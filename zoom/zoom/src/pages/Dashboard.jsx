@@ -1,173 +1,176 @@
 import React from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
-import { Icon } from '../components/Icon';
 import { Link } from 'react-router-dom';
+
+const ActivityRow = ({ icon, title, date, score }) => (
+  <div className="bg-[#1C1F2E] rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center sm:items-start md:items-center gap-4 border border-white/5 hover:border-white/10 transition-colors">
+    <div className="flex items-center gap-5 w-full md:w-auto">
+      <div className="w-12 h-12 bg-[#252839] rounded-xl flex items-center justify-center text-[#8c92a4] shrink-0">
+        {icon}
+      </div>
+      <div>
+        <h3 className="font-semibold text-white mb-0.5">{title}</h3>
+        <p className="text-sm text-[#8c92a4]">Completed • {date}</p>
+      </div>
+    </div>
+    
+    <div className="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto">
+      <div className="text-center md:text-right">
+        <div className="text-[10px] text-[#8c92a4] uppercase tracking-wider font-semibold mb-1">Score</div>
+        <div className="text-xl font-bold text-white leading-none">{score}%</div>
+      </div>
+      <Link to="/history" className="text-[#00e5ff] font-semibold text-sm flex items-center gap-1 hover:text-[#00cbe5] transition-colors">
+        View Feedback 
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </Link>
+    </div>
+  </div>
+);
 
 export default function Dashboard() {
   return (
     <DashboardLayout>
-      <div className="py-8">
-        <p className="text-xs font-bold text-primary tracking-widest mb-2 uppercase">Career Trajectory</p>
-        <h2 className="text-4xl font-semibold mb-10 max-w-[600px] leading-tight text-slate-800">Level: Beginner - Ready for Technical?</h2>
+      <div className="max-w-[1280px] mx-auto pb-12">
+        
+        {/* Welcome Hero */}
+        <div className="mb-14 pt-4">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+            Hello, Alex. <span className="text-[#00E5FF]">Ready to level up today?</span>
+          </h1>
+          <p className="text-xl text-[#8c92a4] max-w-3xl leading-relaxed mb-10">
+            You're <strong className="text-white font-semibold">85% ready</strong> for your next Technical Interview. Our AI suggests focusing on System Design today.
+          </p>
 
-        <div className="grid grid-cols-[2fr_1fr] gap-8 mb-8">
-          {/* Readiness Tracker */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm flex flex-col justify-center border border-slate-100">
-            <div className="flex justify-between items-end mb-4">
-              <div className="font-medium text-slate-800">Overall Readiness</div>
-              <div className="text-4xl font-bold text-primary leading-none">42%</div>
-            </div>
-            <div className="h-3 bg-slate-200 rounded-full overflow-hidden mb-4 relative">
-              <div className="w-[42%] h-full bg-primary rounded-full absolute left-0 top-0"></div>
-            </div>
-            <div className="flex justify-between text-[0.65rem] font-bold tracking-widest text-slate-500 uppercase">
-              <span>Beginner</span>
-              <span>Intermediate</span>
-              <span>Advanced</span>
-              <span>Expert</span>
-            </div>
-          </div>
-
-          {/* Expert Tip */}
-          <div className="bg-teal-700 text-white rounded-2xl p-6 shadow-sm flex flex-col">
-            <div className="flex justify-between items-center mb-6">
-              <div className="bg-white text-teal-700 w-8 h-8 rounded-full flex items-center justify-center">★</div>
-              <div className="text-[0.65rem] font-bold tracking-widest bg-white/20 px-3 py-1 rounded-full uppercase">Expert Tip</div>
-            </div>
-            <h4 className="mb-4 text-xl font-semibold">Focus on your "Why" for the next session.</h4>
-            <p className="text-sm text-teal-100 mb-6 flex-1 leading-relaxed">
-              Candidates who clearly articulate their motivation have a 40% higher confidence rating.
-            </p>
-            <button className="bg-white text-teal-700 w-full py-2.5 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
-              Read Strategy
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link to="/practice" className="px-8 py-3.5 bg-[#00e5ff] text-[#0f111a] font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:bg-[#00cbe5] hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] transition-all flex items-center justify-center gap-3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 3l14 9-14 9V3z"></path>
+              </svg>
+              Start Mock Interview
+            </Link>
+            <button className="px-8 py-3.5 bg-transparent text-white font-semibold text-lg rounded-xl border border-white/10 hover:bg-white/5 transition-all">
+              Review Roadmap
             </button>
           </div>
         </div>
 
-        {/* Metric Cards */}
-        <div className="grid grid-cols-3 gap-8 mb-12">
-          <div className="bg-blue-50 rounded-2xl p-6 shadow-sm border border-blue-100">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {/* Card 1: Score */}
+          <div className="bg-[#1C1F2E] rounded-3xl p-8 border border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div className="flex justify-between items-start mb-6">
-              <div className="bg-blue-100 text-primary w-10 h-10 rounded-full flex items-center justify-center">
-                <Icon name="users" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-slate-800">75%</div>
+              <div className="text-[11px] font-bold text-[#8c92a4] uppercase tracking-widest">Overall Score</div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
             </div>
-            <div className="font-semibold text-slate-800 mb-2">Communication</div>
-            <p className="text-sm text-slate-600">Clarity, tone, and pacing are above average.</p>
+            <div className="flex items-end gap-3 mb-8">
+              <div className="text-6xl font-bold text-white leading-none tracking-tight">84%</div>
+              <div className="text-sm font-bold text-[#10b981] mb-1">+2.4%</div>
+            </div>
+            <div className="w-full h-2 bg-[#252839] rounded-full overflow-hidden">
+              <div className="h-full bg-[#00e5ff] rounded-full shadow-[0_0_10px_#00e5ff]" style={{ width: '84%' }}></div>
+            </div>
           </div>
 
-          <div className="bg-green-50 rounded-2xl p-6 shadow-sm border border-green-100">
-            <div className="flex justify-between items-start mb-6">
-              <div className="bg-green-100 text-green-800 w-10 h-10 rounded-full flex items-center justify-center">
-                <Icon name="grid" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-slate-800">60%</div>
+          {/* Card 2: Interviews */}
+          <div className="bg-[#1C1F2E] rounded-3xl p-8 border border-white/5 flex flex-col justify-between">
+             <div className="flex justify-between items-start mb-6">
+              <div className="text-[11px] font-bold text-[#8c92a4] uppercase tracking-widest">Interviews Completed</div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <path d="M9 15l2 2 4-4"></path>
+              </svg>
             </div>
-            <div className="font-semibold text-slate-800 mb-2">Technical Knowledge</div>
-            <p className="text-sm text-slate-600">Algorithm fluency needs focused practice.</p>
+            <div className="flex items-end gap-2 mb-8">
+              <div className="text-6xl font-bold text-white leading-none tracking-tight">12</div>
+              <div className="text-[#8c92a4] font-medium mb-1">Sessions</div>
+            </div>
+            <div className="text-sm text-[#8c92a4]">
+              3 scheduled for next week
+            </div>
           </div>
 
-          <div className="bg-sky-50 rounded-2xl p-6 shadow-sm border border-sky-100">
+          {/* Card 3: Streak */}
+          <div className="bg-[#1C1F2E] rounded-3xl p-8 border border-white/5 flex flex-col justify-between">
             <div className="flex justify-between items-start mb-6">
-              <div className="bg-sky-100 text-sky-700 w-10 h-10 rounded-full flex items-center justify-center">
-                <Icon name="trending" size={20} />
-              </div>
-              <div className="text-2xl font-bold text-slate-800">80%</div>
+              <div className="text-[11px] font-bold text-[#8c92a4] uppercase tracking-widest">Weekly Streak</div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15.3 2a8.6 8.6 0 0 0-3.3 3c-1.3-1.6-3.8-2.6-6-2-3 1-5 4-5 8a9 9 0 0 0 17.5 3"></path>
+                <path d="M8.5 13.5c1.4-1.2 3.7-1 5 1 .6.8 1 2 1 3.5"></path>
+              </svg>
             </div>
-            <div className="font-semibold text-slate-800 mb-2">Confidence</div>
-            <p className="text-sm text-slate-600">Great eye contact and steady delivery.</p>
+            <div className="flex items-end gap-2 mb-8">
+              <div className="text-6xl font-bold text-white leading-none tracking-tight">5</div>
+              <div className="text-[#8c92a4] font-medium mb-1">Days</div>
+            </div>
+            <div className="flex justify-between gap-2">
+              <div className="h-2 flex-1 rounded-full bg-[#00e5ff] shadow-[0_0_8px_rgba(0,229,255,0.5)]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#00e5ff] shadow-[0_0_8px_rgba(0,229,255,0.5)]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#00e5ff] shadow-[0_0_8px_rgba(0,229,255,0.5)]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#00e5ff] shadow-[0_0_8px_rgba(0,229,255,0.5)]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#00e5ff] shadow-[0_0_8px_rgba(0,229,255,0.5)]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#252839]"></div>
+              <div className="h-2 flex-1 rounded-full bg-[#252839]"></div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="grid grid-cols-[2fr_1fr] gap-8">
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-slate-800">Recent Practice History</h3>
-              <a href="#" className="text-xs font-bold text-primary tracking-widest hover:underline uppercase">View All</a>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-6">
-                <div className="bg-blue-50 text-primary w-12 h-12 rounded-xl flex items-center justify-center">
-                  <Icon name="chart" size={24} />
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-slate-800 mb-1">Backend Architecture Foundations</div>
-                  <div className="text-sm text-slate-500">Oct 24, 2024 • 15 Minutes</div>
-                </div>
-                <div className="text-right flex items-center gap-4">
-                  <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Score</div>
-                    <div className="font-bold text-slate-800">88/100</div>
-                  </div>
-                  <Icon name="chevronRight" size={20} className="text-slate-400" />
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-6">
-                <div className="bg-blue-50 text-primary w-12 h-12 rounded-xl flex items-center justify-center">
-                  <Icon name="users" size={24} />
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-slate-800 mb-1">Behavioral: Handling Conflict</div>
-                  <div className="text-sm text-slate-500">Oct 22, 2024 • 12 Minutes</div>
-                </div>
-                <div className="text-right flex items-center gap-4">
-                  <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Score</div>
-                    <div className="font-bold text-slate-800">92/100</div>
-                  </div>
-                  <Icon name="chevronRight" size={20} className="text-slate-400" />
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-6">
-                <div className="bg-blue-50 text-primary w-12 h-12 rounded-xl flex items-center justify-center">
-                  <Icon name="grid" size={24} />
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-slate-800 mb-1">System Design: Scaling Twitter</div>
-                  <div className="text-sm text-slate-500">Oct 21, 2024 • 45 Minutes</div>
-                </div>
-                <div className="text-right flex items-center gap-4">
-                  <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Score</div>
-                    <div className="font-bold text-slate-800">64/100</div>
-                  </div>
-                  <Icon name="chevronRight" size={20} className="text-slate-400" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 rounded-2xl p-8 shadow-sm border border-blue-100 relative overflow-hidden flex flex-col">
-            <div className="bg-primary w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-8 shadow-md">
-              <Icon name="video" size={32} />
-            </div>
-            <h3 className="mb-4 text-2xl font-semibold text-slate-800">Ready to break the plateau?</h3>
-            <p className="text-slate-600 mb-8 leading-relaxed max-w-[280px]">
-              Your data shows you're ready for the intermediate Level. You can simulate it today.
-            </p>
-            
-            <div className="flex flex-col gap-4 mb-8">
-              <div className="flex items-center gap-3 text-sm font-medium text-slate-700 bg-white p-3 rounded-xl border border-blue-100">
-                <div className="bg-green-100 rounded-full p-1"><Icon name="check" size={14} className="text-green-600" /></div>
-                Personalized AI Mentor
-              </div>
-              <div className="flex items-center gap-3 text-sm font-medium text-slate-700 bg-white p-3 rounded-xl border border-blue-100">
-                <div className="bg-green-100 rounded-full p-1"><Icon name="check" size={14} className="text-green-600" /></div>
-                Real-time Eye Tracking
-              </div>
-            </div>
-
-            <Link to="/simulator" className="mt-auto block text-center bg-primary text-white w-full py-4 rounded-xl font-semibold hover:bg-primary-hover transition-colors shadow-sm">
-              Start Next Practice Session
-            </Link>
-          </div>
+        {/* Recent Activity */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-white tracking-tight">Recent Activity</h2>
         </div>
+
+        <div className="flex flex-col gap-4">
+          <ActivityRow 
+            title="Senior Frontend Engineer"
+            date="Oct 24, 2024"
+            score="92"
+            icon={<CodeIcon />}
+          />
+          <ActivityRow 
+            title="Backend Architecture"
+            date="Oct 22, 2024"
+            score="78"
+            icon={<DatabaseIcon />}
+          />
+          <ActivityRow 
+            title="Behavioral Foundations"
+            date="Oct 19, 2024"
+            score="85"
+            icon={<UserIcon />}
+          />
+        </div>
+
       </div>
     </DashboardLayout>
   );
 }
+
+// Inline SVGs for the activity rows
+const CodeIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6"></polyline>
+    <polyline points="8 6 2 12 8 18"></polyline>
+  </svg>
+);
+
+const DatabaseIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+  </svg>
+);
+
+const UserIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="9" cy="7" r="4"></circle>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+  </svg>
+);

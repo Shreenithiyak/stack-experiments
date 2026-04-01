@@ -1,169 +1,124 @@
 import React from 'react';
 import Layout from '../layouts/Layout';
 import { Link } from 'react-router-dom';
-import { Icon } from '../components/Icon';
 
 export default function Landing() {
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto px-12 py-16">
+      <div className="max-w-7xl mx-auto px-12 py-16 relative">
         
+        {/* Glow effect */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#00e5ff] rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
+
         {/* Hero Section */}
-        <section className="flex items-center justify-between mb-32 gap-16">
+        <section className="flex flex-col md:flex-row items-center justify-between mb-32 gap-16 relative z-10 pt-10">
           <div className="flex-1 max-w-[600px]">
-            <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold tracking-widest mb-6">
-              AI-POWERED GROWTH
+            <div className="inline-flex items-center px-4 py-1.5 bg-[#00e5ff]/10 border border-[#00e5ff]/20 text-[#00e5ff] rounded-full text-xs font-bold tracking-[0.2em] mb-8">
+              AI-POWERED MASTERY
             </div>
-            <h1 className="text-5xl font-bold leading-tight tracking-tight mb-6">
-              Master Your <br/>Interview <span className="text-primary">with AI.</span>
+            <h1 className="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6 text-white">
+              Level up your <br/>Interview <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-[#0088FF]">Game.</span>
             </h1>
-            <p className="text-lg text-slate-500 mb-10 max-w-[450px]">
-              Practice, get instant feedback, and land your first job faster. Move from fresher to expert with our structured level-based training.
+            <p className="text-xl text-[#8c92a4] mb-12 max-w-[500px] leading-relaxed">
+              Practice, get instant feedback, and land your first job faster. Move from fresher to industry expert with our structured level-based training.
             </p>
-            <div className="flex gap-4">
-              <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-lg font-medium transition hover:-translate-y-0.5 hover:shadow-lg text-lg">Start for Free</Link>
-              <button className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-slate-200 text-slate-800 rounded-lg font-medium transition hover:bg-white hover:border-slate-400 text-lg">View Demo</button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.3)] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] text-lg">
+                Start for Free
+              </Link>
+              <button className="inline-flex items-center justify-center px-8 py-4 bg-[#1C1F2E] border border-white/10 text-white rounded-xl font-bold transition hover:bg-[#252839] hover:border-white/20 text-lg">
+                View Gameplay
+              </button>
             </div>
           </div>
           <div className="flex-[1.2] relative">
-            {/* The Image Mockup Mock */}
-            <div className="bg-slate-200 rounded-[2rem] aspect-[16/11] relative overflow-hidden shadow-2xl bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop")' }}>
-              <div className="absolute top-6 left-6 bg-white/90 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-red-500"></div>
+            <div className="bg-[#1C1F2E] rounded-[2.5rem] aspect-[16/11] relative overflow-hidden shadow-2xl bg-cover bg-center border border-white/5" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop")' }}>
+              <div className="absolute inset-0 bg-[#0F111A]/40 mix-blend-multiply"></div>
+              
+              <div className="absolute top-6 left-6 bg-[#11141D]/90 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 border border-white/10 text-white backdrop-blur-md">
+                <div className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00e5ff]"></div>
                 LIVE FEEDBACK ACTIVE
               </div>
-              <div className="absolute bottom-6 right-6 bg-white/95 p-6 rounded-2xl w-[300px] shadow-lg backdrop-blur-md">
-                <div className="font-bold text-primary mb-2">AI Insight</div>
-                <div className="text-sm text-slate-500 italic">
-                  "Your answer about conflict resolution was structured well, but try to use more specific metrics."
+
+              <div className="absolute bottom-6 right-6 bg-[#11141D]/95 p-6 rounded-2xl w-[320px] shadow-2xl backdrop-blur-xl border border-white/10">
+                <div className="font-bold text-[#00E5FF] mb-3 flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                  Neon AI Insight
+                </div>
+                <div className="text-[13px] text-[#8c92a4] italic leading-relaxed">
+                  "Your response about scalable architecture was excellent. You covered load balancing well, but consider mentioning database sharding."
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* The Interview Suite Section */}
-        <section className="mb-32 text-center">
-          <h2 className="text-4xl font-semibold mb-4">The Interview Suite</h2>
-          <p className="mx-auto mb-16 max-w-[600px] text-slate-500">
-            Everything you need to transform from a nervous candidate into a confident professional.
+        {/* The Core Features Section */}
+        <section className="mb-32 text-center relative z-10 pt-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">The Training Suite</h2>
+          <p className="mx-auto mb-16 max-w-[600px] text-lg text-[#8c92a4]">
+            Everything you need to transform from a nervous candidate into a confident, highly-prepared professional.
           </p>
 
-          <div className="grid grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 text-left">
             {/* AI Simulator */}
-            <div className="bg-white rounded-2xl p-10 text-left flex flex-col shadow-sm hover:-translate-y-1 hover:shadow-md transition-all">
-              <div className="text-primary mb-6"><Icon name="video" size={32} /></div>
-              <h3 className="text-2xl font-semibold mb-4">AI Simulator</h3>
-              <p className="text-slate-500 mb-8 flex-1">Experience realistic mock interviews with our AI avatars that adapt to your industry and role seniority.</p>
-              <div className="bg-slate-100 rounded-2xl p-12 flex justify-center items-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542382121-729f27d2c3e4?q=80&w=800&auto=format&fit=crop")' }}></div>
-                <Link to="/simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3 bg-primary text-white rounded-lg font-medium transition hover:-translate-y-0.5 hover:shadow-lg">Launch Simulator</Link>
+            <div className="bg-[#1C1F2E] rounded-3xl p-10 flex flex-col shadow-lg border border-white/5 hover:border-white/10 transition-all group">
+              <div className="w-16 h-16 rounded-2xl bg-[#252839] flex items-center justify-center text-[#00E5FF] mb-8 border border-[#00e5ff]/20">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+              </div>
+              <h3 className="text-3xl font-bold mb-4 text-white">AI Simulator</h3>
+              <p className="text-[#8c92a4] mb-10 flex-1 text-lg leading-relaxed">Experience realistic mock interviews with our AI agents that dynamically adapt to your industry and role seniority.</p>
+              
+              <div className="bg-[#0F111A] rounded-2xl p-12 flex justify-center items-center relative overflow-hidden border border-white/5 group-hover:border-[#00e5ff]/30 transition-colors">
+                <div className="absolute inset-0 opacity-[0.03] bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542382121-729f27d2c3e4?q=80&w=800&auto=format&fit=crop")' }}></div>
+                <Link to="/simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
               </div>
             </div>
 
             {/* Performance Dashboard */}
-            <div className="bg-primary text-white rounded-2xl p-10 text-left flex flex-col shadow-sm">
-              <div className="mb-6"><Icon name="chart" size={32} /></div>
-              <h3 className="text-2xl font-semibold mb-4">Performance Dashboard</h3>
-              <p className="text-blue-200 mb-8 flex-1">Track your progress with deep analytics on confidence levels, speech pace, and technical accuracy.</p>
-              <div className="bg-white/10 rounded-2xl pt-8 px-8 flex items-end justify-between h-[160px] gap-2 overflow-hidden">
-                <div className="w-full bg-green-300 rounded-t-lg h-[40%]"></div>
-                <div className="w-full bg-green-300 rounded-t-lg h-[70%]"></div>
-                <div className="w-full bg-green-300 rounded-t-lg h-[50%]"></div>
-                <div className="w-full bg-green-300 rounded-t-lg h-[90%]"></div>
-                <div className="w-full bg-green-300 rounded-t-lg h-[80%]"></div>
+            <div className="bg-[#0f111a] rounded-3xl p-10 flex flex-col shadow-lg border border-white/5 relative overflow-hidden">
+               <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#0055ff] mix-blend-overlay opacity-[0.05]"></div>
+              
+              <div className="w-16 h-16 rounded-2xl bg-[#1C1F2E] flex items-center justify-center text-white mb-8 border border-white/10 relative z-10">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </div>
+              <h3 className="text-3xl font-bold mb-4 text-white relative z-10">Performance Analytics</h3>
+              <p className="text-[#8c92a4] mb-10 flex-1 text-lg leading-relaxed relative z-10">Track your progress with deep analytics on confidence levels, speech pace, and technical accuracy over time.</p>
+              
+              <div className="bg-[#1C1F2E] rounded-2xl pt-8 px-8 flex items-end justify-between h-[180px] gap-3 overflow-hidden border border-white/5 relative z-10">
+                <div className="w-full bg-[#252839] rounded-t-lg h-[40%] transition-all hover:bg-[#00e5ff]"></div>
+                <div className="w-full bg-[#00e5ff] rounded-t-lg h-[70%] shadow-[0_0_15px_rgba(0,229,255,0.4)] relative"><div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-white bg-[#0f111a] px-2 py-0.5 rounded">84%</div></div>
+                <div className="w-full bg-[#252839] rounded-t-lg h-[50%] transition-all hover:bg-[#00e5ff]"></div>
+                <div className="w-full bg-[#0055ff] rounded-t-lg h-[90%] shadow-[0_0_15px_rgba(0,85,255,0.4)]"></div>
+                <div className="w-full bg-[#252839] rounded-t-lg h-[80%] transition-all hover:bg-[#00e5ff]"></div>
               </div>
             </div>
           </div>
           
-          {/* Offline Question Bank */}
-          <div className="bg-sky-100 rounded-2xl p-10 text-left flex items-center gap-12 mt-8">
-            <div className="flex-1">
-              <div className="text-sky-700 mb-6"><Icon name="library" size={32} /></div>
-              <h3 className="text-2xl font-semibold mb-4">Offline Question Bank</h3>
-              <p className="text-sky-800">Access over 5,000+ curated questions from top companies even without an internet connection. Prepare anytime, anywhere.</p>
-            </div>
-            <div className="flex-[1.5] grid grid-cols-3 gap-4">
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-[0.65rem] font-bold text-primary tracking-widest mb-2">GOOGLE</div>
-                <div className="font-semibold text-sm">System Design Patterns</div>
-              </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-[0.65rem] font-bold text-green-800 tracking-widest mb-2">AMAZON</div>
-                <div className="font-semibold text-sm">Leadership Principles</div>
-              </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-[0.65rem] font-bold text-indigo-600 tracking-widest mb-2">META</div>
-                <div className="font-semibold text-sm">Algorithmic Efficiency</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* The Digital Mentor Path */}
-        <section className="mb-32">
-          <div className="flex justify-between items-end mb-12">
-            <div className="max-w-[600px]">
-              <h2 className="text-4xl font-semibold mb-4">The Digital Mentor Path</h2>
-              <p className="text-slate-500">Our structured roadmap takes you from the basics of communication to mastering executive-level behavioral interviews.</p>
-            </div>
-            <Link to="/questions" className="text-primary font-semibold flex items-center gap-2 hover:underline">
-              Explore Full Curriculum <Icon name="arrowRight" size={16} />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-4 gap-6">
-            {/* Beginner */}
-            <div className="bg-white rounded-2xl p-8 flex flex-col shadow-sm">
-              <div className="inline-flex px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-xs font-bold tracking-widest w-fit mb-6">BEGINNER</div>
-              <h4 className="text-lg font-semibold mb-3">Introduction</h4>
-              <p className="text-sm text-slate-500 mb-8 flex-1">Mastering 'Tell me about yourself' and basic body language.</p>
-              <div className="h-1 bg-primary w-full rounded-full"></div>
-            </div>
-
-            {/* Intermediate */}
-            <div className="bg-white rounded-2xl p-8 flex flex-col shadow-sm">
-              <div className="inline-flex px-3 py-1 bg-sky-100 text-primary rounded-full text-xs font-bold tracking-widest w-fit mb-6">INTERMEDIATE</div>
-              <h4 className="text-lg font-semibold mb-3">STAR Method</h4>
-              <p className="text-sm text-slate-500 mb-8 flex-1">Structuring behavioral responses with situation and results.</p>
-              <div className="h-1 bg-primary w-[60%] rounded-full relative">
-                <div className="absolute inset-0 bg-slate-200 -z-10 w-[166%] rounded-full"></div>
-              </div>
-            </div>
-
-            {/* Advanced */}
-            <div className="bg-white rounded-2xl p-8 flex flex-col shadow-sm">
-              <div className="inline-flex px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold tracking-widest w-fit mb-6">ADVANCED</div>
-              <h4 className="text-lg font-semibold mb-3">Tech Mastery</h4>
-              <p className="text-sm text-slate-500 mb-8 flex-1">Solving complex architecture and logic puzzles in real-time.</p>
-              <div className="h-1 bg-primary w-[20%] rounded-full relative">
-                <div className="absolute inset-0 bg-slate-200 -z-10 w-[500%] rounded-full"></div>
-              </div>
-            </div>
-
-            {/* Expert */}
-            <div className="bg-teal-700 text-white rounded-2xl p-8 flex flex-col shadow-sm">
-              <div className="inline-flex px-3 py-1 bg-white/20 text-white rounded-full text-xs font-bold tracking-widest w-fit mb-6">EXPERT</div>
-              <h4 className="text-lg font-semibold mb-3">Executive Presence</h4>
-              <p className="text-sm text-teal-100 mb-8 flex-1">High-level negotiation and leadership communication.</p>
-              <div className="h-1 bg-teal-400 w-[10%] rounded-full relative">
-                <div className="absolute inset-0 bg-white/20 -z-10 w-[1000%] rounded-full"></div>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* CTA Section */}
-        <section className="bg-primary text-white rounded-3xl py-20 px-12 text-center shadow-lg">
-          <h2 className="text-4xl font-semibold mb-6">Ready to land that offer?</h2>
-          <p className="mx-auto mb-12 max-w-[600px] text-lg text-blue-200">
-            Join 15,000+ candidates who used InterviewReady to transition from students to software engineers.
+        <section className="bg-gradient-to-r from-[#1C1F2E] to-[#12151f] text-white rounded-[2.5rem] py-24 px-12 text-center shadow-2xl border border-white/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#00E5FF] rounded-full mix-blend-screen filter blur-[100px] opacity-10 blur-2xl"></div>
+          
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight relative z-10">Ready to command the room?</h2>
+          <p className="mx-auto mb-12 max-w-[600px] text-xl text-[#8c92a4] relative z-10">
+            Join thousands of ambitious candidates transitioning into top-tier tech roles.
           </p>
-          <Link to="/register" className="inline-flex items-center justify-center px-10 py-4 bg-white text-primary rounded-lg font-bold transition hover:bg-slate-100 text-lg shadow-md">
-            Start Your Level Assessment
+          <Link to="/register" className="inline-flex items-center justify-center px-12 py-5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-extrabold transition hover:bg-[#00cbe5] hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] text-lg shadow-[0_0_20px_rgba(0,229,255,0.2)] relative z-10">
+            Get Started For Free
           </Link>
-          <div className="mt-8 text-sm text-blue-300">
-            No credit card required. Free tier includes 3 mock sessions.
+          <div className="mt-8 text-sm text-[#5e6376] font-semibold tracking-wide uppercase relative z-10">
+            No credit card required. Master your first 3 sessions free.
           </div>
         </section>
       </div>

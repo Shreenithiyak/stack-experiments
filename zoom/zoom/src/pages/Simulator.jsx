@@ -1,111 +1,106 @@
 import React from 'react';
-import DashboardLayout from '../layouts/DashboardLayout';
-import { Icon } from '../components/Icon';
 import { Link } from 'react-router-dom';
 
 export default function Simulator() {
-  const customTitle = (
-    <div className="flex gap-8 text-base font-medium">
-      <Link to="/simulator" className="text-primary border-b-2 border-primary pb-1">Simulator</Link>
-      <Link to="/dashboard" className="text-slate-500 hover:text-slate-800 pb-1">History</Link>
-      <Link to="/questions" className="text-slate-500 hover:text-slate-800 pb-1">Resources</Link>
-    </div>
-  );
-
   return (
-    <DashboardLayout title={customTitle}>
-      <div className="pb-8">
-        {/* Videos Area */}
-        <div className="grid grid-cols-2 gap-6 mb-6 h-[55vh]">
-          {/* AI Avatar */}
-          <div className="bg-slate-800 rounded-3xl overflow-hidden relative shadow-lg bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop")' }}>
-            <div className="absolute top-6 right-6 flex gap-1 items-center h-6">
-              <div className="w-1 bg-blue-500 rounded-full h-[16px]"></div>
-              <div className="w-1 bg-blue-500 rounded-full h-[24px]"></div>
-              <div className="w-1 bg-blue-500 rounded-full h-[12px]"></div>
-              <div className="w-1 bg-blue-500 rounded-full h-[20px]"></div>
-            </div>
-            
-            <div className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md px-6 py-4 rounded-2xl text-white">
-              <div className="flex items-center gap-2 text-xs font-bold tracking-widest mb-1 uppercase">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                AI Interaction Live
-              </div>
-              <div className="text-xl font-semibold">Sarah, Senior Technical Lead</div>
+    <div className="min-h-screen bg-[#11141D] text-white w-full overflow-x-hidden font-sans">
+      <div className="max-w-[800px] mx-auto pt-8 pb-32 relative h-full min-h-[80vh] flex flex-col items-center">
+        
+        {/* Header Status */}
+        <div className="text-center font-bold tracking-[0.2em] text-[#738299] text-[11px] uppercase mb-12">
+          LIVE SIMULATION • SENIOR PRODUCT DESIGNER ROLE
+        </div>
+
+        {/* Avatar */}
+        <div className="flex flex-col items-center mb-12">
+          <div className="w-[120px] h-[120px] rounded-full p-[2px] bg-gradient-to-tr from-[#00E5FF] via-[#7B2CBF] to-[#00E5FF] mb-4 shadow-[0_0_40px_rgba(0,229,255,0.2)]">
+            <div className="w-full h-full rounded-full bg-[#1C1F2E] overflow-hidden border-[3px] border-[#11141D]">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="AI Mentor" />
             </div>
           </div>
-
-          {/* User Video */}
-          <div className="bg-slate-800 rounded-3xl overflow-hidden relative shadow-lg bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200&auto=format&fit=crop")' }}>
-            <div className="absolute top-6 left-6 bg-red-500 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-              REC 02:45
-            </div>
-            <div className="absolute top-6 right-6 bg-black/50 text-white px-2 py-1 rounded-lg text-xs font-bold flex flex-col items-center">
-              <div className="text-green-400">HQ</div>
-              <div>1080P</div>
-            </div>
-
-            <div className="absolute bottom-6 left-6 bg-black/60 text-white px-4 py-2 rounded-full text-sm">
-              You (John Doe)
-            </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_10px_#00e5ff] animate-pulse"></div>
+            <span className="text-white font-bold text-[18px]">AI Mentor</span>
           </div>
         </div>
 
-        {/* Bottom Area */}
-        <div className="grid grid-cols-[1fr_340px] gap-6">
-          
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col">
-            <div className="text-xs font-bold text-primary tracking-widest mb-4 uppercase">Current Question</div>
-            <h2 className="text-3xl font-semibold mb-8 leading-snug">
-              "Tell me about a time you solved a complex technical problem."
-            </h2>
-
-            <div className="bg-slate-50 rounded-2xl p-6 flex-1 border border-slate-100">
-              <div className="text-xs font-bold text-slate-500 tracking-widest mb-4 uppercase">Real-Time Transcription</div>
-              <p className="text-lg text-slate-800 leading-relaxed font-medium">
-                "Last year at my previous role, we faced a critical scaling issue with our primary database. The challenge was that the bottleneck only appeared during peak hours..."
-              </p>
-              <div className="flex gap-1.5 mt-4 items-center h-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary relative animate-pulse"></div>
-                <div className="w-1.5 h-1.5 rounded-full bg-primary/60 relative animate-pulse delay-75"></div>
-                <div className="w-1.5 h-1.5 rounded-full bg-primary/30 relative animate-pulse delay-150"></div>
-              </div>
-            </div>
+        {/* AI Chat Bubble */}
+        <div className="w-full mb-10 pl-6">
+          <div className="bg-[#1C1F2E] border border-white/5 rounded-2xl rounded-tl-sm p-6 text-[#e2e8f0] text-[18px] leading-[1.6] max-w-[85%] shadow-lg">
+            Great to meet you. Let's start with your approach to systems thinking. How do you ensure visual consistency across a global product with multiple sub-brands?
           </div>
-
-          <div className="bg-sky-50 rounded-2xl p-6 shadow-sm border border-sky-100">
-            <h3 className="mb-4 text-xl font-semibold text-slate-800">Simulator Controls</h3>
-            <p className="text-sm text-sky-800 mb-8 leading-relaxed">
-              Maintain eye contact with the camera for better engagement score.
-            </p>
-
-            <button className="bg-red-600 text-white w-full py-4 rounded-xl font-semibold hover:bg-red-700 transition-colors flex items-center justify-center gap-2 mb-4 shadow-sm">
-              <Icon name="stop" size={20} /> Stop Recording
-            </button>
-            
-            <div className="flex gap-4 mb-12">
-              <button className="bg-white text-slate-700 border border-slate-200 flex-1 py-3 rounded-xl font-semibold hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 shadow-sm">
-                <Icon name="skip" size={18} /> Skip
-              </button>
-              <button className="bg-primary text-white flex-1 py-3 rounded-xl font-semibold hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 shadow-sm">
-                <Icon name="restart" size={18} /> Restart
-              </button>
-            </div>
-
-            <div className="mb-4">
-              <div className="flex justify-between items-center text-xs font-bold tracking-widest mb-2 uppercase text-slate-700">
-                <span>Confidence Score</span>
-                <span className="text-slate-800">84%</span>
-              </div>
-              <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
-                <div className="w-[84%] h-full bg-green-400 rounded-full"></div>
-              </div>
-            </div>
+          <div className="text-[10px] text-[#738299] font-bold tracking-[0.1em] uppercase mt-3 ml-2">
+            AI MENTOR • 2M AGO
           </div>
+        </div>
 
+        {/* User Transcription */}
+        <div className="w-full mb-10 flex flex-col items-end pr-6">
+          <div className="text-[#e2e8f0] text-[20px] leading-[1.6] italic pr-4 pl-12 font-medium max-w-[90%] text-right">
+            "I prioritize building a centralized source of truth—a robust design system that uses semantic tokens. This allows us to map brand-specific values to global logic, ensuring that even if the aesthetic changes, the structural integrity remains unified..."
+          </div>
+          <div className="text-[10px] text-[#00E5FF] font-bold tracking-[0.2em] uppercase mt-4 mr-4 animate-pulse">
+            TRANSCRIBING...
+          </div>
+        </div>
+
+        {/* Real-time coaching */}
+        <div className="bg-[#161B28] rounded-xl border border-white/5 border-l-[3px] border-l-[#00E5FF] p-6 mb-12 w-[90%] md:w-[80%] self-start ml-6 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#00E5FF]/5 to-transparent pointer-events-none"></div>
+          <div className="flex items-center gap-2 mb-3 relative z-10">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" strokeWidth="2.5"><path d="M12 2l3 6 6 3-6 3-3 6-3-6-6-3 6-3z"></path></svg>
+            <span className="text-[11px] font-bold text-[#e2e8f0] tracking-widest uppercase">REAL-TIME COACHING</span>
+          </div>
+          <div className="text-[#8c92a4] text-[15px] italic leading-[1.6] relative z-10">
+            Good mention of semantic tokens. To make this answer 'Elite Tier', try to provide a specific example of a conflict you resolved during this process.
+          </div>
         </div>
       </div>
-    </DashboardLayout>
+
+      {/* FIXED Bottom Control Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center pb-8 pt-12 bg-gradient-to-t from-[#11141D] via-[#11141D] to-transparent pointer-events-none">
+        
+        <div className="bg-[#1C1F2E] rounded-full h-[84px] w-[90%] max-w-[700px] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-between px-10 mb-6 backdrop-blur-xl pointer-events-auto transition-transform hover:scale-[1.02]">
+          
+          {/* Finish Session / Close - Left */}
+          <Link to="/analytics" className="text-[#738299] hover:text-[#00e5ff] transition-colors p-2 rounded-full hover:bg-white/5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </Link>
+          
+          {/* Audio Visualization & Mic */}
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-1.5 h-8">
+              <div className="w-1.5 bg-[#00E5FF]/30 h-4 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/60 h-8 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/40 h-5 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/80 h-6 rounded-full"></div>
+            </div>
+            
+            {/* Main Mic Button */}
+            <div className="w-[72px] h-[72px] rounded-full bg-[#00E5FF] shadow-[0_0_30px_rgba(0,229,255,0.4)] flex items-center justify-center cursor-pointer hover:bg-[#00cbe5] hover:scale-105 transition-all">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F111A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+            </div>
+            
+            <div className="flex items-center gap-1.5 h-8">
+              <div className="w-1.5 bg-[#00E5FF]/80 h-6 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/40 h-5 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/60 h-8 rounded-full"></div>
+              <div className="w-1.5 bg-[#00E5FF]/30 h-4 rounded-full"></div>
+            </div>
+          </div>
+
+          {/* Options - Right */}
+          <button className="text-[#738299] hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+          </button>
+        </div>
+        
+        {/* Helper Text */}
+        <div className="text-[10px] font-bold tracking-[0.2em] text-[#475569] uppercase pointer-events-auto">
+          TAP TO PAUSE • SPACEBAR TO TOGGLE MIC
+        </div>
+      </div>
+      
+    </div>
   );
 }
