@@ -42,9 +42,7 @@ export default function Landing() {
 
               <div className="absolute bottom-6 right-6 bg-[#11141D]/95 p-6 rounded-2xl w-[320px] shadow-2xl backdrop-blur-xl border border-white/10">
                 <div className="font-bold text-[#00E5FF] mb-3 flex items-center gap-2">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                  </svg>
+                  <img src="https://img.icons8.com/ios-filled/50/00e5ff/lightning-bolt--v1.png" alt="insight" className="w-4 h-4 object-contain" />
                   Neon AI Insight
                 </div>
                 <div className="text-[13px] text-[#8c92a4] italic leading-relaxed">
@@ -66,17 +64,14 @@ export default function Landing() {
             {/* AI Simulator */}
             <div className="bg-[#1C1F2E] rounded-3xl p-10 flex flex-col shadow-lg border border-white/5 hover:border-white/10 transition-all group">
               <div className="w-16 h-16 rounded-2xl bg-[#252839] flex items-center justify-center text-[#00E5FF] mb-8 border border-[#00e5ff]/20">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                </svg>
+                <img src="https://img.icons8.com/ios-filled/50/00e5ff/play--v1.png" alt="play" className="w-8 h-8 object-contain" />
               </div>
               <h3 className="text-3xl font-bold mb-4 text-white">AI Simulator</h3>
               <p className="text-[#8c92a4] mb-10 flex-1 text-lg leading-relaxed">Experience realistic mock interviews with our AI agents that dynamically adapt to your industry and role seniority.</p>
               
               <div className="bg-[#0F111A] rounded-2xl p-12 flex justify-center items-center relative overflow-hidden border border-white/5 group-hover:border-[#00e5ff]/30 transition-colors">
                 <div className="absolute inset-0 opacity-[0.03] bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542382121-729f27d2c3e4?q=80&w=800&auto=format&fit=crop")' }}></div>
-                <Link to="/simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
+                <Link to="/landing-simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
               </div>
             </div>
 
@@ -85,11 +80,7 @@ export default function Landing() {
                <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#0055ff] mix-blend-overlay opacity-[0.05]"></div>
               
               <div className="w-16 h-16 rounded-2xl bg-[#1C1F2E] flex items-center justify-center text-white mb-8 border border-white/10 relative z-10">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="20" x2="18" y2="10"></line>
-                  <line x1="12" y1="20" x2="12" y2="4"></line>
-                  <line x1="6" y1="20" x2="6" y2="14"></line>
-                </svg>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/bar-chart.png" alt="analytics" className="w-8 h-8 object-contain" />
               </div>
               <h3 className="text-3xl font-bold mb-4 text-white relative z-10">Performance Analytics</h3>
               <p className="text-[#8c92a4] mb-10 flex-1 text-lg leading-relaxed relative z-10">Track your progress with deep analytics on confidence levels, speech pace, and technical accuracy over time.</p>

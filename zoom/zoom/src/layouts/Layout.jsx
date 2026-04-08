@@ -19,9 +19,9 @@ const Navbar = () => {
               Home
               {location.pathname === '/' && <div className="absolute -bottom-[23px] left-0 right-0 h-[2px] bg-[#00e5ff]" />}
             </Link>
-            <Link to="/simulator" className={`relative transition-all ${location.pathname === '/simulator' ? 'text-[#00e5ff]' : 'text-[#8c92a4] hover:text-white'}`}>
+            <Link to="/landing-simulator" className={`relative transition-all ${location.pathname === '/landing-simulator' ? 'text-[#00e5ff]' : 'text-[#8c92a4] hover:text-white'}`}>
               Simulator
-              {location.pathname === '/simulator' && <div className="absolute -bottom-[23px] left-0 right-0 h-[2px] bg-[#00e5ff]" />}
+              {location.pathname === '/landing-simulator' && <div className="absolute -bottom-[23px] left-0 right-0 h-[2px] bg-[#00e5ff]" />}
             </Link>
 
 

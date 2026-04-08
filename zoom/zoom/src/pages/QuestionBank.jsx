@@ -25,7 +25,7 @@ const QuestionCard = ({ category, time, question, isExpanded: defaultExpanded })
               {category}
             </span>
             <span className="text-[11px] font-medium text-[#8c92a4] flex items-center gap-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <img src="https://img.icons8.com/ios-filled/50/8c92a4/clock--v1.png" alt="clock" className="w-3 h-3 object-contain" />
               {time}
             </span>
           </div>
@@ -40,9 +40,7 @@ const QuestionCard = ({ category, time, question, isExpanded: defaultExpanded })
             onClick={() => setIsExpanded(!isExpanded)}
             className="w-10 h-10 rounded-lg bg-transparent hover:bg-[#252a3d] text-[#8c92a4] border border-transparent hover:border-white/5 flex items-center justify-center transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+            <img src="https://img.icons8.com/ios-filled/50/8c92a4/expand-arrow.png" alt="toggle" className={`w-5 h-5 object-contain transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
           </button>
         </div>
       </div>
@@ -83,10 +81,7 @@ export default function QuestionBank() {
         {/* Header Section */}
         <div className="flex items-start gap-6 mb-12">
           <Link to="/dashboard" className="w-12 h-12 bg-[#1a1c29] hover:bg-[#202336] rounded-xl flex items-center justify-center text-white border border-white/5 transition-colors shadow-sm shrink-0">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/back.png" alt="back" className="w-6 h-6 object-contain" />
           </Link>
           <div>
             <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Software Engineer Question Bank</h1>
@@ -138,10 +133,7 @@ export default function QuestionBank() {
         <div className="fixed bottom-12 right-12 z-50 animate-bounce-slow">
           <Link to="/simulator" className="flex items-center gap-3 bg-[#00e5ff] hover:bg-[#00cbe5] text-[#0f111a] px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(0,229,255,0.4)] transition-all hover:scale-105 active:scale-95 border-2 border-[#00e5ff]">
             Start Mock Interview 
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+            <img src="https://img.icons8.com/ios-filled/50/0f111a/chevron-right.png" alt="start" className="w-6 h-6 object-contain" />
           </Link>
         </div>
 

@@ -11,9 +11,7 @@ const LoadingStep = ({ text, status }) => {
           'border-white/20 bg-transparent'}`}
       >
         {status === 'completed' && (
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
+          <img src="https://img.icons8.com/ios-filled/50/00e5ff/checkmark.png" alt="check" className="w-3 h-3 object-contain" />
         )}
       </div>
       <span className={`font-semibold tracking-wide ${status === 'completed' ? 'text-white' : status === 'active' ? 'text-[#00e5ff]' : 'text-[#5e6376]'}`}>
@@ -85,9 +83,7 @@ export default function Analytics() {
             
             <div className="w-24 h-24 bg-[#00e5ff]/20 rounded-full flex items-center justify-center mb-8 border-2 border-[#00e5ff] shadow-[0_0_40px_rgba(0,229,255,0.4)] relative">
               <div className="absolute inset-0 bg-[#00E5FF] rounded-full mix-blend-screen filter blur-xl opacity-30 animate-pulse"></div>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="text-[#00E5FF] relative z-10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
+              <img src="https://img.icons8.com/ios-filled/50/00e5ff/checkmark.png" alt="complete" className="w-12 h-12 relative z-10 object-contain" />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">

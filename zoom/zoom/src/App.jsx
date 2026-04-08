@@ -9,6 +9,7 @@ import QuestionBank from './pages/QuestionBank';
 import Simulator from './pages/Simulator';
 
 import Analytics from './pages/Analytics';
+import LandingSimulator from './pages/LandingSimulator';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/questions" element={<QuestionBank />} />
         <Route path="/simulator" element={<Simulator />} />
+        <Route path="/landing-simulator" element={<LandingSimulator />} />
       </Routes>
     </BrowserRouter>
   );
