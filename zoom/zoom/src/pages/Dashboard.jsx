@@ -1,6 +1,7 @@
 import React from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const ActivityRow = ({ icon, title, date, score }) => (
   <div className="bg-[#1C1F2E] rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center sm:items-start md:items-center gap-4 border border-white/5 hover:border-white/10 transition-colors">
@@ -28,6 +29,8 @@ const ActivityRow = ({ icon, title, date, score }) => (
 );
 
 export default function Dashboard() {
+  const { user } = useAuth();
+  
   return (
     <DashboardLayout>
       <div className="max-w-[1280px] mx-auto pb-12">
@@ -35,7 +38,7 @@ export default function Dashboard() {
         {/* Welcome Hero */}
         <div className="mb-14 pt-4">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-            Hello, Alex. <span className="text-[#00E5FF]">Ready to level up today?</span>
+            Hello, {user?.name ? user.name.split(' ')[0] : 'Alex'}. <span className="text-[#00E5FF]">Ready to level up today?</span>
           </h1>
           <p className="text-xl text-[#8c92a4] max-w-3xl leading-relaxed mb-10">
             You're <strong className="text-white font-semibold">85% ready</strong> for your next Technical Interview. Our AI suggests focusing on System Design today.

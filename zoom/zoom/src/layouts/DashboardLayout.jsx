@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useAuth();
   
   return (
     <nav className="flex justify-between items-center px-8 lg:px-12 py-5 bg-[#0F111A] border-b border-white/5 sticky top-0 z-50">
@@ -62,7 +64,7 @@ const Navbar = () => {
           <img src="https://img.icons8.com/ios-filled/50/8c92a4/settings.png" alt="Settings" className="w-5 h-5 object-contain hover:brightness-200 transition-all" />
         </button>
         <Link to="/login" className="w-8 h-8 rounded-full overflow-hidden border border-white/20 hover:border-white/50 transition-colors ml-4">
-          <img src="https://ui-avatars.com/api/?name=Alex&background=1e293b&color=00e5ff" alt="Profile" className="w-full h-full object-cover" />
+          <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'Alex')}&background=1e293b&color=00e5ff`} alt="Profile" className="w-full h-full object-cover" />
         </Link>
       </div>
 

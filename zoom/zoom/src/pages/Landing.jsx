@@ -26,9 +26,9 @@ export default function Landing() {
               <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.3)] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] text-lg">
                 Start for Free
               </Link>
-              <button className="inline-flex items-center justify-center px-8 py-4 bg-[#1C1F2E] border border-white/10 text-white rounded-xl font-bold transition hover:bg-[#252839] hover:border-white/20 text-lg">
+              <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-[#1C1F2E] border border-white/10 text-white rounded-xl font-bold transition hover:bg-[#252839] hover:border-white/20 text-lg">
                 View Gameplay
-              </button>
+              </Link>
             </div>
           </div>
           <div className="flex-[1.2] relative">
@@ -71,7 +71,7 @@ export default function Landing() {
               
               <div className="bg-[#0F111A] rounded-2xl p-12 flex justify-center items-center relative overflow-hidden border border-white/5 group-hover:border-[#00e5ff]/30 transition-colors">
                 <div className="absolute inset-0 opacity-[0.03] bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542382121-729f27d2c3e4?q=80&w=800&auto=format&fit=crop")' }}></div>
-                <Link to="/landing-simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
+                <Link to="/register" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
               </div>
             </div>
 
