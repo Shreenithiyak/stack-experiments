@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const LoadingStep = ({ text, status }) => {
   return (
@@ -23,6 +24,7 @@ const LoadingStep = ({ text, status }) => {
 
 export default function Analytics() {
   const [step, setStep] = useState(0);
+  const { user, login } = useAuth();
 
   useEffect(() => {
     const timer1 = setTimeout(() => setStep(1), 1500);
@@ -37,6 +39,17 @@ export default function Analytics() {
       clearTimeout(timer4);
     };
   }, []);
+
+  useEffect(() => {
+    if (step === 4 && user && (!user.history || user.history.length === 0)) {
+      login({
+        ...user,
+        history: [
+          { date: new Date().toLocaleDateString(), score: 92, title: 'System Design Mock' }
+        ]
+      });
+    }
+  }, [step, user, login]);
 
   return (
     <DashboardLayout>

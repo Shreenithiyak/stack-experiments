@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,7 +22,10 @@ export default function Login() {
   };
 
   const handleSocialLogin = (provider) => {
-    login({ name: `${provider} User`, email: `${provider.toLowerCase()}@example.com` });
+    const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
+    if (!inputEmail) return;
+
+    login({ name: `${provider} User`, email: inputEmail });
     navigate('/dashboard');
   };
 

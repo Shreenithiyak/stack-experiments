@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -6,8 +6,14 @@ import { useAuth } from '../context/AuthContext';
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const { register } = useAuth();
+  const { user, register } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,9 +23,12 @@ export default function Register() {
   };
 
   const handleSocialRegister = (provider) => {
+    const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
+    if (!inputEmail) return;
+
     const mockUser = {
       name: `${provider} User`,
-      email: `${provider.toLowerCase()}@example.com`
+      email: inputEmail
     };
     register(mockUser);
     navigate('/dashboard');

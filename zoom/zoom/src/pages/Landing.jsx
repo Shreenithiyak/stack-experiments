@@ -31,16 +31,16 @@ export default function Landing() {
               </Link>
             </div>
           </div>
-          <div className="flex-[1.2] relative">
-            <div className="bg-[#1C1F2E] rounded-[2.5rem] aspect-[16/11] relative overflow-hidden shadow-2xl bg-cover bg-center border border-white/5" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop")' }}>
+          <div className="flex-[1.2] relative w-full">
+            <div className="w-full bg-[#1C1F2E] rounded-[2.5rem] aspect-[16/11] relative overflow-hidden shadow-2xl bg-cover bg-no-repeat border border-white/5" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop")', backgroundPosition: '80% 15%' }}>
               <div className="absolute inset-0 bg-[#0F111A]/40 mix-blend-multiply"></div>
               
-              <div className="absolute top-6 left-6 bg-[#11141D]/90 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 border border-white/10 text-white backdrop-blur-md">
+              <div className="absolute top-6 right-6 bg-[#11141D]/90 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 border border-white/10 text-white backdrop-blur-md">
                 <div className="w-2 h-2 rounded-full bg-[#00E5FF] shadow-[0_0_8px_#00e5ff]"></div>
                 LIVE FEEDBACK ACTIVE
               </div>
 
-              <div className="absolute bottom-6 right-6 bg-[#11141D]/95 p-6 rounded-2xl w-[320px] shadow-2xl backdrop-blur-xl border border-white/10">
+              <div className="absolute bottom-6 left-6 bg-[#11141D]/95 p-6 rounded-2xl w-[320px] shadow-2xl backdrop-blur-xl border border-white/10">
                 <div className="font-bold text-[#00E5FF] mb-3 flex items-center gap-2">
                   <img src="https://img.icons8.com/ios-filled/50/00e5ff/lightning-bolt--v1.png" alt="insight" className="w-4 h-4 object-contain" />
                   Neon AI Insight
@@ -71,7 +71,7 @@ export default function Landing() {
               
               <div className="bg-[#0F111A] rounded-2xl p-12 flex justify-center items-center relative overflow-hidden border border-white/5 group-hover:border-[#00e5ff]/30 transition-colors">
                 <div className="absolute inset-0 opacity-[0.03] bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542382121-729f27d2c3e4?q=80&w=800&auto=format&fit=crop")' }}></div>
-                <Link to="/register" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
+                <Link to="/landing-simulator" className="relative z-10 inline-flex items-center justify-center px-8 py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)]">Launch Simulator</Link>
               </div>
             </div>
 

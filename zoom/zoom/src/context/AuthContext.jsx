@@ -12,6 +12,13 @@ export const AuthProvider = ({ children }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    const handleUnload = () => {
+      localStorage.removeItem('neon_user');
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+    return () => window.removeEventListener('beforeunload', handleUnload);
   }, []);
 
   const login = (userData) => {
