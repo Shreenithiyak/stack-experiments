@@ -1,18 +1,23 @@
 import express from 'express'
-import {data,sentdata,databyid,updatedatabyid,deletedatabyid} from '../controller/appcontroller.js'
+import {checkdata,sentdata,movedatato} from '../controller/appcontroller.js'
+import { checktoken } from '../middleware/appmiddleware.js'
 
 const route =express.Router()
 
 route.post('/sentdata',sentdata)
-route.get('/getdata',data)
-route.get('/getdatabyid/:id',databyid)
-route.put('/updatedatabyid/:id',updatedatabyid)
-route.get('/deletedatabyid/:id',deletedatabyid)
+route.post('/logindata',checkdata)
+route.get('/logindata', checktoken,movedatato)
+
+
+
+// route.get('/getdatabyid/:id',databyid)
+// route.put('/updatedatabyid/:id',updatedatabyid)
+// route.get('/deletedatabyid/:id',deletedatabyid)
 
 
 export default route
 
-//http://localhost:5000/api/user/getdata
+//http://localhost:5000/api/user/logindata
 //http://localhost:5000/api/user/sentdata
 //http://localhost:5000/api/user/getdatabyid/69e5ba7bb9b089d4f1826416
 //http://localhost:5000/api/user/updatedatabyid/69e5ba7bb9b089d4f1826416

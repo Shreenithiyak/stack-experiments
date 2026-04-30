@@ -6,6 +6,8 @@ import { useAuth } from '../context/AuthContext';
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { user, register } = useAuth();
   const navigate = useNavigate();
 
@@ -15,11 +17,32 @@ export default function Register() {
     }
   }, [user, navigate]);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || (!email && name !== 'mock')) return;
-    register({ name: name || 'Mock User', email: email || 'mock@example.com' });
-    navigate('/dashboard');
+    setError('');
+    if (!name || !email || !password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/user/sentdata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        // Fallback for user context if we want to proceed directly or redirect to login
+        // Assuming we navigate to login to allow them to actually get a token
+        navigate('/login');
+      } else {
+        setError(data.msg || 'Registration failed');
+      }
+    } catch (err) {
+      setError('Failed to connect to server. Please try again later.');
+    }
   };
 
   const handleSocialRegister = (provider) => {
@@ -69,6 +92,11 @@ export default function Register() {
 
         {/* Form */}
         <form onSubmit={handleRegister}>
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+              {error}
+            </div>
+          )}
           <div className="flex flex-col gap-2 mb-4">
             <label className="text-sm font-semibold text-white">Full Name</label>
             <input 
@@ -95,6 +123,8 @@ export default function Register() {
             <label className="text-sm font-semibold text-white">Choose a Password</label>
             <input 
               type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376] placeholder:tracking-widest" 
               placeholder="••••••••" 
             />

@@ -1,7 +1,8 @@
 import React from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useState, useEffect } from 'react';
 
 const ActivityRow = ({ icon, title, date, score }) => (
   <div className="bg-[#1C1F2E] rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center sm:items-start md:items-center gap-4 border border-white/5 hover:border-white/10 transition-colors">
@@ -50,24 +51,57 @@ const TestimonialRow = ({ userProfile, text, role, company }) => (
 );
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, token, logout } = useAuth();
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(user);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/user/logindata', {
+          method: 'GET',
+          headers: {
+            'Authorization': token
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setProfile({ ...user, name: data.msg.name, id: data.msg.id });
+        } else {
+          // Token invalid or expired
+          logout();
+          navigate('/login');
+        }
+      } catch (err) {
+        console.error('Failed to fetch profile', err);
+      }
+    };
+
+    fetchProfile();
+  }, [token, navigate, logout]);
   
   // Logic to determine if user is a new login.
   // In a real app we'd check user history, here we simulate it (assume true unless user has data)
-  const isNewLogin = !user?.history || user?.history?.length === 0;
+  const isNewLogin = !profile?.history || profile?.history?.length === 0;
 
   const getDisplayName = () => {
-    if (!user) return 'Alex';
+    if (!profile) return 'Alex';
     
     // If name is a generated mock name from social login, use the email prefix
-    if (user.name && user.name.endsWith(' User')) {
-      if (user.email) {
-        const prefix = user.email.split('@')[0];
+    if (profile.name && profile.name.endsWith(' User')) {
+      if (profile.email) {
+        const prefix = profile.email.split('@')[0];
         return prefix.charAt(0).toUpperCase() + prefix.slice(1);
       }
     }
     
-    return user.name ? user.name.split(' ')[0] : 'Alex';
+    return profile.name ? profile.name.split(' ')[0] : 'Alex';
   };
 
   return (
@@ -82,7 +116,7 @@ export default function Dashboard() {
           <p className="text-xl text-[#8c92a4] max-w-3xl leading-relaxed mb-10">
             {isNewLogin 
               ? "Welcome to Neon. It looks like you're ready to start your journey. Let's do a quick mock interview."
-              : `You're <strong className="text-white font-semibold">${user?.history?.[0]?.score || 84}% ready</strong> for your next Technical Interview. Our AI suggests focusing on System Design today.`}
+              : `You're <strong className="text-white font-semibold">${profile?.history?.[0]?.score || 84}% ready</strong> for your next Technical Interview. Our AI suggests focusing on System Design today.`}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -105,11 +139,11 @@ export default function Dashboard() {
               <img src="https://img.icons8.com/ios-filled/50/00e5ff/bullseye.png" alt="score" className="w-5 h-5 object-contain" />
             </div>
             <div className="flex items-end gap-3 mb-8">
-              <div className="text-6xl font-bold text-white leading-none tracking-tight">{isNewLogin ? '0%' : `${user?.history?.[0]?.score || 84}%`}</div>
+              <div className="text-6xl font-bold text-white leading-none tracking-tight">{isNewLogin ? '0%' : `${profile?.history?.[0]?.score || 84}%`}</div>
               {!isNewLogin && <div className="text-sm font-bold text-[#10b981] mb-1">+2.4%</div>}
             </div>
             <div className="w-full h-2 bg-[#252839] rounded-full overflow-hidden">
-              <div className="h-full bg-[#00e5ff] rounded-full shadow-[0_0_10px_#00e5ff] transition-all duration-1000" style={{ width: isNewLogin ? '0%' : `${user?.history?.[0]?.score || 84}%` }}></div>
+              <div className="h-full bg-[#00e5ff] rounded-full shadow-[0_0_10px_#00e5ff] transition-all duration-1000" style={{ width: isNewLogin ? '0%' : `${profile?.history?.[0]?.score || 84}%` }}></div>
             </div>
           </div>
 
@@ -120,7 +154,7 @@ export default function Dashboard() {
               <img src="https://img.icons8.com/ios-filled/50/c4b5fd/clipboard.png" alt="interviews" className="w-5 h-5 object-contain" />
             </div>
             <div className="flex items-end gap-2 mb-8">
-              <div className="text-6xl font-bold text-white leading-none tracking-tight">{isNewLogin ? '0' : (user?.history?.length || 12)}</div>
+              <div className="text-6xl font-bold text-white leading-none tracking-tight">{isNewLogin ? '0' : (profile?.history?.length || 12)}</div>
               <div className="text-[#8c92a4] font-medium mb-1">Sessions</div>
             </div>
             <div className="text-sm text-[#8c92a4]">

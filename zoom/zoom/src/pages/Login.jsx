@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { user, login } = useAuth();
   const navigate = useNavigate();
 
@@ -14,11 +16,31 @@ export default function Login() {
     }
   }, [user, navigate]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email && email !== 'mock') return;
-    login({ name: 'Returning User', email });
-    navigate('/dashboard');
+    setError('');
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/user/logindata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+
+      if (response.ok && data.token) {
+        login({ email }, data.token);
+        navigate('/dashboard');
+      } else {
+        setError(data.msg || 'Invalid credentials');
+      }
+    } catch (err) {
+      setError('Failed to connect to server. Please try again later.');
+    }
   };
 
   const handleSocialLogin = (provider) => {
@@ -64,6 +86,11 @@ export default function Login() {
 
         {/* Form */}
         <form onSubmit={handleLogin}>
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+              {error}
+            </div>
+          )}
           <div className="flex flex-col gap-2 mb-5">
             <label className="text-sm font-semibold text-white">Email Address</label>
             <input 
@@ -82,6 +109,8 @@ export default function Login() {
             </div>
             <input 
               type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376] placeholder:tracking-widest" 
               placeholder="••••••••" 
             />

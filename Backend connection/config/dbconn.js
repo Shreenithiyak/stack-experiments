@@ -11,3 +11,6 @@ console.log("db connected")
 
  }
  export default Base
+
+
+ 
