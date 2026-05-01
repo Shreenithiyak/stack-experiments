@@ -10,7 +10,7 @@ export default function AuthLayout({ children }) {
       {/* Navbar area */}
       <nav className="relative flex justify-between items-center px-6 lg:px-12 py-6 w-full z-10 max-w-[1440px] mx-auto">
         <Link to="/" className="text-xl font-bold text-[#00E5FF] tracking-tight">
-          Neon Interview AI
+          INTERVIEW-READY
         </Link>
         <div className="text-sm font-medium text-[#8c92a4] hidden sm:block">
           Ready to level up today?
@@ -79,7 +79,7 @@ export default function AuthLayout({ children }) {
 
       {/* Footer */}
       <footer className="relative z-10 px-6 lg:px-12 py-6 flex flex-col md:flex-row justify-between items-center text-[11px] uppercase tracking-wide text-[#5e6376] w-full max-w-[1440px] mx-auto mt-auto bg-transparent">
-        <div className="mb-4 md:mb-0 font-bold">© 2024 Neon Luminary AI. All Rights Reserved.</div>
+        <div className="mb-4 md:mb-0 font-bold">© 2024 INTERVIEW-READY. All Rights Reserved.</div>
         <div className="flex gap-8 mb-4 md:mb-0">
           <a href="#" className="hover:text-white transition">Privacy Policy</a>
           <a href="#" className="hover:text-white transition">Terms of Service</a>

@@ -12,7 +12,7 @@ const Navbar = () => {
       {/* Brand / Logo */}
       <div className="flex items-center gap-2">
         <Link to="/" className="text-xl font-bold tracking-tight text-[#00E5FF]">
-          Neon Interview AI
+          INTERVIEW-READY
         </Link>
       </div>
 
@@ -82,7 +82,7 @@ export default function DashboardLayout({ children }) {
       
       {/* Footer from image */}
       <footer className="w-full max-w-[1280px] mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-[11px] font-medium text-[#5e6376] mt-auto uppercase tracking-wide">
-        <div>© 2024 NEON LUMINARY AI. ALL RIGHTS RESERVED.</div>
+        <div>© 2024 INTERVIEW-READY. ALL RIGHTS RESERVED.</div>
         <div className="flex gap-8 mt-4 md:mt-0">
           <a href="#" className="hover:text-white transition">Privacy Policy</a>
           <a href="#" className="hover:text-white transition">Terms of Service</a>

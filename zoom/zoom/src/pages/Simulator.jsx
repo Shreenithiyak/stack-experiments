@@ -14,7 +14,7 @@ export default function Simulator() {
         <div className="flex items-center gap-12 h-full">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold tracking-tight text-[#00E5FF] hover:opacity-80 transition-opacity">
-            Neon Interview AI
+            INTERVIEW-READY
           </Link>
         </div>
 
