@@ -63,7 +63,7 @@ export default function Dashboard() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/user/logindata', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/logindata`, {
           method: 'GET',
           headers: {
             'Authorization': token
