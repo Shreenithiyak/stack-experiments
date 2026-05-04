@@ -62,6 +62,11 @@ export default function Dashboard() {
     }
 
     const fetchProfile = async () => {
+      if (token === 'social-login-token') {
+        setProfile(user);
+        return;
+      }
+
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/logindata`, {
           method: 'GET',

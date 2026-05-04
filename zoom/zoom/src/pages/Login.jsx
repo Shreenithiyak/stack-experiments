@@ -47,7 +47,7 @@ export default function Login() {
     const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
     if (!inputEmail) return;
 
-    login({ name: `${provider} User`, email: inputEmail });
+    login({ name: `${provider} User`, email: inputEmail }, 'social-login-token');
     navigate('/dashboard');
   };
 

@@ -8,7 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { user, register } = useAuth();
+  const { user, register, login } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function Register() {
       name: `${provider} User`,
       email: inputEmail
     };
-    register(mockUser);
+    login(mockUser, 'social-login-token');
     navigate('/dashboard');
   };
 
