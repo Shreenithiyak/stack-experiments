@@ -35,23 +35,32 @@ export default function ImageUpload({ onChange }) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-6">
       {/* Preview circle */}
-      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-slate-700 bg-slate-900 flex items-center justify-center">
+      <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-slate-800 bg-slate-900 flex items-center justify-center shadow-2xl shadow-red-900/20 relative group">
         {preview ? (
           <img
             src={preview}
             alt="preview"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform group-hover:scale-110"
           />
         ) : (
-          <span className="text-slate-400 text-sm">No image</span>
+          <div className="flex flex-col items-center gap-2">
+            <i className="fa-solid fa-user text-5xl text-slate-700"></i>
+            <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">Upload</span>
+          </div>
         )}
+        
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+           <i className="fa-solid fa-camera text-white text-2xl"></i>
+        </div>
       </div>
 
       {/* File input */}
-      <label className="cursor-pointer inline-block px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md">
-        <span className="text-sm font-medium">Choose Image</span>
+      <label className="cursor-pointer group flex items-center gap-3 px-8 py-3 bg-red-600 hover:bg-red-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-red-600/20 active:scale-95">
+        <i className="fa-solid fa-cloud-arrow-up"></i>
+        <span>Select Photo</span>
         <input
           type="file"
           accept="image/*"
