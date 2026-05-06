@@ -8,7 +8,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { user, register, login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Register() {
     setError('');
     if (!name || !email || !password) {
       setError('Please fill in all fields.');
+
       return;
     }
 
@@ -34,8 +35,6 @@ export default function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        // Fallback for user context if we want to proceed directly or redirect to login
-        // Assuming we navigate to login to allow them to actually get a token
         navigate('/login');
       } else {
         setError(data.msg || 'Registration failed');

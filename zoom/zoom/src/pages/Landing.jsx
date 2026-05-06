@@ -97,7 +97,7 @@ export default function Landing() {
           
         </section>
 
-        {/* CTA Section */}
+      
         <section className="bg-gradient-to-r from-[#1C1F2E] to-[#12151f] text-white rounded-[2.5rem] py-24 px-12 text-center shadow-2xl border border-white/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#00E5FF] rounded-full mix-blend-screen filter blur-[100px] opacity-10 blur-2xl"></div>
           
