@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center pt-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 gap-12 items-center">
           <div>
             <p className="text-red-500 font-medium tracking-wide mb-3 text-lg md:text-xl">Hi, my name is</p>
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-bold text-white mb-6 tracking-tight">
@@ -47,13 +47,6 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="hidden lg:flex justify-center relative">
-            <div className="w-96 h-96 md:w-[28rem] md:h-[28rem] relative z-10 rounded-2xl overflow-hidden border-2 border-slate-800 bg-slate-900 flex items-center justify-center shadow-xl">
-              <img src="/profile.jpg" alt="Profile" className="w-full h-full object-cover object-top" />
-            </div>
-            {/* Decorative background element */}
-            <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full -z-10 transform translate-x-8 translate-y-8"></div>
-          </div>
         </div>
       </div>
     </section>
