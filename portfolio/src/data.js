@@ -98,6 +98,7 @@ export const education = [
 ];
 
 export const certifications = [
+  "Full Stack Web Development (MERN Stack) — SLA, 2026",
   "Business Analytics Certification Oracle Cloud Infrastructure (Web-based Certification)",
   "IBM Developer Skills Network",
 ];
