@@ -1,14 +1,9 @@
 import { Github, Linkedin, Mail, ArrowRight } from './Icons';
 import { usePortfolio } from '../context/PortfolioContext';
-import ImageUpload from './ImageUpload';
+
 
 export default function Hero() {
   const { personalInfo } = usePortfolio();
-
-  const handleImageChange = (file) => {
-    console.log('Picked file →', file);
-    // TODO: store file in context or upload to server if needed
-  };
 
   return (
     <section
@@ -72,11 +67,6 @@ export default function Hero() {
               </a>
             </div>
           </div>
-        </div>
-        {/* Image upload section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-white mb-4">Profile Photo</h2>
-          <ImageUpload onChange={handleImageChange} />
         </div>
       </div>
     </section>
