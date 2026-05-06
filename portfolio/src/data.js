@@ -1,4 +1,4 @@
-import { Code2, Database, Layout, Wrench, Server, Terminal } from "lucide-react";
+import { Database, Layout, Wrench, Server } from "./components/Icons";
 
 export const personalInfo = {
   name: "SHREE NITHIYA K",
@@ -11,27 +11,29 @@ export const personalInfo = {
   objective: "Motivated Computer Science graduate seeking a Full Stack Developer role. Skilled in building responsive web applications using modern frontend and backend technologies. Eager to apply problem-solving skills, learn new technologies, and contribute to real-world projects in a growth-oriented environment.",
 };
 
-export const skills = [
-  {
-    category: "Frontend",
-    icon: Layout,
-    items: ["HTML5", "CSS3", "JavaScript (ES6+)", "React.js", "Responsive Design"],
-  },
-  {
-    category: "Backend",
-    icon: Server,
-    items: ["Node.js", "Express.js", "REST API Development"],
-  },
-  {
-    category: "Database",
-    icon: Database,
-    items: ["MongoDB", "Mongoose"],
-  },
-  {
-    category: "Tools & Concepts",
-    icon: Wrench,
-    items: ["Git", "GitHub", "VS Code", "Thunder Client", "MVC Architecture"],
-  },
+export const skillCategories = [
+  { id: "frontend", category: "Frontend", icon: Layout },
+  { id: "backend", category: "Backend", icon: Server },
+  { id: "database", category: "Database", icon: Database },
+  { id: "tools", category: "Tools & Concepts", icon: Wrench },
+];
+
+export const allSkills = [
+  { name: "HTML5", categoryId: "frontend" },
+  { name: "CSS3", categoryId: "frontend" },
+  { name: "JavaScript (ES6+)", categoryId: "frontend" },
+  { name: "React.js", categoryId: "frontend" },
+  { name: "Responsive Design", categoryId: "frontend" },
+  { name: "Node.js", categoryId: "backend" },
+  { name: "Express.js", categoryId: "backend" },
+  { name: "REST API Development", categoryId: "backend" },
+  { name: "MongoDB", categoryId: "database" },
+  { name: "Mongoose", categoryId: "database" },
+  { name: "Git", categoryId: "tools" },
+  { name: "GitHub", categoryId: "tools" },
+  { name: "VS Code", categoryId: "tools" },
+  { name: "Thunder Client", categoryId: "tools" },
+  { name: "MVC Architecture", categoryId: "tools" },
 ];
 
 export const strengths = [
