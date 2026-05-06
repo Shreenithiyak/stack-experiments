@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { CheckCircle2 } from './Icons';
 

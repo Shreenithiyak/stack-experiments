@@ -1,6 +1,4 @@
-import React from 'react';
 
-// Replaced all SVGs with pure Tailwind CSS shapes and text equivalents
 
 export const Menu = ({ className = '' }) => (
   <div className={`flex flex-col justify-between w-6 h-4 ${className}`}>
@@ -22,12 +20,12 @@ export const Linkedin = ({ className = '', size = 24 }) => (
   <i className={`fa-brands fa-linkedin ${className}`} style={{ fontSize: size }}></i>
 );
 
-export const Mail = (props) => (
-  <span className={`font-bold select-none ${props.className || ''}`}>@</span>
+export const Mail = ({ className = '', size = 24 }) => (
+  <i className={`fa-solid fa-envelope ${className}`} style={{ fontSize: size }}></i>
 );
 
-export const ArrowRight = (props) => (
-  <span className={`font-bold select-none ${props.className || ''}`}>→</span>
+export const ArrowRight = ({ className = '', size = 24 }) => (
+  <i className={`fa-solid fa-arrow-right ${className}`} style={{ fontSize: size }}></i>
 );
 
 export const CheckCircle2 = (props) => (

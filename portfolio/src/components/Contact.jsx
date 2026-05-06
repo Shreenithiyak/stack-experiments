@@ -1,4 +1,3 @@
-import React from 'react';
 import { Mail, MapPin, Phone, Github, Linkedin } from './Icons';
 import { usePortfolio } from '../context/PortfolioContext';
 
