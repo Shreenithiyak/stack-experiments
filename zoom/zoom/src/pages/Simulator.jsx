@@ -1,10 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiBell, FiAward, FiSettings } from 'react-icons/fi';
 import { FaStop, FaFastForward, FaRedoAlt } from 'react-icons/fa';
 
 export default function Simulator() {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get question from state or use default if navigated directly
+  const displayQuestion = location.state?.selectedQuestion || "Tell me about a time you solved a complex technical problem.";
 
   return (
     <div className="min-h-screen bg-[#11141D] text-white font-sans flex flex-col">
@@ -108,7 +112,7 @@ export default function Simulator() {
             <div className="mb-8 pl-1">
               <div className="text-[11px] font-bold tracking-[0.2em] text-[#00E5FF] uppercase mb-4">Current Question</div>
               <h3 className="text-3xl font-extrabold text-white leading-[1.3] tracking-tight">
-                "Tell me about a time you solved a complex technical problem."
+                "{displayQuestion}"
               </h3>
             </div>
             
