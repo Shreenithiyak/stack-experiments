@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { Link } from 'react-router-dom';
 
-const LevelBadge = ({ label, active, colorDot }) => (
-  <button className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold transition-all shadow-sm
+const LevelBadge = ({ label, active, colorDot, onClick }) => (
+  <button 
+    onClick={onClick}
+    className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold transition-all shadow-sm
     ${active ? 'bg-[#00e5ff] shadow-[0_0_15px_rgba(0,229,255,0.2)] text-[#0f111a]' : 'bg-[#1a1c29] text-white hover:bg-[#202336] border border-white/5'}
   `}>
     {!active && <div className={`w-2 h-2 rounded-full ${colorDot}`} />}
@@ -11,7 +13,7 @@ const LevelBadge = ({ label, active, colorDot }) => (
   </button>
 );
 
-const QuestionCard = ({ category, time, question, isExpanded: defaultExpanded }) => {
+const QuestionCard = ({ category, time, question, description, focusAreas, isExpanded: defaultExpanded }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
   return (
@@ -48,23 +50,24 @@ const QuestionCard = ({ category, time, question, isExpanded: defaultExpanded })
       {isExpanded && (
         <div className="mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row gap-8">
           <div className="flex-1 text-sm text-[#8c92a4] leading-relaxed">
-            This question tests your fundamental understanding of computational complexity. Be prepared to discuss worst-case, average-case, and best-case scenarios for common sorting and searching algorithms.
+            {description || "This question tests your fundamental understanding of the topic. Be prepared to discuss practical applications and edge cases."}
           </div>
           <div className="md:w-[350px] bg-[#0c0e15] rounded-xl p-5 border border-white/5">
             <h4 className="text-[10px] font-bold text-white tracking-widest uppercase mb-4">Focus Areas</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-[#8c92a4]">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shrink-0 mt-1.5" />
-                <span>Space Complexity</span>
-              </li>
-              <li className="flex items-start gap-3 text-sm text-[#8c92a4]">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shrink-0 mt-1.5" />
-                <span>Logarithmic vs Linear time</span>
-              </li>
-              <li className="flex items-start gap-3 text-sm text-[#8c92a4]">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shrink-0 mt-1.5" />
-                <span>Amortized Analysis</span>
-              </li>
+              {focusAreas && focusAreas.length > 0 ? (
+                focusAreas.map((area, index) => (
+                  <li key={index} className="flex items-start gap-3 text-sm text-[#8c92a4]">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shrink-0 mt-1.5" />
+                    <span>{area}</span>
+                  </li>
+                ))
+              ) : (
+                <li className="flex items-start gap-3 text-sm text-[#8c92a4]">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] shrink-0 mt-1.5" />
+                  <span>General Implementation</span>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -73,7 +76,91 @@ const QuestionCard = ({ category, time, question, isExpanded: defaultExpanded })
   );
 };
 
+const questionsData = {
+  beginner: [
+    {
+      id: 1,
+      category: "Algorithms",
+      time: "15 mins",
+      question: "Explain the concept of Big O notation and how you apply it to evaluate algorithm performance.",
+      description: "This question tests your fundamental understanding of computational complexity. Be prepared to discuss worst-case, average-case, and best-case scenarios for common sorting and searching algorithms.",
+      focusAreas: ["Space Complexity", "Logarithmic vs Linear time", "Amortized Analysis"]
+    },
+    {
+      id: 2,
+      category: "Data Structures",
+      time: "10 mins",
+      question: "What are the primary differences between an Array and a Linked List?",
+      description: "Understanding memory allocation and access patterns is crucial for choosing the right data structure for your application.",
+      focusAreas: ["Random Access", "Insertion/Deletion Efficiency", "Memory Overhead"]
+    },
+    {
+      id: 3,
+      category: "Web Basics",
+      time: "12 mins",
+      question: "Describe the process of what happens when you type a URL into a browser and press Enter.",
+      description: "A classic high-level question that tests your breadth of knowledge across networking, DNS, and browser rendering.",
+      focusAreas: ["DNS Lookup", "TCP/IP Handshake", "DOM/CSSOM Construction"]
+    }
+  ],
+  intermediate: [
+    {
+      id: 4,
+      category: "Data Structures",
+      time: "10 mins",
+      question: "What are the primary differences between a Hash Map and a Tree Map?",
+      description: "Hash maps provide constant time average access, while tree maps maintain order. Knowing when to trade speed for ordering is a key intermediate skill.",
+      focusAreas: ["Time Complexity (O(1) vs O(log n))", "Ordering Guarantees", "Hash Collisions vs Balancing"]
+    },
+    {
+      id: 5,
+      category: "Web Tech",
+      time: "15 mins",
+      question: "Explain the event loop in JavaScript and how it handles asynchronous operations.",
+      description: "Deep dive into the concurrency model of JS. Essential for frontend and Node.js developers.",
+      focusAreas: ["Call Stack", "Task Queue vs Microtask Queue", "Blocking vs Non-blocking"]
+    },
+    {
+      id: 6,
+      category: "Database",
+      time: "20 mins",
+      question: "When would you choose a NoSQL database over a traditional SQL database?",
+      description: "Tests your understanding of data modeling, scaling requirements, and the CAP theorem.",
+      focusAreas: ["ACID vs BASE", "Horizontal Scalability", "Schema Flexibility"]
+    }
+  ],
+  advanced: [
+    {
+      id: 7,
+      category: "System Design",
+      time: "20 mins",
+      question: "How would you design a rate limiter for a high-traffic public API?",
+      description: "This tests your ability to handle scale, synchronization in distributed systems, and choosing between different algorithms like Token Bucket or Leaky Bucket.",
+      focusAreas: ["Token Bucket Algorithm", "Distributed Locking (Redis)", "Scalability & Fault Tolerance"]
+    },
+    {
+      id: 8,
+      category: "Architecture",
+      time: "25 mins",
+      question: "Describe your process for debugging a memory leak in a large-scale application.",
+      description: "Advanced debugging requires understanding of heap snapshots, garbage collection cycles, and profiler tools.",
+      focusAreas: ["Heap Analysis", "Garbage Collection Strategies", "Retention Paths"]
+    },
+    {
+      id: 9,
+      category: "Concurrency",
+      time: "30 mins",
+      question: "How do you handle race conditions in a distributed system with multiple microservices?",
+      description: "Focuses on consistency models, idempotent operations, and distributed coordination.",
+      focusAreas: ["Optimistic vs Pessimistic Locking", "Idempotency Keys", "Distributed Transactions (Saga Pattern)"]
+    }
+  ]
+};
+
 export default function QuestionBank() {
+  const [activeLevel, setActiveLevel] = useState('beginner');
+  const currentQuestions = questionsData[activeLevel];
+
   return (
     <DashboardLayout>
       <div className="py-2 max-w-[1100px] mx-auto relative min-h-screen">
@@ -92,41 +179,43 @@ export default function QuestionBank() {
         {/* Level Filters & Count */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
           <div className="flex gap-4 overflow-x-auto w-full md:w-auto pb-2 hide-scrollbar">
-            <LevelBadge label="Beginner" active={true} colorDot="" />
-            <LevelBadge label="Intermediate" active={false} colorDot="bg-yellow-400" />
-            <LevelBadge label="Advanced" active={false} colorDot="bg-red-400" />
+            <LevelBadge 
+              label="Beginner" 
+              active={activeLevel === 'beginner'} 
+              colorDot="" 
+              onClick={() => setActiveLevel('beginner')}
+            />
+            <LevelBadge 
+              label="Intermediate" 
+              active={activeLevel === 'intermediate'} 
+              colorDot="bg-yellow-400" 
+              onClick={() => setActiveLevel('intermediate')}
+            />
+            <LevelBadge 
+              label="Advanced" 
+              active={activeLevel === 'advanced'} 
+              colorDot="bg-red-400" 
+              onClick={() => setActiveLevel('advanced')}
+            />
           </div>
           <div className="text-sm italic text-[#5e6376] font-medium shrink-0">
-            48 Questions Available
+            {Object.values(questionsData).flat().length} Questions Available
           </div>
         </div>
 
         {/* Questions List */}
         <div className="flex flex-col gap-6 pb-40">
-          <QuestionCard 
-            category="Algorithms" 
-            time="15 mins" 
-            question="Explain the concept of Big O notation and how you apply it to evaluate algorithm performance." 
-            isExpanded={true} 
-          />
-          <QuestionCard 
-            category="Data Structures" 
-            time="10 mins" 
-            question="What are the primary differences between a Hash Map and a Tree Map?" 
-            isExpanded={false} 
-          />
-          <QuestionCard 
-            category="System Design" 
-            time="20 mins" 
-            question="How would you design a rate limiter for a high-traffic public API?" 
-            isExpanded={false} 
-          />
-          <QuestionCard 
-            category="General Logic" 
-            time="5 mins" 
-            question="Describe your process for debugging a memory leak in a large-scale application." 
-            isExpanded={false} 
-          />
+          {currentQuestions.map((q) => (
+            <QuestionCard 
+              key={q.id}
+              category={q.category} 
+              time={q.time} 
+              question={q.question} 
+              description={q.description}
+              focusAreas={q.focusAreas}
+              isExpanded={false} 
+            />
+          ))}
         </div>
 
         {/* Floating Action Button */}

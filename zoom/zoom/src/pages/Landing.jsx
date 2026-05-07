@@ -1,4 +1,3 @@
-import React from 'react';
 import Layout from '../layouts/Layout';
 import { Link } from 'react-router-dom';
 
@@ -7,10 +6,10 @@ export default function Landing() {
     <Layout>
       <div className="max-w-7xl mx-auto px-12 py-16 relative">
         
-        {/* Glow effect */}
+       
         <div className="absolute top-20 left-10 w-96 h-96 bg-[#00e5ff] rounded-full mix-blend-screen filter blur-[150px] opacity-10 pointer-events-none"></div>
 
-        {/* Hero Section */}
+        
         <section className="flex flex-col md:flex-row items-center justify-between mb-32 gap-16 relative z-10 pt-10">
           <div className="flex-1 max-w-[600px]">
             <div className="inline-flex items-center px-4 py-1.5 bg-[#00e5ff]/10 border border-[#00e5ff]/20 text-[#00e5ff] rounded-full text-xs font-bold tracking-[0.2em] mb-8">
@@ -53,7 +52,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* The Core Features Section */}
+       
         <section className="mb-32 text-center relative z-10 pt-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">The Training Suite</h2>
           <p className="mx-auto mb-16 max-w-[600px] text-lg text-[#8c92a4]">
@@ -61,7 +60,7 @@ export default function Landing() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 text-left">
-            {/* AI Simulator */}
+           
             <div className="bg-[#1C1F2E] rounded-3xl p-10 flex flex-col shadow-lg border border-white/5 hover:border-white/10 transition-all group">
               <div className="w-16 h-16 rounded-2xl bg-[#252839] flex items-center justify-center text-[#00E5FF] mb-8 border border-[#00e5ff]/20">
                 <img src="https://img.icons8.com/ios-filled/50/00e5ff/play--v1.png" alt="play" className="w-8 h-8 object-contain" />
@@ -75,7 +74,7 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Performance Dashboard */}
+            
             <div className="bg-[#0f111a] rounded-3xl p-10 flex flex-col shadow-lg border border-white/5 relative overflow-hidden">
                <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#0055ff] mix-blend-overlay opacity-[0.05]"></div>
               

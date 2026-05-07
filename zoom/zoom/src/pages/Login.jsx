@@ -39,7 +39,7 @@ export default function Login() {
         setError(data.msg || 'Invalid credentials');
       }
     } catch (err) {
-      setError('Failed to connect to server. Please try again later.');
+      setError('Failed to connect to server. Please try again later.',err);
     }
   };
 

@@ -40,7 +40,7 @@ export default function Register() {
         setError(data.msg || 'Registration failed');
       }
     } catch (err) {
-      setError('Failed to connect to server. Please try again later.');
+      setError('Failed to connect to server. Please try again later.',err);
     }
   };
 

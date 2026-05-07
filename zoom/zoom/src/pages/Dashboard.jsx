@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -91,14 +90,13 @@ export default function Dashboard() {
     fetchProfile();
   }, [token, navigate, logout]);
   
-  // Logic to determine if user is a new login.
-  // In a real app we'd check user history, here we simulate it (assume true unless user has data)
+
   const isNewLogin = !profile?.history || profile?.history?.length === 0;
 
   const getDisplayName = () => {
     if (!profile) return 'Alex';
     
-    // If name is a generated mock name from social login, use the email prefix
+
     if (profile.name && profile.name.endsWith(' User')) {
       if (profile.email) {
         const prefix = profile.email.split('@')[0];
@@ -251,7 +249,6 @@ export default function Dashboard() {
   );
 }
 
-// Inline SVGs for the activity rows
 const CodeIcon = () => (
   <img src="https://img.icons8.com/ios-filled/50/8c92a4/code.png" alt="code" className="w-5 h-5 object-contain" />
 );
@@ -263,3 +260,7 @@ const DatabaseIcon = () => (
 const UserIcon = () => (
   <img src="https://img.icons8.com/ios-filled/50/8c92a4/user.png" alt="user" className="w-5 h-5 object-contain" />
 );
+
+
+
+
