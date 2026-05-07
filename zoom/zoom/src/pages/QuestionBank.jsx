@@ -35,7 +35,11 @@ const QuestionCard = ({ category, time, question, description, focusAreas, isExp
         </div>
         
         <div className="flex items-center gap-3 shrink-0">
-          <Link to="/simulator" className="px-5 py-2.5 bg-[#252a3d] hover:bg-[#2a3045] text-white text-sm font-semibold rounded-lg border border-white/5 transition-colors shadow-sm">
+          <Link 
+            to="/simulator" 
+            state={{ selectedQuestion: question }}
+            className="px-5 py-2.5 bg-[#252a3d] hover:bg-[#2a3045] text-white text-sm font-semibold rounded-lg border border-white/5 transition-colors shadow-sm"
+          >
             Practice Now
           </Link>
           <button 
