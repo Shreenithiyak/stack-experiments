@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -25,21 +26,23 @@ export default function Login() {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/logindata`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/logindata`, {
+        email, 
+        password
       });
-      const data = await response.json();
 
-      if (response.ok && data.token) {
-        login({ email }, data.token);
+      if (response.data && response.data.token) {
+        setEmail('');
+        setPassword('');
+        login({ email }, response.data.token);
         navigate('/dashboard');
-      } else {
-        setError(data.msg || 'Invalid credentials');
       }
     } catch (err) {
-      setError('Failed to connect to server. Please try again later.',err);
+      if (err.response && err.response.data && err.response.data.msg) {
+        setError(err.response.data.msg);
+      } else {
+        setError('Failed to connect to server. Please try again later.');
+      }
     }
   };
 

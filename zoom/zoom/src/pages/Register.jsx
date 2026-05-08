@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -27,20 +28,22 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/sentdata`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/sentdata`, {
+        name, 
+        email, 
+        password
       });
-      const data = await response.json();
 
-      if (response.ok) {
-        navigate('/login');
-      } else {
-        setError(data.msg || 'Registration failed');
-      }
+      setName('');
+      setEmail('');
+      setPassword('');
+      navigate('/login');
     } catch (err) {
-      setError('Failed to connect to server. Please try again later.',err);
+      if (err.response && err.response.data && err.response.data.msg) {
+        setError(err.response.data.msg);
+      } else {
+        setError('Failed to connect to server. Please try again later.');
+      }
     }
   };
 
