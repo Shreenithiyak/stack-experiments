@@ -3,6 +3,7 @@ import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -11,6 +12,8 @@ export default function Register() {
   const [error, setError] = useState('');
   const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     if (user) {
@@ -28,7 +31,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/sentdata`, {
+      await axios.post(`${API_URL}/api/user/sentdata`, {
         name, 
         email, 
         password
@@ -47,16 +50,33 @@ export default function Register() {
     }
   };
 
-  const handleSocialRegister = (provider) => {
-    const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
-    if (!inputEmail) return;
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const response = await axios.post(`${API_URL}/api/user/googlelogin`, {
+        id_token: credentialResponse.credential
+      });
 
-    const mockUser = {
-      name: `${provider} User`,
-      email: inputEmail
-    };
-    login(mockUser, 'social-login-token');
-    navigate('/dashboard');
+      if (response.data && response.data.token) {
+        login({ name: 'Google User' }, response.data.token);
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      setError(err.response?.data?.msg || 'Google Registration failed. Please try again.');
+    }
+  };
+
+  const handleSocialRegister = (provider) => {
+    if (provider === 'LinkedIn') {
+        const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
+        if (!inputEmail) return;
+
+        const mockUser = {
+            name: `${provider} User`,
+            email: inputEmail
+        };
+        login(mockUser, 'social-login-token');
+        navigate('/dashboard');
+    }
   };
 
   return (
@@ -74,11 +94,16 @@ export default function Register() {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex gap-4 mb-6">
-          <button onClick={() => handleSocialRegister('Google')} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F111A] border border-white/5 rounded-lg text-sm font-semibold text-white hover:bg-[#252839] transition">
-            <img src="https://img.icons8.com/color/50/000000/google-logo.png" alt="Google" className="w-5 h-5 object-contain" />
-            Google
-          </button>
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="flex justify-center w-full">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError('Google Registration failed')}
+              theme="filled_black"
+              shape="pill"
+              width="100%"
+            />
+          </div>
           <button onClick={() => handleSocialRegister('LinkedIn')} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F111A] border border-white/5 rounded-lg text-sm font-semibold text-white hover:bg-[#252839] transition">
             <img src="https://img.icons8.com/color/50/000000/linkedin.png" alt="LinkedIn" className="w-5 h-5 object-contain" />
             LinkedIn
@@ -147,3 +172,4 @@ export default function Register() {
     </AuthLayout>
   );
 }
+

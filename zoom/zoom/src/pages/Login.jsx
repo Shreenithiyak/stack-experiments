@@ -3,6 +3,7 @@ import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ export default function Login() {
   const [error, setError] = useState('');
   const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     if (user) {
@@ -26,7 +29,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/user/logindata`, {
+      const response = await axios.post(`${API_URL}/api/user/logindata`, {
         email, 
         password
       });
@@ -46,12 +49,29 @@ export default function Login() {
     }
   };
 
-  const handleSocialLogin = (provider) => {
-    const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
-    if (!inputEmail) return;
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const response = await axios.post(`${API_URL}/api/user/googlelogin`, {
+        id_token: credentialResponse.credential
+      });
 
-    login({ name: `${provider} User`, email: inputEmail }, 'social-login-token');
-    navigate('/dashboard');
+      if (response.data && response.data.token) {
+        login({ name: 'Google User' }, response.data.token);
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      setError(err.response?.data?.msg || 'Google Login failed. Please try again.');
+    }
+  };
+
+  const handleSocialLogin = (provider) => {
+    // Keeping this for LinkedIn or other providers if needed later
+    if (provider === 'LinkedIn') {
+        const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
+        if (!inputEmail) return;
+        login({ name: `${provider} User`, email: inputEmail }, 'social-login-token');
+        navigate('/dashboard');
+    }
   };
 
   return (
@@ -69,11 +89,16 @@ export default function Login() {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex gap-4 mb-6">
-          <button onClick={() => handleSocialLogin('Google')} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F111A] border border-white/5 rounded-lg text-sm font-semibold text-white hover:bg-[#252839] transition">
-            <img src="https://img.icons8.com/color/50/000000/google-logo.png" alt="Google" className="w-5 h-5 object-contain" />
-            Google
-          </button>
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="flex justify-center w-full">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setError('Google Login failed')}
+              theme="filled_black"
+              shape="pill"
+              width="100%"
+            />
+          </div>
           <button onClick={() => handleSocialLogin('LinkedIn')} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F111A] border border-white/5 rounded-lg text-sm font-semibold text-white hover:bg-[#252839] transition">
             <img src="https://img.icons8.com/color/50/000000/linkedin.png" alt="LinkedIn" className="w-5 h-5 object-contain" />
             LinkedIn
@@ -131,3 +156,4 @@ export default function Login() {
     </AuthLayout>
   );
 }
+

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { RoleProvider } from './context/RoleContext';
 import { CompanyProvider } from './context/CompanyContext';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -15,27 +16,32 @@ import Analytics from './pages/Analytics';
 import LandingSimulator from './pages/LandingSimulator';
 
 function App() {
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
   return (
-    <AuthProvider>
-      <CompanyProvider>
-        <RoleProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/practice" element={<Practice />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/questions" element={<QuestionBank />} />
-              <Route path="/simulator" element={<Simulator />} />
-              <Route path="/landing-simulator" element={<LandingSimulator />} />
-            </Routes>
-          </BrowserRouter>
-        </RoleProvider>
-      </CompanyProvider>
-    </AuthProvider>
+    <GoogleOAuthProvider clientId={clientId}>
+      <AuthProvider>
+        <CompanyProvider>
+          <RoleProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/practice" element={<Practice />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/questions" element={<QuestionBank />} />
+                <Route path="/simulator" element={<Simulator />} />
+                <Route path="/landing-simulator" element={<LandingSimulator />} />
+              </Routes>
+            </BrowserRouter>
+          </RoleProvider>
+        </CompanyProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 
 export default App;
+
