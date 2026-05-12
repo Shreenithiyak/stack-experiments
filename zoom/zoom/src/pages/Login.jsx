@@ -37,7 +37,7 @@ export default function Login() {
       if (response.data && response.data.token) {
         setEmail('');
         setPassword('');
-        login({ email }, response.data.token);
+        login(response.data.user, response.data.token);
         navigate('/dashboard');
       }
     } catch (err) {
@@ -56,7 +56,7 @@ export default function Login() {
       });
 
       if (response.data && response.data.token) {
-        login({ name: 'Google User' }, response.data.token);
+        login(response.data.user, response.data.token);
         navigate('/dashboard');
       }
     } catch (err) {

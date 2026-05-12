@@ -6,6 +6,10 @@ const questionSchema = new mongoose.Schema({
         required: true,
         enum: ['beginner', 'intermediate', 'advanced']
     },
+    company: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         required: true

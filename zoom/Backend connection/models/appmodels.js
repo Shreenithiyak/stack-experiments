@@ -11,8 +11,7 @@ const appdemo = new mongoose.Schema({
         unique:true
     },
     password:{
-        type:"String",
-        required:true
+        type:"String"
     },
     createdAT:{
         type:"String",
@@ -22,7 +21,7 @@ const appdemo = new mongoose.Schema({
         type:"String",
         default:"user"
     }
-},{timestramps:true})
+},{timestamps:true})
 
 const appmodel= mongoose.model("appmodel",appdemo)
 export default appmodel

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRole } from '../context/RoleContext';
 import { useCompany } from '../context/CompanyContext';
+import { useAuth } from '../context/AuthContext';
 
 const RoleCard = ({ id, title, description, onSelect }) => {
   const { selectedRoleId, setSelectedRoleId } = useRole();
@@ -34,8 +35,20 @@ const RoleCard = ({ id, title, description, onSelect }) => {
 };
 
 const CompanyLogo = ({ abbreviation, fullName }) => {
+  const { setSelectedCompany } = useCompany();
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setSelectedCompany(fullName);
+    navigate('/questions');
+  };
+
   return (
-    <Link to="/questions" className="flex flex-col items-center gap-3 group outline-none">
+    <button 
+      onClick={handleClick}
+      className="flex flex-col items-center gap-3 group outline-none bg-transparent border-none p-0"
+    >
       <div className="w-16 h-16 bg-[#171923] border border-white/5 rounded-xl flex items-center justify-center text-sm font-bold text-white shadow-sm transition-all cursor-pointer group-hover:border-[#00e5ff]/50 group-hover:bg-[#1a1c29] group-focus-visible:border-[#00e5ff]/50 group-focus-visible:bg-[#1a1c29] group-focus-visible:ring-2 group-focus-visible:ring-[#00e5ff]/50">
         {abbreviation}
       </div>
@@ -43,9 +56,10 @@ const CompanyLogo = ({ abbreviation, fullName }) => {
         <div className="text-sm font-semibold text-white mb-0.5 group-hover:text-[#00e5ff] transition-colors">{fullName}</div>
         <div className="text-[9px] text-[#8c92a4] uppercase tracking-widest">Question Bank</div>
       </div>
-    </Link>
+    </button>
   );
 };
+
 
 export default function Practice() {
   const [activeTab, setActiveTab] = useState(() => {
@@ -60,6 +74,7 @@ export default function Practice() {
   
   const { roles, handleGenerateRoles } = useRole();
   const { companies } = useCompany();
+  const { user } = useAuth();
 
   useEffect(() => {
     localStorage.setItem('neon_practice_tab', activeTab);
@@ -86,7 +101,7 @@ export default function Practice() {
     <DashboardLayout>
       <div className="py-8 max-w-[1100px] mx-auto">
         <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-          Master Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b9b0ff] to-[#f4d5ff]">Next Interview</span>
+          Hey {user?.name || 'You'}, Master Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b9b0ff] to-[#f4d5ff]">Next Interview</span>
         </h1>
         <p className="text-lg text-[#8c92a4] mb-12 max-w-2xl leading-relaxed">
           Choose your focus area or a specific company bank to begin tailored mock sessions powered by high-fidelity AI coaching.

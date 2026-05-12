@@ -23,16 +23,25 @@ export const checkdata = async(req,res)=>{
    const {email,password}=req.body
   try {
    
-    const client =await appmodel.findOne({email})
-    if(!client){
-    return res.status(404).json({msg:"user not found"})
+    const client = await appmodel.findOne({ email });
+    if (!client) {
+      return res.status(404).json({ msg: "User not found" });
     }
-    const checkpass =await bcrypt.compare(password,client.password)
-   if(!checkpass){
-    return res.status(404).json({msg:"password not found"})
-   } 
-    const token =await jwt.sign({id:client._id,name:client.name},process.env.JWT_SECURE,{expiresIn:"1w"})
-    res.status(200).json({msg:"token successfully syncked ",token})
+    
+    if (!client.password) {
+      return res.status(400).json({ msg: "This account was created with Google login. Please use Google to sign in." });
+    }
+
+    const checkpass = await bcrypt.compare(password, client.password);
+    if (!checkpass) {
+      return res.status(401).json({ msg: "Incorrect password" });
+    }
+    const token = await jwt.sign({ id: client._id, name: client.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
+    res.status(200).json({ 
+      msg: "token successfully syncked ", 
+      token, 
+      user: { name: client.name, email: client.email } 
+    });
 
 } catch (error) {
     console.log('error',error);
@@ -64,12 +73,20 @@ export const googlelogin =async(req,res)=>{
     try {
       const user = await appmodel.findOne({email:payload.email})
       if(user){
-        const token =await jwt.sign({id:user._id,name:user.name},process.env.JWT_SECURE,{expiresIn:"1w"})
-        res.status(200).json({msg:"token successfully syncked ",token})
-      }else{
-        const add =await appmodel.create({name:payload.name,email:payload.email,password:''})
-        const token =await jwt.sign({id:add._id,name:add.name},process.env.JWT_SECURE,{expiresIn:"1w"})
-        res.status(200).json({msg:"token successfully syncked ",token})
+        const token = await jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
+        res.status(200).json({ 
+          msg: "token successfully syncked ", 
+          token, 
+          user: { name: user.name, email: user.email } 
+        });
+      } else {
+        const add = await appmodel.create({ name: payload.name, email: payload.email, password: '' });
+        const token = await jwt.sign({ id: add._id, name: add.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
+        res.status(200).json({ 
+          msg: "token successfully syncked ", 
+          token, 
+          user: { name: add.name, email: add.email } 
+        });
       }
     } catch (error) {
         console.log('error',error);
@@ -79,8 +96,11 @@ export const googlelogin =async(req,res)=>{
 
 export const getQuestions = async (req, res) => {
     try {
-        const { level } = req.query;
-        const filter = level ? { level } : {};
+        const { level, company } = req.query;
+        const filter = {};
+        if (level) filter.level = level;
+        if (company) filter.company = company;
+        
         const questions = await Question.find(filter);
         res.status(200).json(questions);
     } catch (error) {
@@ -90,90 +110,137 @@ export const getQuestions = async (req, res) => {
 };
 
 export const seedQuestions = async (req, res) => {
-    const questionsData = [
-        {
-            level: 'beginner',
-            category: "Algorithms",
-            time: "15 mins",
-            question: "Explain the concept of Big O notation and how you apply it to evaluate algorithm performance.",
-            description: "This question tests your fundamental understanding of computational complexity. Be prepared to discuss worst-case, average-case, and best-case scenarios for common sorting and searching algorithms.",
-            focusAreas: ["Space Complexity", "Logarithmic vs Linear time", "Amortized Analysis"]
-        },
-        {
-            level: 'beginner',
-            category: "Data Structures",
-            time: "10 mins",
-            question: "What are the primary differences between an Array and a Linked List?",
-            description: "Understanding memory allocation and access patterns is crucial for choosing the right data structure for your application.",
-            focusAreas: ["Random Access", "Insertion/Deletion Efficiency", "Memory Overhead"]
-        },
-        {
-            level: 'beginner',
-            category: "Web Basics",
-            time: "12 mins",
-            question: "Describe the process of what happens when you type a URL into a browser and press Enter.",
-            description: "A classic high-level question that tests your breadth of knowledge across networking, DNS, and browser rendering.",
-            focusAreas: ["DNS Lookup", "TCP/IP Handshake", "DOM/CSSOM Construction"]
-        },
-        {
-            level: 'intermediate',
-            category: "Data Structures",
-            time: "10 mins",
-            question: "What are the primary differences between a Hash Map and a Tree Map?",
-            description: "Hash maps provide constant time average access, while tree maps maintain order. Knowing when to trade speed for ordering is a key intermediate skill.",
-            focusAreas: ["Time Complexity (O(1) vs O(log n))", "Ordering Guarantees", "Hash Collisions vs Balancing"]
-        },
-        {
-            level: 'intermediate',
-            category: "Web Tech",
-            time: "15 mins",
-            question: "Explain the event loop in JavaScript and how it handles asynchronous operations.",
-            description: "Deep dive into the concurrency model of JS. Essential for frontend and Node.js developers.",
-            focusAreas: ["Call Stack", "Task Queue vs Microtask Queue", "Blocking vs Non-blocking"]
-        },
-        {
-            level: 'intermediate',
-            category: "Database",
-            time: "20 mins",
-            question: "When would you choose a NoSQL database over a traditional SQL database?",
-            description: "Tests your understanding of data modeling, scaling requirements, and the CAP theorem.",
-            focusAreas: ["ACID vs BASE", "Horizontal Scalability", "Schema Flexibility"]
-        },
-        {
-            level: 'advanced',
-            category: "System Design",
-            time: "20 mins",
-            question: "How would you design a rate limiter for a high-traffic public API?",
-            description: "This tests your ability to handle scale, synchronization in distributed systems, and choosing between different algorithms like Token Bucket or Leaky Bucket.",
-            focusAreas: ["Token Bucket Algorithm", "Distributed Locking (Redis)", "Scalability & Fault Tolerance"]
-        },
-        {
-            level: 'advanced',
-            category: "Architecture",
-            time: "25 mins",
-            question: "Describe your process for debugging a memory leak in a large-scale application.",
-            description: "Advanced debugging requires understanding of heap snapshots, garbage collection cycles, and profiler tools.",
-            focusAreas: ["Heap Analysis", "Garbage Collection Strategies", "Retention Paths"]
-        },
-        {
-            level: 'advanced',
-            category: "Concurrency",
-            time: "30 mins",
-            question: "How do you handle race conditions in a distributed system with multiple microservices?",
-            description: "Focuses on consistency models, idempotent operations, and distributed coordination.",
-            focusAreas: ["Optimistic vs Pessimistic Locking", "Idempotency Keys", "Distributed Transactions (Saga Pattern)"]
-        }
+    const companies = [
+        "TCS", "Infosys", "Wipro", "Accenture", "Google", "Amazon", "Microsoft", 
+        "Zoho", "Meta", "Apple", "Netflix", "IBM", "Oracle", "Cisco", 
+        "Tesla", "Intel", "Spotify", "Atlassian", "Uber", "Airbnb", 
+        "Snowflake", "Salesforce", "Palantir", "Stripe"
     ];
 
+    const questionsData = [];
+
+    companies.forEach(company => {
+        // Beginner Questions (3)
+        questionsData.push(
+            {
+                level: 'beginner',
+                company: company,
+                category: "Fundamentals",
+                time: "10-15 mins",
+                question: `Explain the core architectural principles that drive ${company}'s primary product line.`,
+                description: `This question tests your basic understanding of how ${company} builds its core services.`,
+                focusAreas: ["Scalability", "Reliability", "Basic Architecture"]
+            },
+            {
+                level: 'beginner',
+                company: company,
+                category: "Data Structures",
+                time: "12 mins",
+                question: `Which data structures would be most efficient for handling ${company}'s high-volume user data?`,
+                description: "Tests selection of efficient data structures for specific use cases.",
+                focusAreas: ["Arrays vs Lists", "Hash Maps", "Complexity"]
+            },
+            {
+                level: 'beginner',
+                company: company,
+                category: "Problem Solving",
+                time: "15 mins",
+                question: `Describe a basic algorithm to optimize a typical workflow at ${company}.`,
+                description: "Practical application of algorithms in a corporate context.",
+                focusAreas: ["Optimization", "Logic", "Efficiency"]
+            }
+        );
+
+        // Intermediate Questions (3)
+        questionsData.push(
+            {
+                level: 'intermediate',
+                company: company,
+                category: "System Design",
+                time: "20-25 mins",
+                question: `How would you design a scalable microservice for ${company}'s cloud infrastructure?`,
+                description: "Tests ability to design components that fit into a larger ecosystem.",
+                focusAreas: ["API Design", "Load Balancing", "Microservices"]
+            },
+            {
+                level: 'intermediate',
+                company: company,
+                category: "Performance",
+                time: "22 mins",
+                question: `How would you identify and resolve a bottleneck in ${company}'s data pipeline?`,
+                description: "Deep dive into performance profiling and optimization.",
+                focusAreas: ["Bottleneck Analysis", "Caching", "Throughput"]
+            },
+            {
+                level: 'intermediate',
+                company: company,
+                category: "Database",
+                time: "25 mins",
+                question: `Compare SQL vs NoSQL requirements for ${company}'s distributed data storage.`,
+                description: "Evaluating database trade-offs for company-specific scale.",
+                focusAreas: ["ACID vs BASE", "Consistency", "Scalability"]
+            }
+        );
+
+        // Advanced Questions (3)
+        questionsData.push(
+            {
+                level: 'advanced',
+                company: company,
+                category: "High-Level Architecture",
+                time: "35-45 mins",
+                question: `Design a global-scale fault-tolerant system for ${company} that handles 100k+ requests per second.`,
+                description: "Senior-level architectural challenge for extreme scale.",
+                focusAreas: ["Multi-region Deployment", "Global Consistency", "Disaster Recovery"]
+            },
+            {
+                level: 'advanced',
+                company: company,
+                category: "Security & Privacy",
+                time: "40 mins",
+                question: `How would you implement zero-trust security architecture across ${company}'s internal networks?`,
+                description: "Advanced security protocols and identity management.",
+                focusAreas: ["Authentication", "Encryption", "Zero-Trust"]
+            },
+            {
+                level: 'advanced',
+                company: company,
+                category: "Future Tech",
+                time: "45 mins",
+                question: `How can ${company} leverage AI/ML to predict and prevent system failures in real-time?`,
+                description: "Applying cutting-edge technology to maintain system health.",
+                focusAreas: ["Predictive Analytics", "Self-healing Systems", "MLOps"]
+            }
+        );
+    });
+
     try {
-        await Question.deleteMany({}); // Clear existing
+        await Question.deleteMany({});
         const seeded = await Question.insertMany(questionsData);
-        res.status(200).json({ msg: "Seeded successfully", count: seeded.length });
+        res.status(200).json({ 
+            msg: `Successfully seeded 9 questions for each of the 24 companies.`, 
+            totalQuestions: seeded.length 
+        });
     } catch (error) {
         console.log('error', error);
-        res.status(500).json({ msg: "Error seeding questions" });
+        res.status(500).json({ msg: "Error seeding comprehensive MNC question sets" });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

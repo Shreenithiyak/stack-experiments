@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../layouts/DashboardLayout';
+import { useCompany } from '../context/CompanyContext';
 
+// Sub-components remains the same
 const LevelBadge = ({ label, active, colorDot, onClick }) => (
   <button 
     onClick={onClick}
@@ -86,6 +88,7 @@ export default function QuestionBank() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { selectedCompany } = useCompany();
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -93,7 +96,13 @@ export default function QuestionBank() {
     const fetchQuestions = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${API_URL}/api/user/questions`);
+        // Fetch questions filtered by level and company
+        const response = await axios.get(`${API_URL}/api/user/questions`, {
+          params: {
+            level: activeLevel,
+            company: selectedCompany
+          }
+        });
         setQuestions(response.data);
         setError(null);
       } catch (err) {
@@ -105,9 +114,7 @@ export default function QuestionBank() {
     };
 
     fetchQuestions();
-  }, [API_URL]);
-
-  const currentQuestions = questions.filter(q => q.level === activeLevel);
+  }, [API_URL, activeLevel, selectedCompany]);
 
   return (
     <DashboardLayout>
@@ -115,14 +122,17 @@ export default function QuestionBank() {
         
         {/* Header Section */}
         <div className="flex items-start gap-6 mb-12">
-          <Link to="/dashboard" className="w-12 h-12 bg-[#1a1c29] hover:bg-[#202336] rounded-xl flex items-center justify-center text-white border border-white/5 transition-colors shadow-sm shrink-0">
+          <Link to="/practice" className="w-12 h-12 bg-[#1a1c29] hover:bg-[#202336] rounded-xl flex items-center justify-center text-white border border-white/5 transition-colors shadow-sm shrink-0">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/back.png" alt="back" className="w-6 h-6 object-contain" />
           </Link>
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Software Engineer Question Bank</h1>
-            <p className="text-[#8c92a4] text-[15px]">Curated for Google, Meta, and Netflix standards</p>
+            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+                {selectedCompany ? `${selectedCompany} Question Bank` : 'Global Question Bank'}
+            </h1>
+            <p className="text-[#8c92a4] text-[15px]">Curated for Top-tier MNC standards</p>
           </div>
         </div>
+
 
         {/* Level Filters & Count */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
@@ -167,8 +177,8 @@ export default function QuestionBank() {
                 Retry
               </button>
             </div>
-          ) : currentQuestions.length > 0 ? (
-            currentQuestions.map((q) => (
+          ) : questions.length > 0 ? (
+            questions.map((q) => (
               <QuestionCard 
                 key={q._id}
                 category={q.category} 

@@ -63,8 +63,8 @@ const Navbar = () => {
         <button className="text-[#8c92a4] hover:text-white transition-colors">
           <img src="https://img.icons8.com/ios-filled/50/8c92a4/settings.png" alt="Settings" className="w-5 h-5 object-contain hover:brightness-200 transition-all" />
         </button>
-        <Link to="/login" className="w-8 h-8 rounded-full overflow-hidden border border-white/20 hover:border-white/50 transition-colors ml-4">
-          <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'Alex')}&background=1e293b&color=00e5ff`} alt="Profile" className="w-full h-full object-cover" />
+        <Link to="/dashboard" className="w-10 h-10 rounded-full border border-white/20 hover:border-[#00e5ff] transition-all ml-4 flex items-center justify-center bg-[#171923] text-[#00e5ff] font-bold text-sm shadow-sm">
+          {user?.name?.charAt(0) || 'Y'}
         </Link>
       </div>
 

@@ -57,7 +57,7 @@ export default function Register() {
       });
 
       if (response.data && response.data.token) {
-        login({ name: 'Google User' }, response.data.token);
+        login(response.data.user, response.data.token);
         navigate('/dashboard');
       }
     } catch (err) {
