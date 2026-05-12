@@ -97,17 +97,22 @@ export default function QuestionBank() {
       setLoading(true);
       try {
         // Fetch questions filtered by level and company
+        console.log("Fetching questions from:", `${API_URL}/api/user/questions`);
+        console.log("Params:", { level: activeLevel, company: selectedCompany });
+        
         const response = await axios.get(`${API_URL}/api/user/questions`, {
           params: {
             level: activeLevel,
             company: selectedCompany
           }
         });
+        
+        console.log("Fetched questions count:", response.data.length);
         setQuestions(response.data);
         setError(null);
       } catch (err) {
         console.error("Error fetching questions:", err);
-        setError("Failed to load questions. Please start the backend server and seed the data.");
+        setError(`Failed to load questions: ${err.message}. Ensure backend is running at ${API_URL} and database is seeded.`);
       } finally {
         setLoading(false);
       }

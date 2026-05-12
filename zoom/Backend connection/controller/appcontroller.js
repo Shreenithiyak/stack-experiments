@@ -98,8 +98,8 @@ export const getQuestions = async (req, res) => {
     try {
         const { level, company } = req.query;
         const filter = {};
-        if (level) filter.level = level;
-        if (company) filter.company = company;
+        if (level && level !== '') filter.level = level;
+        if (company && company !== '') filter.company = company;
         
         const questions = await Question.find(filter);
         res.status(200).json(questions);
