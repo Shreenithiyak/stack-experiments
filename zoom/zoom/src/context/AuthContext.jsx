@@ -17,16 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem('neon_token'));
 
   useEffect(() => {
-
-    const handleUnload = () => {
-      // Typically we don't clear tokens on unload for persistent login, 
-      // but to preserve existing behavior:
-      localStorage.removeItem('neon_user');
-      localStorage.removeItem('neon_token');
-    };
-
-    window.addEventListener('beforeunload', handleUnload);
-    return () => window.removeEventListener('beforeunload', handleUnload);
+    // Persistent sessions enabled. No longer clearing tokens on refresh.
   }, []);
 
   const login = (userData, authToken) => {

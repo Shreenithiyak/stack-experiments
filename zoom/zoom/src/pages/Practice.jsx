@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRole } from '../context/RoleContext';
@@ -62,10 +62,7 @@ const CompanyLogo = ({ abbreviation, fullName }) => {
 
 
 export default function Practice() {
-  const [activeTab, setActiveTab] = useState(() => {
-    const saved = localStorage.getItem('neon_practice_tab');
-    return saved ? saved : 'technology';
-  });
+  const [activeTab, setActiveTab] = useState('technology');
   
   const [searchTerm, setSearchTerm] = useState('');
   const [companySearchTerm, setCompanySearchTerm] = useState('');
@@ -75,10 +72,6 @@ export default function Practice() {
   const { roles, handleGenerateRoles } = useRole();
   const { companies } = useCompany();
   const { user } = useAuth();
-
-  useEffect(() => {
-    localStorage.setItem('neon_practice_tab', activeTab);
-  }, [activeTab]);
 
   const filteredRoles = roles.filter(role => 
     role.title.toLowerCase().includes(searchTerm.toLowerCase()) || 

@@ -1,5 +1,5 @@
 import  appmodel from '../models/appmodels.js'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import {OAuth2Client} from 'google-auth-library';
 import Question from '../models/questionModel.js';
@@ -7,7 +7,7 @@ import Question from '../models/questionModel.js';
 export const sentdata = async(req,res)=>{
  const {name,email,password}=req.body
   try {
-   const hashed = await bcrypt.hash(password,10)
+   const hashed = await bcrypt.hash(password,8)
    const add =await appmodel.create({name,email,password:hashed})
    res.status(200).json({msg:"sucess",data:add})
   } catch (error) {
