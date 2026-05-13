@@ -72,92 +72,102 @@ export default function Login() {
     console.log(`${provider} login initiated`);
   };
 
+  const [showEmailForm, setShowEmailForm] = useState(false);
+
   return (
     <AuthLayout>
       <div className="bg-[#1C1F2E] rounded-2xl w-full max-w-[440px] p-8 sm:p-10 shadow-lg shadow-black/50 border border-white/5">
         
-        {/* Tabs */}
-        <div className="flex gap-6 border-b border-white/10 mb-8">
-          <Link to="/login" className="pb-3 text-lg font-semibold text-[#00E5FF] border-b-2 border-[#00E5FF]">
-            Sign In
-          </Link>
-          <Link to="/register" className="pb-3 text-lg font-semibold text-[#8c92a4] hover:text-white transition">
-            Create Account
-          </Link>
+        {/* Header */}
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold text-white mb-2">Welcome Back</h2>
+          <p className="text-[#8c92a4] text-sm">Experience the future of interview prep</p>
         </div>
 
-        {/* Social Buttons */}
-        <div className="flex flex-col gap-4 mb-6">
-          <div className="flex justify-center w-full">
+        {/* Primary Action: Google Login */}
+        <div className="flex flex-col items-center gap-6 mb-8">
+          <div className="w-full flex justify-center scale-110">
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
-              onError={() => setError('Google Login failed')}
-              theme="filled_black"
+              onError={() => setError('Google Authentication failed')}
+              theme="filled_blue"
               shape="pill"
-              width="100%"
+              text="signin_with"
+              width="300"
             />
           </div>
-          <button onClick={() => handleSocialLogin('LinkedIn')} className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F111A] border border-white/5 rounded-lg text-sm font-semibold text-white hover:bg-[#252839] transition">
-            <img src="https://img.icons8.com/color/50/000000/linkedin.png" alt="LinkedIn" className="w-5 h-5 object-contain" />
-            LinkedIn
-          </button>
+          <p className="text-[12px] text-[#5e6376] font-medium italic">Fast, secure & one-click access</p>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="flex-1 border-t border-white/10"></div>
-          <span className="text-[11px] font-bold text-[#5e6376] uppercase tracking-wider">Or continue with</span>
-          <div className="flex-1 border-t border-white/10"></div>
-        </div>
+        {/* Divider / Toggle */}
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-full border-t border-white/5"></div>
+          {!showEmailForm ? (
+            <button 
+              onClick={() => setShowEmailForm(true)}
+              className="text-[13px] font-bold text-[#00E5FF] hover:text-white transition-colors"
+            >
+              Sign in with Email Address
+            </button>
+          ) : (
+            <div className="w-full animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Form */}
+              <form onSubmit={handleLogin} className="mt-4">
+                {error && (
+                  <div className="mb-6 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
+                    {error}
+                  </div>
+                )}
+                <div className="flex flex-col gap-2 mb-5">
+                  <label className="text-xs font-bold text-[#8c92a4] uppercase tracking-wider">Email Address</label>
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376]" 
+                    placeholder="name@example.com" 
+                  />
+                </div>
+                
+                <div className="flex flex-col gap-2 mb-8">
+                  <div className="flex justify-between items-center">
+                    <label className="text-xs font-bold text-[#8c92a4] uppercase tracking-wider">Password</label>
+                    <a href="#" className="text-xs font-semibold text-[#00E5FF] hover:underline">Forgot?</a>
+                  </div>
+                  <div className="relative">
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376] placeholder:tracking-widest" 
+                      placeholder="••••••••" 
+                    />
+                    <button 
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#5e6376] hover:text-[#00e5ff] transition-colors"
+                    >
+                      {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                    </button>
+                  </div>
+                </div>
 
-        {/* Form */}
-        <form onSubmit={handleLogin}>
-          {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm">
-              {error}
-            </div>
-          )}
-          <div className="flex flex-col gap-2 mb-5">
-            <label className="text-sm font-semibold text-white">Email Address</label>
-            <input 
-              type="email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376]" 
-              placeholder="name@example.com" 
-            />
-          </div>
-          
-          <div className="flex flex-col gap-2 mb-8">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-semibold text-white">Password</label>
-              <a href="#" className="text-xs font-semibold text-[#00E5FF] hover:underline hover:text-white">Forgot?</a>
-            </div>
-            <div className="relative">
-              <input 
-                type={showPassword ? "text" : "password"} 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-[#0F111A] border border-white/5 rounded-lg text-[15px] text-white outline-none transition focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 placeholder:text-[#5e6376] placeholder:tracking-widest" 
-                placeholder="••••••••" 
-              />
+                <button type="submit" className="w-full inline-flex justify-center items-center py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-lg font-bold text-[15px] transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)] active:scale-[0.99] border border-[#00e5ff]">
+                  Access Dashboard
+                </button>
+              </form>
               <button 
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#5e6376] hover:text-[#00e5ff] transition-colors"
+                onClick={() => setShowEmailForm(false)}
+                className="w-full text-center mt-6 text-[12px] text-[#5e6376] hover:text-white transition"
               >
-                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                Go back to Google Sign-in
               </button>
             </div>
-          </div>
+          )}
+        </div>
 
-          <button type="submit" className="w-full inline-flex justify-center items-center py-3.5 bg-[#00E5FF] text-[#0F111A] rounded-lg font-bold text-[15px] transition hover:bg-[#00cbe5] shadow-[0_0_15px_rgba(0,229,255,0.2)] active:scale-[0.99] border border-[#00e5ff]">
-            Sign In to Dashboard
-          </button>
-        </form>
-
-        <div className="mt-8 text-center text-[13px] text-[#8c92a4] font-medium">
-          Don't have an account? <Link to="/register" className="text-[#00E5FF] font-bold hover:underline">Create an account</Link>
+        <div className="mt-10 text-center text-[13px] text-[#8c92a4] font-medium">
+          New to InterviewReady? <Link to="/register" className="text-[#00E5FF] font-bold hover:underline">Create Account</Link>
         </div>
       </div>
     </AuthLayout>

@@ -90,7 +90,10 @@ export const googlelogin = async (req, res) => {
         }
     } catch (error) {
         console.log('Google Auth Error:', error);
-        res.status(500).json({ msg: error.message || "Server error during google login" });
+        res.status(500).json({ 
+            msg: `Google Auth Error: ${error.message || "Unknown error"}`,
+            details: error.toString()
+        });
     }
 }
 
