@@ -67,13 +67,9 @@ export default function Login() {
   };
 
   const handleSocialLogin = (provider) => {
-    // Keeping this for LinkedIn or other providers if needed later
-    if (provider === 'LinkedIn') {
-        const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
-        if (!inputEmail) return;
-        login({ name: `${provider} User`, email: inputEmail }, 'social-login-token');
-        navigate('/dashboard');
-    }
+    // Social logins like Google are handled by their own components.
+    // Placeholder for additional providers if needed.
+    console.log(`${provider} login initiated`);
   };
 
   return (

@@ -68,17 +68,8 @@ export default function Register() {
   };
 
   const handleSocialRegister = (provider) => {
-    if (provider === 'LinkedIn') {
-        const inputEmail = window.prompt(`Enter your email to continue with ${provider}:`);
-        if (!inputEmail) return;
-
-        const mockUser = {
-            name: `${provider} User`,
-            email: inputEmail
-        };
-        login(mockUser, 'social-login-token');
-        navigate('/dashboard');
-    }
+    // Social registrations are handled by Google component or manual form.
+    console.log(`${provider} registration initiated`);
   };
 
   return (

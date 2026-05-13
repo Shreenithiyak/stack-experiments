@@ -60,37 +60,37 @@ export const movedatato =async(req,res)=>{
 
 }
 
-export const googlelogin =async(req,res)=>{
-    const {id_token} = req.body
-    const client = new OAuth2Client(process.env.GOOGLE_OAUTH_ID)
-    const ticket = await client.verifyIdToken({
-        idToken:id_token,
-        audience:process.env.GOOGLE_OAUTH_ID,
-    })
-    const payload = ticket.getPayload()
-    console.log(payload)
-    
+export const googlelogin = async (req, res) => {
+    const { id_token } = req.body;
     try {
-      const user = await appmodel.findOne({email:payload.email})
-      if(user){
-        const token = await jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
-        res.status(200).json({ 
-          msg: "token successfully syncked ", 
-          token, 
-          user: { name: user.name, email: user.email } 
+        const client = new OAuth2Client(process.env.GOOGLE_OAUTH_ID);
+        const ticket = await client.verifyIdToken({
+            idToken: id_token,
+            audience: process.env.GOOGLE_OAUTH_ID,
         });
-      } else {
-        const add = await appmodel.create({ name: payload.name, email: payload.email, password: '' });
-        const token = await jwt.sign({ id: add._id, name: add.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
-        res.status(200).json({ 
-          msg: "token successfully syncked ", 
-          token, 
-          user: { name: add.name, email: add.email } 
-        });
-      }
+        const payload = ticket.getPayload();
+        console.log("Google Payload:", payload);
+
+        const user = await appmodel.findOne({ email: payload.email });
+        if (user) {
+            const token = await jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
+            res.status(200).json({
+                msg: "token successfully syncked ",
+                token,
+                user: { name: user.name, email: user.email }
+            });
+        } else {
+            const add = await appmodel.create({ name: payload.name, email: payload.email, password: '' });
+            const token = await jwt.sign({ id: add._id, name: add.name }, process.env.JWT_SECURE, { expiresIn: "1w" });
+            res.status(200).json({
+                msg: "token successfully syncked ",
+                token,
+                user: { name: add.name, email: add.email }
+            });
+        }
     } catch (error) {
-        console.log('error',error);
-        res.status(500).json({msg: error.message || "Server error during google login"})
+        console.log('Google Auth Error:', error);
+        res.status(500).json({ msg: error.message || "Server error during google login" });
     }
 }
 
