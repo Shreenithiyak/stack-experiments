@@ -8,6 +8,7 @@ dotenv.config()
 const app =express()
 const allowedOrigins = [
   'https://stack-experiments.onrender.com',
+  'https://stack-experiment.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174'
 ];
@@ -25,6 +26,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json())
+
+// Security header for Google OAuth Popups
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  next();
+});
 
 app.use('/api/user',connect)
 const startServer = async () => {

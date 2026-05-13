@@ -21,10 +21,16 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData, authToken) => {
-    setUser(userData);
-    setToken(authToken);
+    // Set both together to minimize re-renders and race conditions
     localStorage.setItem('neon_user', JSON.stringify(userData));
     localStorage.setItem('neon_token', authToken);
+    setUser(userData);
+    setToken(authToken);
+  };
+
+  const updateUser = (userData) => {
+    localStorage.setItem('neon_user', JSON.stringify(userData));
+    setUser(userData);
   };
 
   const register = (userData) => {
@@ -40,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, login, updateUser, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

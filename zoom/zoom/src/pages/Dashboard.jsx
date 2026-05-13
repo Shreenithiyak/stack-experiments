@@ -55,10 +55,19 @@ export default function Dashboard() {
   const [profile, setProfile] = useState(user);
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+    // Wait a brief moment to ensure AuthContext has initialized from localStorage
+    const checkAuth = setTimeout(() => {
+      if (!token) {
+        console.log("No token found, redirecting to login...");
+        navigate('/login');
+      }
+    }, 100);
+
+    return () => clearTimeout(checkAuth);
+  }, [token, navigate]);
+
+  useEffect(() => {
+    if (!token) return;
 
     const fetchProfile = async () => {
       if (token === 'social-login-token') {

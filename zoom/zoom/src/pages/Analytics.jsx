@@ -24,13 +24,24 @@ const LoadingStep = ({ text, status }) => {
 
 export default function Analytics() {
   const [step, setStep] = useState(0);
-  const { user, login } = useAuth();
+  const { user, updateUser } = useAuth();
 
   useEffect(() => {
     const timer1 = setTimeout(() => setStep(1), 1500);
     const timer2 = setTimeout(() => setStep(2), 3500);
     const timer3 = setTimeout(() => setStep(3), 5500);
-    const timer4 = setTimeout(() => setStep(4), 7500);
+    const timer4 = setTimeout(() => {
+      setStep(4);
+      // Save history directly in the final event instead of an Effect
+      if (user && (!user.history || user.history.length === 0)) {
+        updateUser({
+          ...user,
+          history: [
+            { date: new Date().toLocaleDateString(), score: 92, title: 'System Design Mock' }
+          ]
+        });
+      }
+    }, 7500);
 
     return () => {
       clearTimeout(timer1);
@@ -38,18 +49,7 @@ export default function Analytics() {
       clearTimeout(timer3);
       clearTimeout(timer4);
     };
-  }, []);
-
-  useEffect(() => {
-    if (step === 4 && user && (!user.history || user.history.length === 0)) {
-      login({
-        ...user,
-        history: [
-          { date: new Date().toLocaleDateString(), score: 92, title: 'System Design Mock' }
-        ]
-      });
-    }
-  }, [step, user, login]);
+  }, [user, updateUser]);
 
   return (
     <DashboardLayout>

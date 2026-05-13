@@ -58,19 +58,25 @@ export default function Register() {
         id_token: credentialResponse.credential
       });
 
-      if (response.data && response.data.token) {
+      if (response.data && response.data.token && response.data.user) {
+        console.log("Google success, navigating...");
         login(response.data.user, response.data.token);
+        
+        // Fail-safe navigation
         navigate('/dashboard');
+        setTimeout(() => {
+          if (window.location.pathname === '/register' || window.location.pathname === '/login') {
+            window.location.href = '/dashboard';
+          }
+        }, 100);
+      } else {
+        setError('Google Registration successful but user data missing.');
       }
     } catch (err) {
       setError(err.response?.data?.msg || 'Google Registration failed. Please try again.');
     }
   };
 
-  const handleSocialRegister = (provider) => {
-    // Social registrations are handled by Google component or manual form.
-    console.log(`${provider} registration initiated`);
-  };
 
   const [showEmailForm, setShowEmailForm] = useState(false);
 

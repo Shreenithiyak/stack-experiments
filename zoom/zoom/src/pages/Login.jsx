@@ -36,11 +36,19 @@ export default function Login() {
         password
       });
 
-      if (response.data && response.data.token) {
-        setEmail('');
-        setPassword('');
+      if (response.data && response.data.token && response.data.user) {
+        console.log("Login success, navigating...");
         login(response.data.user, response.data.token);
+        
+        // Fail-safe navigation
         navigate('/dashboard');
+        setTimeout(() => {
+          if (window.location.pathname === '/login') {
+            window.location.href = '/dashboard';
+          }
+        }, 100);
+      } else {
+        setError('Login successful but user data missing. Please try again.');
       }
     } catch (err) {
       if (err.response && err.response.data && err.response.data.msg) {
@@ -57,20 +65,25 @@ export default function Login() {
         id_token: credentialResponse.credential
       });
 
-      if (response.data && response.data.token) {
+      if (response.data && response.data.token && response.data.user) {
+        console.log("Google success, navigating...");
         login(response.data.user, response.data.token);
+        
+        // Fail-safe navigation
         navigate('/dashboard');
+        setTimeout(() => {
+          if (window.location.pathname === '/login' || window.location.pathname === '/register') {
+            window.location.href = '/dashboard';
+          }
+        }, 100);
+      } else {
+        setError('Google Login successful but user data missing.');
       }
     } catch (err) {
       setError(err.response?.data?.msg || 'Google Login failed. Please try again.');
     }
   };
 
-  const handleSocialLogin = (provider) => {
-    // Social logins like Google are handled by their own components.
-    // Placeholder for additional providers if needed.
-    console.log(`${provider} login initiated`);
-  };
 
   const [showEmailForm, setShowEmailForm] = useState(false);
 
