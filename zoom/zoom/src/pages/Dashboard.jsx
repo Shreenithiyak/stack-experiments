@@ -136,9 +136,6 @@ export default function Dashboard() {
               <img src="https://img.icons8.com/ios-filled/50/0f111a/play--v1.png" alt="play" className="w-5 h-5 object-contain" />
               Start Mock Interview
             </Link>
-            <button className="px-8 py-3.5 bg-transparent text-white font-semibold text-lg rounded-xl border border-white/10 hover:bg-white/5 transition-all">
-              Review Roadmap
-            </button>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useCompany } from '../context/CompanyContext';
+import { useRole } from '../context/RoleContext';
 
 // Sub-components remains the same
 const LevelBadge = ({ label, active, colorDot, onClick }) => (
@@ -89,6 +90,10 @@ export default function QuestionBank() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { selectedCompany } = useCompany();
+  const { roles, selectedRoleId } = useRole();
+  
+  const selectedRole = roles.find(r => r.id === selectedRoleId);
+  const roleTitle = selectedRole ? selectedRole.title : 'Tech Role';
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -132,7 +137,7 @@ export default function QuestionBank() {
           </Link>
           <div>
             <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
-                {selectedCompany ? `${selectedCompany} Question Bank` : 'Global Question Bank'}
+                {selectedCompany ? `${selectedCompany} Question Bank (${roleTitle})` : `Global Question Bank (${roleTitle})`}
             </h1>
             <p className="text-[#8c92a4] text-[15px]">Curated for Top-tier MNC standards</p>
           </div>

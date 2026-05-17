@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { GoogleLogin } from '@react-oauth/google';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const location = useLocation();
+  const [email, setEmail] = useState(location.state?.email || '');
+  const [password, setPassword] = useState(location.state?.password || '');
   const [showPassword, setShowPassword] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(!!location.state?.email);
   const [error, setError] = useState('');
   const { user, login } = useAuth();
   const navigate = useNavigate();
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+  useEffect(() => {
+    if (location.state?.email || location.state?.password) {
+      // Clear the state so it doesn't stay if they refresh
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     if (user) {
@@ -83,9 +92,6 @@ export default function Login() {
       setError(err.response?.data?.msg || 'Google Login failed. Please try again.');
     }
   };
-
-
-  const [showEmailForm, setShowEmailForm] = useState(false);
 
   return (
     <AuthLayout>
@@ -180,7 +186,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 text-center text-[13px] text-[#8c92a4] font-medium">
-          New to InterviewReady? <Link to="/register" className="text-[#00E5FF] font-bold hover:underline">Create Account</Link>
+          New to InterviewReady? <Link to="/register" state={{ showEmailForm: true }} className="text-[#00E5FF] font-bold hover:underline">Create Account</Link>
         </div>
       </div>
     </AuthLayout>

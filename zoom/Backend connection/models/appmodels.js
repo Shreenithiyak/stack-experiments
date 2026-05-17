@@ -23,7 +23,7 @@ const appdemo = new mongoose.Schema({
     }
 },{timestamps:true})
 
-const appmodel= mongoose.model("appmodel",appdemo)
+const appmodel= mongoose.model("appmodels",appdemo)
 export default appmodel
 
 

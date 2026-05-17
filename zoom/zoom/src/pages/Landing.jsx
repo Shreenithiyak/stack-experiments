@@ -25,9 +25,6 @@ export default function Landing() {
               <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.3)] text-[#0F111A] rounded-xl font-bold transition hover:bg-[#00cbe5] hover:shadow-[0_0_25px_rgba(0,229,255,0.4)] text-lg">
                 Start for Free
               </Link>
-              <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-[#1C1F2E] border border-white/10 text-white rounded-xl font-bold transition hover:bg-[#252839] hover:border-white/20 text-lg">
-                View Gameplay
-              </Link>
             </div>
           </div>
           <div className="flex-[1.2] relative w-full">

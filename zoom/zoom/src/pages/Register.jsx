@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AuthLayout from '../layouts/AuthLayout';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { GoogleLogin } from '@react-oauth/google';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
@@ -14,6 +14,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const { user, login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -39,10 +40,10 @@ export default function Register() {
         password
       });
 
+      navigate('/login', { state: { email, password } });
       setName('');
       setEmail('');
       setPassword('');
-      navigate('/login');
     } catch (err) {
       if (err.response && err.response.data && err.response.data.msg) {
         setError(err.response.data.msg);
@@ -78,7 +79,7 @@ export default function Register() {
   };
 
 
-  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(location.state?.showEmailForm || false);
 
   return (
     <AuthLayout>

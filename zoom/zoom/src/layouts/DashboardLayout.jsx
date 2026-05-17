@@ -63,8 +63,8 @@ const Navbar = () => {
         <button className="text-[#8c92a4] hover:text-white transition-colors">
           <img src="https://img.icons8.com/ios-filled/50/8c92a4/settings.png" alt="Settings" className="w-5 h-5 object-contain hover:brightness-200 transition-all" />
         </button>
-        <Link to="/dashboard" className="w-10 h-10 rounded-full border border-white/20 hover:border-[#00e5ff] transition-all ml-4 flex items-center justify-center bg-[#171923] text-[#00e5ff] font-bold text-sm shadow-sm">
-          {user?.name?.charAt(0) || 'Y'}
+        <Link to="/profile" className="w-10 h-10 rounded-full border border-white/20 hover:border-[#00e5ff] transition-all ml-4 flex items-center justify-center bg-[#171923] text-[#00e5ff] font-bold text-sm shadow-sm" title="View Profile">
+          {user?.name?.charAt(0) || 'U'}
         </Link>
       </div>
 

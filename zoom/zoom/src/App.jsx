@@ -14,6 +14,7 @@ import Simulator from './pages/Simulator';
 
 import Analytics from './pages/Analytics';
 import LandingSimulator from './pages/LandingSimulator';
+import Profile from './pages/Profile';
 
 function App() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/practice" element={<Practice />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/questions" element={<QuestionBank />} />
