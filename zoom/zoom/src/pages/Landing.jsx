@@ -95,7 +95,7 @@ export default function Landing() {
 
       
         <section className="bg-gradient-to-r from-[#1C1F2E] to-[#12151f] text-white rounded-[2.5rem] py-24 px-12 text-center shadow-2xl border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#00E5FF] rounded-full mix-blend-screen filter blur-[100px] opacity-10 blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#00E5FF] rounded-full mix-blend-screen filter blur-[100px] opacity-10"></div>
           
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight relative z-10">Ready to command the room?</h2>
           <p className="mx-auto mb-12 max-w-[600px] text-xl text-[#8c92a4] relative z-10">

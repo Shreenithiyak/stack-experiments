@@ -101,19 +101,19 @@ export default function QuestionBank() {
     const fetchQuestions = async () => {
       setLoading(true);
       try {
-        // Fetch questions filtered by level and company
         console.log("Fetching questions from:", `${API_URL}/api/user/questions`);
-        console.log("Params:", { level: activeLevel, company: selectedCompany });
+        console.log("Params:", { level: activeLevel, company: selectedCompany, role: selectedRole ? selectedRole.title : undefined });
         
         const response = await axios.get(`${API_URL}/api/user/questions`, {
           params: {
             level: activeLevel,
-            company: selectedCompany
+            company: selectedCompany,
+            role: selectedRole ? selectedRole.title : undefined
           }
         });
         
-        console.log("Fetched questions count:", response.data.length);
-        setQuestions(response.data);
+        console.log("Fetched questions count:", response.data.data ? response.data.data.length : 0);
+        setQuestions(response.data.data || []);
         setError(null);
       } catch (err) {
         console.error("Error fetching questions:", err);
@@ -124,7 +124,7 @@ export default function QuestionBank() {
     };
 
     fetchQuestions();
-  }, [API_URL, activeLevel, selectedCompany]);
+  }, [API_URL, activeLevel, selectedCompany, selectedRole]);
 
   return (
     <DashboardLayout>

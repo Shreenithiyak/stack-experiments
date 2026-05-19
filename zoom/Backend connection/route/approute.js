@@ -1,5 +1,5 @@
 import express from 'express'
-import {checkdata,sentdata,movedatato, googlelogin, getQuestions, seedQuestions} from '../controller/appcontroller.js'
+import {checkdata,sentdata,movedatato, googlelogin, getQuestions, seedQuestions, getCompanies, getRoles} from '../controller/appcontroller.js'
 import { checktoken } from '../middleware/appmiddleware.js'
 
 const route =express.Router()
@@ -9,6 +9,8 @@ route.post('/logindata',checkdata)
 route.get('/logindata', checktoken,movedatato)
 route.post('/googlelogin',googlelogin)
 route.get('/questions', getQuestions)
+route.get('/companies', getCompanies)
+route.get('/roles', getRoles)
 route.post('/seed-questions', seedQuestions)
 
 

@@ -10,6 +10,18 @@ const questionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    companyAbbreviation: {
+        type: String,
+        required: false
+    },
+    role: {
+        type: String,
+        required: false
+    },
+    roleDescription: {
+        type: String,
+        required: false
+    },
     category: {
         type: String,
         required: true

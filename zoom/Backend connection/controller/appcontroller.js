@@ -99,16 +99,45 @@ export const googlelogin = async (req, res) => {
 
 export const getQuestions = async (req, res) => {
     try {
-        const { level, company } = req.query;
+        const { company, role, level } = req.query;
         const filter = {};
-        if (level && level !== '') filter.level = level;
         if (company && company !== '') filter.company = company;
+        if (role && role !== '') filter.role = role;
+        if (level && level !== '') filter.level = level;
         
         const questions = await Question.find(filter);
-        res.status(200).json(questions);
+        res.status(200).json({ success: true, count: questions.length, data: questions });
     } catch (error) {
         console.log('error', error);
-        res.status(500).json({ msg: "Error fetching questions" });
+        res.status(500).json({ success: false, msg: "Error fetching questions", message: error.message });
+    }
+};
+
+export const getCompanies = async (req, res) => {
+    try {
+        const companies = await Question.aggregate([
+            { $group: { _id: { fullName: "$company", abbreviation: "$companyAbbreviation" } } },
+            { $project: { _id: 0, fullName: "$_id.fullName", abbreviation: "$_id.abbreviation" } }
+        ]);
+        const validCompanies = companies.filter(c => c.fullName);
+        res.status(200).json({ success: true, data: validCompanies });
+    } catch (error) {
+        console.log('error', error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export const getRoles = async (req, res) => {
+    try {
+        const roles = await Question.aggregate([
+            { $group: { _id: { title: "$role", description: "$roleDescription" } } },
+            { $project: { _id: 0, title: "$_id.title", description: "$_id.description" } }
+        ]);
+        const validRoles = roles.filter(r => r.title).map((r, i) => ({ id: i + 1, ...r }));
+        res.status(200).json({ success: true, data: validRoles });
+    } catch (error) {
+        console.log('error', error);
+        res.status(500).json({ success: false, message: error.message });
     }
 };
 

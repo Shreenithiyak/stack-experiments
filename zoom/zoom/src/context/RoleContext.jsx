@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const RoleContext = createContext();
 
@@ -32,17 +33,23 @@ export const RoleProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [roles, setRoles] = useState(() => {
-    const savedRoles = localStorage.getItem('neon_practice_roles');
-    if (savedRoles) {
-      return JSON.parse(savedRoles);
-    }
-    return defaultRoles;
-  });
+  const [roles, setRoles] = useState(defaultRoles);
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
-    localStorage.setItem('neon_practice_roles', JSON.stringify(roles));
-  }, [roles]);
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/user/roles`);
+        if (response.data.success && response.data.data.length > 0) {
+          setRoles(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching roles from backend:", error);
+      }
+    };
+    fetchRoles();
+  }, [API_URL]);
 
   useEffect(() => {
     localStorage.setItem('neon_selected_role', JSON.stringify(selectedRoleId));
@@ -57,7 +64,6 @@ export const RoleProvider = ({ children }) => {
       return;
     }
     
-    // Pick 2 random roles from available pool
     const numToAdd = Math.min(2, available.length);
     const newRolesToAdd = [];
     
@@ -81,3 +87,4 @@ export const RoleProvider = ({ children }) => {
     </RoleContext.Provider>
   );
 };
+
