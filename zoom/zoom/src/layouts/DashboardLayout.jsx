@@ -66,7 +66,7 @@ const Navbar = () => {
   });
 
   return (
-    <nav className="flex justify-between items-center px-8 lg:px-12 py-5 bg-[#0F111A] reading:bg-[#eadbbf] border-b border-white/5 reading:border-[#433422]/15 sticky top-0 z-50 transition-colors duration-300">
+    <nav className="flex justify-between items-center px-8 lg:px-12 py-5 bg-white dark:bg-[#0F111A] reading:bg-[#eadbbf] border-b border-slate-200 dark:border-white/5 reading:border-[#433422]/15 sticky top-0 z-50 transition-colors duration-300">
 
       {/* Brand / Logo */}
       <div className="flex items-center gap-2">
