@@ -67,19 +67,19 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center px-8 lg:px-12 py-5 bg-[#0F111A] reading:bg-[#eadbbf] border-b border-white/5 reading:border-[#433422]/15 sticky top-0 z-50 transition-colors duration-300">
-      
+
       {/* Brand / Logo */}
       <div className="flex items-center gap-2">
-        <Link to="/" className="text-xl font-bold tracking-tight text-[#00cbe5] dark:text-[#00E5FF] reading:text-[#b25e00]">
+        <span className="text-xl font-bold tracking-tight text-[#00cbe5] dark:text-[#00E5FF] reading:text-[#b25e00]">
           INTERVIEW-READY
-        </Link>
+        </span>
       </div>
 
       {/* Center Nav Items */}
       <div className="hidden md:flex items-center gap-8 pl-12 flex-1">
-        <NavLink 
-          to="/dashboard" 
-          className={() => 
+        <NavLink
+          to="/dashboard"
+          className={() =>
             `text-sm font-medium transition-all relative ${location.pathname === '/dashboard' ? 'text-[#00cbe5] dark:text-[#00e5ff] reading:text-[#b25e00]' : 'text-slate-550 dark:text-[#8c92a4] reading:text-[#7b654a] hover:text-slate-800 dark:hover:text-white reading:hover:text-[#433422]'}`
           }
         >
@@ -88,9 +88,9 @@ const Navbar = () => {
             <div className="absolute -bottom-[23px] left-0 right-0 h-[2px] bg-[#00cbe5] dark:bg-[#00e5ff] reading:bg-[#b25e00]" />
           )}
         </NavLink>
-        <NavLink 
-          to="/practice" 
-          className={() => 
+        <NavLink
+          to="/practice"
+          className={() =>
             `text-sm font-medium transition-all relative ${location.pathname.startsWith('/practice') || location.pathname.startsWith('/questions') ? 'text-[#00cbe5] dark:text-[#00e5ff] reading:text-[#b25e00]' : 'text-slate-550 dark:text-[#8c92a4] reading:text-[#7b654a] hover:text-slate-800 dark:hover:text-white reading:hover:text-[#433422]'}`
           }
         >
@@ -99,9 +99,9 @@ const Navbar = () => {
             <div className="absolute -bottom-[23px] left-0 right-0 h-[2px] bg-[#00cbe5] dark:bg-[#00e5ff] reading:bg-[#b25e00]" />
           )}
         </NavLink>
-        <NavLink 
-          to="/analytics" 
-          className={() => 
+        <NavLink
+          to="/analytics"
+          className={() =>
             `text-sm font-medium transition-all relative ${location.pathname.startsWith('/analytics') ? 'text-[#00cbe5] dark:text-[#00e5ff] reading:text-[#b25e00]' : 'text-slate-550 dark:text-[#8c92a4] reading:text-[#7b654a] hover:text-slate-800 dark:hover:text-white reading:hover:text-[#433422]'}`
           }
         >
@@ -115,7 +115,7 @@ const Navbar = () => {
 
       {/* Right Actions */}
       <div className="flex items-center gap-6 relative" ref={dropdownRef}>
-        <button 
+        <button
           onClick={() => setShowNotifications(!showNotifications)}
           className="text-slate-550 dark:text-[#8c92a4] reading:text-[#7b654a] hover:text-slate-800 dark:hover:text-white reading:hover:text-[#433422] transition-colors relative"
         >
@@ -163,7 +163,7 @@ export default function DashboardLayout({ children }) {
       <main className="flex-1 w-full max-w-[1280px] mx-auto px-6 py-12">
         {children}
       </main>
-      
+
       {/* Footer from image */}
       <footer className="w-full max-w-[1280px] mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-[11px] font-medium text-slate-400 dark:text-[#5e6376] reading:text-[#8b7355] mt-auto uppercase tracking-wide border-t border-slate-200 dark:border-transparent reading:border-[#433422]/10">
         <div>© 2024 INTERVIEW-READY. ALL RIGHTS RESERVED.</div>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export default function AuthLayout({ children }) {
+
   return (
     <div className="min-h-screen flex flex-col font-sans bg-[#11141D] text-white relative overflow-hidden">
       {/* Subtle background glow */}
@@ -9,9 +9,9 @@ export default function AuthLayout({ children }) {
       
       {/* Navbar area */}
       <nav className="relative flex justify-between items-center px-6 lg:px-12 py-6 w-full z-10 max-w-[1440px] mx-auto">
-        <Link to="/" className="text-xl font-bold text-[#00E5FF] tracking-tight">
+        <span className="text-xl font-bold text-[#00E5FF] tracking-tight">
           INTERVIEW-READY
-        </Link>
+        </span>
         <div className="text-sm font-medium text-[#8c92a4] hidden sm:block">
           Ready to level up today?
         </div>

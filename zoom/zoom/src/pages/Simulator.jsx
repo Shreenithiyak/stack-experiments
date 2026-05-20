@@ -90,9 +90,9 @@ export default function Simulator() {
         
         {/* Brand / Logo */}
         <div className="flex items-center gap-2">
-          <Link to="/" className="text-xl font-bold tracking-tight text-[#00cbe5] dark:text-[#00E5FF] reading:text-[#b25e00]">
+          <span className="text-xl font-bold tracking-tight text-[#00cbe5] dark:text-[#00E5FF] reading:text-[#b25e00]">
             INTERVIEW-READY
-          </Link>
+          </span>
         </div>
 
         {/* Center Nav Items */}

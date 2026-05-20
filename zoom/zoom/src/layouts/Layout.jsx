@@ -10,9 +10,9 @@ const Navbar = () => {
         
         <div className="flex items-center gap-12">
           {/* Brand / Logo */}
-          <Link to="/" className="text-xl font-bold tracking-tight text-[#00E5FF]">
+          <span className="text-xl font-bold tracking-tight text-[#00E5FF]">
             INTERVIEW-READY
-          </Link>
+          </span>
           
           <div className="hidden md:flex gap-8 text-sm font-medium">
             <Link to="/" className={`relative transition-all ${location.pathname === '/' ? 'text-[#00e5ff]' : 'text-[#8c92a4] hover:text-white'}`}>
