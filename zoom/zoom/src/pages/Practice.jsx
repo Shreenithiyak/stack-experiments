@@ -18,15 +18,15 @@ const RoleCard = ({ id, title, description, onSelect }) => {
   return (
     <div 
       onClick={handleClick}
-      className={`cursor-pointer block p-6 rounded-2xl border transition-all duration-300 relative group
-        ${active ? 'border-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.05)] bg-gradient-to-b from-[#1a1c29] to-[#13151f]' : 'border-white/5 bg-[#171923] hover:border-white/10 hover:bg-[#1a1c29]'}
+      className={`cursor-pointer block p-6 rounded-2xl border transition-all duration-300 relative group shadow-sm
+        ${active ? 'border-[#00cbe5] dark:border-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.05)] bg-gradient-to-b from-white to-slate-50 dark:from-[#1a1c29] dark:to-[#13151f]' : 'border-slate-200 dark:border-white/5 bg-white dark:bg-[#171923] hover:border-slate-350 dark:hover:border-white/10 hover:bg-slate-50 dark:hover:bg-[#1a1c29]'}
       `}
     >
-      <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#00e5ff] transition-colors">{title}</h3>
-      <p className="text-sm text-[#8c92a4] mb-8 leading-relaxed h-[60px]">{description}</p>
+      <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-2 group-hover:text-[#00cbe5] dark:group-hover:text-[#00e5ff] transition-colors">{title}</h3>
+      <p className="text-sm text-slate-500 dark:text-[#8c92a4] mb-8 leading-relaxed h-[60px]">{description}</p>
       
-      <div className="flex items-center justify-between text-[#8c92a4]">
-        <span className="text-[10px] uppercase tracking-wider font-bold bg-white/5 px-3 py-1.5 rounded-full">
+      <div className="flex items-center justify-between text-slate-550 dark:text-[#8c92a4]">
+        <span className="text-[10px] uppercase tracking-wider font-bold bg-slate-100 dark:bg-white/5 px-3 py-1.5 rounded-full">
           3 Levels
         </span>
       </div>
@@ -49,12 +49,12 @@ const CompanyLogo = ({ abbreviation, fullName }) => {
       onClick={handleClick}
       className="flex flex-col items-center gap-3 group outline-none bg-transparent border-none p-0"
     >
-      <div className="w-16 h-16 bg-[#171923] border border-white/5 rounded-xl flex items-center justify-center text-sm font-bold text-white shadow-sm transition-all cursor-pointer group-hover:border-[#00e5ff]/50 group-hover:bg-[#1a1c29] group-focus-visible:border-[#00e5ff]/50 group-focus-visible:bg-[#1a1c29] group-focus-visible:ring-2 group-focus-visible:ring-[#00e5ff]/50">
+      <div className="w-16 h-16 bg-white dark:bg-[#171923] border border-slate-200 dark:border-white/5 rounded-xl flex items-center justify-center text-sm font-bold text-slate-800 dark:text-white shadow-sm transition-all cursor-pointer group-hover:border-[#00cbe5]/50 dark:group-hover:border-[#00e5ff]/50 group-hover:bg-slate-50 dark:group-hover:bg-[#1a1c29] group-focus-visible:border-[#00cbe5]/50 dark:group-focus-visible:border-[#00e5ff]/50 group-focus-visible:bg-slate-50 dark:group-focus-visible:bg-[#1a1c29] group-focus-visible:ring-2 group-focus-visible:ring-[#00cbe5]/50 dark:group-focus-visible:ring-[#00e5ff]/50">
         {abbreviation}
       </div>
       <div className="text-center">
-        <div className="text-sm font-semibold text-white mb-0.5 group-hover:text-[#00e5ff] transition-colors">{fullName}</div>
-        <div className="text-[9px] text-[#8c92a4] uppercase tracking-widest">Question Bank</div>
+        <div className="text-sm font-semibold text-slate-800 dark:text-white mb-0.5 group-hover:text-[#00cbe5] dark:group-hover:text-[#00e5ff] transition-colors">{fullName}</div>
+        <div className="text-[9px] text-slate-400 dark:text-[#8c92a4] uppercase tracking-widest font-medium">Question Bank</div>
       </div>
     </button>
   );
@@ -93,25 +93,25 @@ export default function Practice() {
   return (
     <DashboardLayout>
       <div className="py-8 max-w-[1100px] mx-auto">
-        <h1 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-          Hey {user?.name || 'You'}, Master Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b9b0ff] to-[#f4d5ff]">Next Interview</span>
+        <h1 className="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors duration-300">
+          Hey {user?.name || 'You'}, Master Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8370ff] to-[#df92ff] dark:from-[#b9b0ff] dark:to-[#f4d5ff]">Next Interview</span>
         </h1>
-        <p className="text-lg text-[#8c92a4] mb-12 max-w-2xl leading-relaxed">
+        <p className="text-lg text-slate-550 dark:text-[#8c92a4] mb-12 max-w-2xl leading-relaxed transition-colors duration-300">
           Choose your focus area or a specific company bank to begin tailored mock sessions powered by high-fidelity AI coaching.
         </p>
 
         {/* Filters & Tabs */}
         <div className="flex flex-col md:flex-row gap-6 justify-between items-center mb-10 w-full">
-          <div className="flex bg-[#171923] p-1 rounded-xl w-full md:w-auto overflow-hidden">
+          <div className="flex bg-slate-100 dark:bg-[#171923] p-1 rounded-xl w-full md:w-auto overflow-hidden border border-slate-200 dark:border-transparent transition-colors duration-300">
             <button 
               onClick={() => setActiveTab('technology')}
-              className={`px-6 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00e5ff]/50 ${activeTab === 'technology' ? 'bg-[#00e5ff] text-[#0f111a]' : 'text-slate-300 hover:text-white'}`}
+              className={`px-6 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00cbe5]/50 dark:focus-visible:ring-[#00e5ff]/50 ${activeTab === 'technology' ? 'bg-[#00cbe5] dark:bg-[#00e5ff] text-white dark:text-[#0f111a]' : 'text-slate-650 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}`}
             >
               By Technology
             </button>
             <button 
               onClick={() => setActiveTab('company')}
-              className={`px-6 py-2.5 rounded-lg font-medium text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00e5ff]/50 ${activeTab === 'company' ? 'bg-[#00e5ff] text-[#0f111a]' : 'text-slate-300 hover:text-white'}`}
+              className={`px-6 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00cbe5]/50 dark:focus-visible:ring-[#00e5ff]/50 ${activeTab === 'company' ? 'bg-[#00cbe5] dark:bg-[#00e5ff] text-white dark:text-[#0f111a]' : 'text-slate-650 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}`}
             >
               By Company (MNC)
             </button>
@@ -125,7 +125,7 @@ export default function Practice() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search roles..." 
-                className="w-full bg-[#171923] border border-white/5 rounded-xl pl-12 pr-4 py-3 text-sm text-white placeholder:text-[#5e6376] focus:outline-none focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 transition-all font-medium"
+                className="w-full bg-white dark:bg-[#171923] border border-slate-200 dark:border-white/5 rounded-xl pl-12 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#5e6376] focus:outline-none focus:border-[#00cbe5]/50 dark:focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00cbe5]/30 dark:focus:ring-[#00e5ff]/30 transition-all font-medium"
               />
             </div>
           )}
@@ -149,16 +149,16 @@ export default function Practice() {
                   />
                 ))
               ) : (
-                <div className="col-span-full text-center py-10 text-[#8c92a4]">
+                <div className="col-span-full text-center py-10 text-slate-500 dark:text-[#8c92a4]">
                   No roles found matching "{searchTerm}"
                 </div>
               )}
               
               <button 
                 onClick={handleGenerateClick}
-                className="border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center text-[#8c92a4] hover:text-white hover:border-white/30 transition-all p-6 min-h-[220px]"
+                className="border-2 border-dashed border-slate-300 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center text-slate-500 dark:text-[#8c92a4] hover:text-slate-800 dark:hover:text-white hover:border-slate-400 dark:hover:border-white/30 transition-all p-6 min-h-[220px]"
               >
-                <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-full border border-slate-200 dark:border-white/20 flex items-center justify-center mb-4">
                   <img src="https://img.icons8.com/ios-filled/50/8c92a4/plus-math.png" alt="plus" className="w-5 h-5 object-contain" />
                 </div>
                 <span className="font-semibold">Request New Role</span>
@@ -169,7 +169,7 @@ export default function Practice() {
               <div className="flex justify-center mb-16">
                 <button 
                   onClick={() => setShowAllRoles(!showAllRoles)}
-                  className="px-6 py-2.5 rounded-xl border border-white/10 text-white font-semibold hover:bg-[#1a1c29] transition-colors"
+                  className="px-6 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-[#1a1c29] transition-colors"
                 >
                   {showAllRoles ? "Show Less Roles" : `Show All Roles (${filteredRoles.length})`}
                 </button>
@@ -182,7 +182,7 @@ export default function Practice() {
         {activeTab === 'company' && (
           <div className="pt-2">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-              <h2 className="text-2xl font-bold flex items-center gap-3 text-white">
+              <h2 className="text-2xl font-bold flex items-center gap-3 text-slate-800 dark:text-white transition-colors duration-300">
                 <img src="https://img.icons8.com/ios-filled/50/00e5ff/briefcase.png" alt="briefcase" className="w-6 h-6 object-contain" />
                 Target Top MNCs
               </h2>
@@ -193,7 +193,7 @@ export default function Practice() {
                   value={companySearchTerm}
                   onChange={(e) => setCompanySearchTerm(e.target.value)}
                   placeholder="Search companies..." 
-                  className="w-full bg-[#171923] border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-[#5e6376] focus:outline-none focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00e5ff]/30 transition-all font-medium"
+                  className="w-full bg-white dark:bg-[#171923] border border-slate-200 dark:border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#5e6376] focus:outline-none focus:border-[#00cbe5]/50 dark:focus:border-[#00e5ff]/50 focus:ring-1 focus:ring-[#00cbe5]/30 dark:focus:ring-[#00e5ff]/30 transition-all font-medium"
                 />
               </div>
             </div>
@@ -206,7 +206,7 @@ export default function Practice() {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-[#8c92a4] text-sm py-4 w-full text-center">
+                <div className="col-span-full text-slate-500 dark:text-[#8c92a4] text-sm py-4 w-full text-center">
                   No companies found matching "{companySearchTerm}"
                 </div>
               )}
@@ -216,7 +216,7 @@ export default function Practice() {
               <div className="flex justify-center mt-6">
                 <button 
                   onClick={() => setShowAllCompanies(!showAllCompanies)}
-                  className="px-6 py-2.5 rounded-xl border border-white/10 text-white font-semibold hover:bg-[#1a1c29] transition-colors"
+                  className="px-6 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-semibold hover:bg-slate-50 dark:hover:bg-[#1a1c29] transition-colors"
                 >
                   {showAllCompanies ? "Show Less Companies" : `View Top ${filteredCompanies.length} MNCs`}
                 </button>
