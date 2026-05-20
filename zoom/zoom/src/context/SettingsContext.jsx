@@ -28,10 +28,29 @@ export const SettingsProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('app_theme', theme);
     const root = document.documentElement;
+    
+    // Clean up all themes
+    root.classList.remove(
+      'dark', 
+      'reading', 
+      'sepia-[.45]', 
+      'contrast-95', 
+      'brightness-[.98]', 
+      'bg-[#f7efe2]', 
+      'text-[#433422]'
+    );
+    
     if (theme === 'dark') {
       root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+    } else if (theme === 'reading') {
+      root.classList.add(
+        'reading', 
+        'sepia-[.45]', 
+        'contrast-95', 
+        'brightness-[.98]', 
+        'bg-[#f7efe2]', 
+        'text-[#433422]'
+      );
     }
   }, [theme]);
 
