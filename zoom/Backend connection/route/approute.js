@@ -1,8 +1,11 @@
 import express from 'express'
+import multer from 'multer'
 import {checkdata,sentdata,movedatato, googlelogin, getQuestions, seedQuestions, getCompanies, getRoles} from '../controller/appcontroller.js'
+import { transcribeAudio, chatWithAI, generateTTS } from '../controller/interviewController.js'
 import { checktoken } from '../middleware/appmiddleware.js'
 
 const route =express.Router()
+const upload = multer({ dest: 'uploads/' })
 
 route.post('/sentdata',sentdata)
 route.post('/logindata',checkdata)
@@ -13,6 +16,10 @@ route.get('/companies', getCompanies)
 route.get('/roles', getRoles)
 route.post('/seed-questions', seedQuestions)
 
+// AI Interview Routes
+route.post('/interview/transcribe', checktoken, upload.single('audio'), transcribeAudio)
+route.post('/interview/chat', checktoken, chatWithAI)
+route.post('/interview/tts', checktoken, generateTTS)
 
 
 // route.get('/getdatabyid/:id',databyid)
