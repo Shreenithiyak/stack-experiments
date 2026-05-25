@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaStop, FaFastForward, FaRedoAlt } from 'react-icons/fa';
+import { FaStop, FaFastForward, FaRedoAlt, FaMicrophone } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
+import { useVoiceInterview } from '../hooks/useVoiceInterview';
 
 export default function Simulator() {
   const navigate = useNavigate();
@@ -11,12 +12,22 @@ export default function Simulator() {
   const { reminderEnabled, reminderTime } = useSettings();
   
   const [confidence, setConfidence] = useState(0);
-  const [transcript, setTranscript] = useState("Wait for the AI to finish the question, then start speaking...");
   const [showNotifications, setShowNotifications] = useState(false);
   const dropdownRef = useRef(null);
   
   // Get question from state or use default if navigated directly
   const displayQuestion = location.state?.selectedQuestion || "Tell me about a time you solved a complex technical problem.";
+
+  const {
+    isRecording,
+    isProcessing,
+    isSpeaking,
+    transcript,
+    aiAudioUrl,
+    startRecording,
+    stopRecording,
+    restartInterview
+  } = useVoiceInterview(displayQuestion);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -30,7 +41,7 @@ export default function Simulator() {
   }, []);
 
   const handleRestart = () => {
-    setTranscript("Session restarted. Please begin your answer again.");
+    restartInterview();
     setConfidence(0);
   };
 
@@ -189,9 +200,9 @@ export default function Simulator() {
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-200/50 dark:from-[#11141D]/90 via-transparent to-transparent pointer-events-none"></div>
             
-            <div className="absolute top-6 left-6 bg-white/85 dark:bg-[#11141D]/85 reading:bg-[#fcf6e8]/85 backdrop-blur-md px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 reading:border-[#433422]/12 flex items-center gap-2 shadow-sm transition-colors duration-300">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444] shadow-[0_0_8px_#ef4444] animate-pulse"></div>
-              <span className="text-xs font-bold tracking-widest text-slate-700 dark:text-[#e2e8f0] reading:text-[#433422]">REC ACTIVE</span>
+            <div className={`absolute top-6 left-6 bg-white/85 dark:bg-[#11141D]/85 reading:bg-[#fcf6e8]/85 backdrop-blur-md px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 reading:border-[#433422]/12 flex items-center gap-2 shadow-sm transition-colors duration-300 ${isRecording ? 'opacity-100' : 'opacity-50'}`}>
+              <div className={`w-2.5 h-2.5 rounded-full ${isRecording ? 'bg-[#ef4444] shadow-[0_0_8px_#ef4444] animate-pulse' : 'bg-slate-400'}`}></div>
+              <span className="text-xs font-bold tracking-widest text-slate-700 dark:text-[#e2e8f0] reading:text-[#433422]">{isRecording ? 'REC ACTIVE' : 'REC PAUSED'}</span>
             </div>
 
             <div className="absolute bottom-6 left-6 px-5 py-2.5 bg-white/80 dark:bg-[#1C1F2E]/80 reading:bg-[#fcf6e8]/80 backdrop-blur-md border border-slate-200 dark:border-white/10 reading:border-[#433422]/12 rounded-full font-bold text-sm text-slate-800 dark:text-white reading:text-[#433422] shadow-lg transition-colors duration-300">
@@ -214,14 +225,16 @@ export default function Simulator() {
             
             <div className="flex-1 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#171923] dark:to-[#12151f] reading:bg-[#f2e7d3] border border-[#00cbe5]/20 dark:border-[#00e5ff]/20 reading:border-[#b25e00]/20 relative rounded-2xl p-7 shadow-inner transition-all duration-300">
               <div className="text-[10px] font-bold tracking-[0.15em] text-slate-400 dark:text-[#8c92a4] reading:text-[#7b654a] uppercase mb-5">Real-Time Transcription</div>
-              <p className="text-slate-700 dark:text-[#e2e8f0] reading:text-[#433422] text-lg leading-[1.8] font-medium tracking-wide italic transition-colors">
+              <p className={`text-lg leading-[1.8] font-medium tracking-wide italic transition-colors ${isProcessing ? 'text-slate-400 animate-pulse' : 'text-slate-700 dark:text-[#e2e8f0] reading:text-[#433422]'}`}>
                 "{transcript}"
               </p>
-              <div className="mt-4 flex gap-1 items-center">
-                <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce"></div>
-                <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-              </div>
+              {(isRecording || isProcessing) && (
+                <div className="mt-4 flex gap-1 items-center">
+                  <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce"></div>
+                  <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="w-1.5 h-1.5 bg-[#00cbe5] dark:bg-[#00E5FF] reading:bg-[#b25e00] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -233,13 +246,37 @@ export default function Simulator() {
                 Maintain eye contact with the camera for better engagement score.
               </p>
 
-              <button 
-                onClick={() => navigate('/analytics')}
-                className="w-full bg-[#ef4444] hover:bg-[#dc2626] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(239,68,68,0.2)] mb-5 active:scale-[0.98]"
-              >
-                <FaStop className="w-[18px] h-[18px]" />
-                <span className="text-[15px]">Stop Recording</span>
-              </button>
+              {isRecording ? (
+                <button 
+                  onClick={stopRecording}
+                  disabled={isProcessing}
+                  className="w-full bg-[#ef4444] hover:bg-[#dc2626] disabled:opacity-50 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(239,68,68,0.2)] mb-5 active:scale-[0.98]"
+                >
+                  <FaStop className="w-[18px] h-[18px]" />
+                  <span className="text-[15px]">Stop Recording</span>
+                </button>
+              ) : isSpeaking ? (
+                <button
+                  disabled
+                  className="w-full bg-[#8b5cf6] opacity-80 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 mb-5 cursor-not-allowed"
+                >
+                  <span className="flex gap-1 items-center">
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                    <span className="w-2 h-2 bg-white rounded-full animate-bounce"></span>
+                  </span>
+                  <span className="text-[15px]">AI is Speaking...</span>
+                </button>
+              ) : (
+                <button 
+                  onClick={startRecording}
+                  disabled={isProcessing}
+                  className="w-full bg-[#10b981] hover:bg-[#059669] disabled:opacity-50 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.2)] mb-5 active:scale-[0.98]"
+                >
+                  <FaMicrophone className="w-[18px] h-[18px]" />
+                  <span className="text-[15px]">Start Recording</span>
+                </button>
+              )}
 
               <div className="grid grid-cols-2 gap-4">
                 <button 
@@ -271,6 +308,11 @@ export default function Simulator() {
           </div>
 
         </div>
+
+        {/* Hidden Audio Element for AI TTS */}
+        {aiAudioUrl && (
+          <audio src={aiAudioUrl} autoPlay onEnded={() => console.log('AI finished speaking')} />
+        )}
 
       </div>
     </div>

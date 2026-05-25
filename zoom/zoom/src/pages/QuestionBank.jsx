@@ -113,6 +113,7 @@ export default function QuestionBank() {
         });
         
         console.log("Fetched questions count:", response.data.data ? response.data.data.length : 0);
+        console.log("Questions data:", response.data.data);
         setQuestions(response.data.data || []);
         setError(null);
       } catch (err) {
