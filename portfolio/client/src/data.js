@@ -45,7 +45,7 @@ export const projects = [
       'Full-stack AI Mock Interview platform that generates dynamic interview questions based on job role and experience level. Features JWT authentication, protected routes, and clean REST APIs.',
     stack: 'React.js · Node.js · Express.js · MongoDB',
     tags: ['MERN Stack', 'AI-Powered', 'JWT', 'REST API'],
-    liveUrl: 'https://mock-interview-ashen-theta.vercel.app',
+    liveUrl: 'https://mock-interview-ashen-theta.vercel.app/',
     githubUrl: 'https://github.com/Shreenithiyak',
     icon: '🤖',
     gradient: 'from-purple-500/15 to-cyan-500/8',
