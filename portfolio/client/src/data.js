@@ -1,0 +1,189 @@
+// All portfolio data — plain JavaScript
+
+export const personalInfo = {
+  name: 'Shree Nithiya K',
+  role: 'Full Stack Developer (MERN Stack)',
+  tagline: 'Building the Web, One Stack at a Time',
+  subtitle: 'CS Graduate | React + Node.js | Building real-world web apps',
+  email: 'shreenithiyak@gmail.com',
+  phone: '+91-8838844247',
+  location: 'Chennai, Tamil Nadu, India',
+  linkedin: 'https://www.linkedin.com/in/shree-nithiya-k-b60213369',
+  github: 'https://github.com/Shreenithiyak',
+  resumeUrl: '/resume.pdf',
+  bio: 'Motivated Computer Science graduate passionate about building responsive, scalable web applications that solve real-world problems. Based in Chennai — eager to learn, collaborate, and contribute to impactful projects.',
+  college: 'Voorhees College, Vellore',
+  degree: 'B.Sc Computer Science',
+  cgpa: '7.2',
+  graduationYear: '2025',
+};
+
+export const heroTypingTexts = [
+  'Full Stack Developer',
+  'MERN Stack Engineer',
+  'React Enthusiast',
+  'Problem Solver',
+  'Web App Builder',
+];
+
+export const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/skills', label: 'Skills' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/certifications', label: 'Certifications' },
+  { to: '/education', label: 'Education' },
+  { to: '/contact', label: 'Contact' },
+];
+
+export const projects = [
+  {
+    id: 1,
+    number: '01',
+    title: 'Interview Ready',
+    description:
+      'Full-stack AI Mock Interview platform that generates dynamic interview questions based on job role and experience level. Features JWT authentication, protected routes, and clean REST APIs.',
+    stack: 'React.js · Node.js · Express.js · MongoDB',
+    tags: ['MERN Stack', 'AI-Powered', 'JWT', 'REST API'],
+    liveUrl: 'https://mock-interview-ashen-theta.vercel.app',
+    githubUrl: 'https://github.com/Shreenithiyak',
+    icon: '🤖',
+    gradient: 'from-purple-500/15 to-cyan-500/8',
+  },
+  {
+    id: 2,
+    number: '02',
+    title: 'Personal Portfolio',
+    description:
+      'Responsive developer portfolio built with reusable React components, smooth section navigation, and a mobile-first design approach with dark glassmorphism aesthetics.',
+    stack: 'HTML · CSS · JavaScript · React',
+    tags: ['React', 'Responsive', 'Component-Based'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/Shreenithiyak',
+    icon: '🌐',
+    gradient: 'from-cyan-500/15 to-purple-500/8',
+  },
+  {
+    id: 3,
+    number: '03',
+    title: 'Student Portal',
+    description:
+      'Academic web application to manage student details with a clean, intuitive UI and simple navigation. Supports viewing, adding, and updating student records.',
+    stack: 'HTML · CSS · JavaScript',
+    tags: ['Academic', 'CRUD', 'Vanilla JS'],
+    liveUrl: null,
+    githubUrl: 'https://github.com/Shreenithiyak',
+    icon: '🎓',
+    gradient: 'from-pink-500/12 to-cyan-500/6',
+  },
+];
+
+export const certifications = [
+  {
+    id: 1,
+    title: 'Business Analytics',
+    issuer: 'Oracle Cloud Infrastructure',
+    icon: '☁️',
+    status: 'Verified',
+  },
+  {
+    id: 2,
+    title: 'Developer Skills Network',
+    issuer: 'IBM',
+    icon: '🔷',
+    status: 'Verified',
+  },
+  {
+    id: 3,
+    title: 'Full Stack Web Development',
+    issuer: 'MERN Stack · SLA · 2026',
+    icon: '🌐',
+    status: 'Completed',
+  },
+];
+
+export const education = [
+  {
+    id: 1,
+    icon: '🎓',
+    degree: 'B.Sc Computer Science',
+    institution: 'Voorhees College, Vellore',
+    year: '2022 – 2025',
+    score: 'CGPA: 7.2',
+    scoreType: 'cgpa',
+  },
+  {
+    id: 2,
+    icon: '📚',
+    degree: 'Higher Secondary Certificate (HSC)',
+    institution: 'Tamil Nadu State Board',
+    year: '2022',
+    score: '59.5%',
+    scoreType: 'percent',
+  },
+  {
+    id: 3,
+    icon: '🏫',
+    degree: 'Secondary School Leaving Certificate (SSLC)',
+    institution: 'Tamil Nadu State Board',
+    year: '2020',
+    score: '72.1%',
+    scoreType: 'percent',
+  },
+];
+
+export const skillCategories = [
+  {
+    id: 'frontend',
+    category: 'Frontend',
+    icon: '🎨',
+    skills: [
+      { name: 'HTML5', icon: 'FaHtml5', color: '#e34c26' },
+      { name: 'CSS3', icon: 'FaCss3Alt', color: '#264de4' },
+      { name: 'JavaScript ES6+', icon: 'FaJs', color: '#f7df1e' },
+      { name: 'React.js', icon: 'FaReact', color: '#61dafb' },
+      { name: 'Tailwind CSS', icon: null, color: '#38bdf8' },
+    ],
+  },
+  {
+    id: 'backend',
+    category: 'Backend',
+    icon: '⚙️',
+    skills: [
+      { name: 'Node.js', icon: 'FaNodeJs', color: '#68a063' },
+      { name: 'Express.js', icon: null, color: '#a855f7' },
+      { name: 'JWT Auth', icon: null, color: '#22d3ee' },
+      { name: 'REST API', icon: null, color: '#ec4899' },
+      { name: 'MVC Architecture', icon: null, color: '#a855f7' },
+    ],
+  },
+  {
+    id: 'database',
+    category: 'Database',
+    icon: '🗄️',
+    skills: [
+      { name: 'MongoDB', icon: null, color: '#4db33d' },
+      { name: 'Mongoose', icon: null, color: '#880000' },
+    ],
+  },
+  {
+    id: 'tools',
+    category: 'Tools & Concepts',
+    icon: '🛠️',
+    skills: [
+      { name: 'Git', icon: 'FaGitAlt', color: '#f05032' },
+      { name: 'GitHub', icon: 'FaGithub', color: '#a855f7' },
+      { name: 'VS Code', icon: null, color: '#22d3ee' },
+      { name: 'Thunder Client', icon: null, color: '#ec4899' },
+      { name: 'Docker (Basic)', icon: 'FaDocker', color: '#2496ed' },
+    ],
+  },
+];
+
+export const strengths = [
+  '⚡ Quick Learner',
+  '🤝 Team Player',
+  '🧩 Problem Solver',
+  '🔥 Ambitious',
+  '🌐 Open Source Enthusiast',
+];

@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --purple: #a855f7;
+    --purple-dark: #7c3aed;
+    --cyan: #22d3ee;
+    --cyan-dark: #0891b2;
+    --bg: #050510;
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.08);
+    --border-glow: rgba(168,85,247,0.4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply font-sans antialiased bg-[#050510] text-slate-100 cursor-none;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-[#050510]; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--purple), var(--cyan));
+    border-radius: 10px;
+  }
+
+  ::selection {
+    @apply bg-purple-500/30 text-purple-100;
+  }
+}
+
+@layer components {
+  /* ── Gradient text ── */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  /* ── Glassmorphism cards ── */
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.07] rounded-2xl;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+  .glass-card-hover:hover {
+    @apply border-purple-500/40;
+    box-shadow: 0 20px 60px rgba(168,85,247,0.12), 0 0 0 1px rgba(168,85,247,0.08);
+    transform: translateY(-6px);
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white text-sm
+           transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(135deg, var(--purple-dark), var(--cyan-dark));
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 28px rgba(168,85,247,0.5);
+    transform: translateY(-2px);
+  }
+  .btn-primary:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    border-radius: inherit;
+  }
+  .btn-primary > * { position: relative; z-index: 1; }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-slate-200 text-sm
+           border border-purple-500/40 bg-transparent
+           transition-all duration-300 hover:bg-purple-500/10 hover:border-purple-400;
+  }
+  .btn-outline:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(168,85,247,0.25); }
+
+  /* ── Section helpers ── */
+  .section-tag {
+    @apply inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase
+           text-purple-400 border border-purple-500/25 mb-4;
+    background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(34,211,238,0.08));
+  }
+  .section-title {
+    @apply font-display text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight;
+  }
+  .divider-glow {
+    @apply w-14 h-0.5 rounded-full mx-auto mt-4;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+  }
+
+  /* ── Input fields ── */
+  .input-dark {
+    @apply w-full px-4 py-3 rounded-xl text-slate-100 text-sm
+           bg-white/[0.04] border border-white/[0.08]
+           placeholder-slate-500 outline-none
+           transition-all duration-200;
+  }
+  .input-dark:focus {
+    @apply border-purple-500/50;
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.1);
+  }
+  .input-error { @apply border-red-500/60; }
+
+  /* ── Skill badge ── */
+  .skill-badge {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-200
+           bg-white/[0.05] border border-white/[0.07]
+           transition-all duration-200 cursor-default;
+  }
+  .skill-badge:hover {
+    @apply bg-purple-500/15 border-purple-500/40;
+    transform: translateY(-2px);
+  }
+
+  /* ── Project card ── */
+  .project-card {
+    @apply glass-card flex flex-col overflow-hidden relative
+           transition-all duration-300;
+  }
+  .project-card::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(168,85,247,0.07), rgba(34,211,238,0.04));
+  }
+  .project-card:hover {
+    @apply border-purple-500/40;
+    box-shadow: 0 20px 60px rgba(168,85,247,0.15);
+    transform: translateY(-8px);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  /* ── Timeline ── */
+  .timeline-line {
+    @apply absolute left-6 top-0 bottom-0 w-0.5;
+    background: linear-gradient(to bottom, var(--purple), var(--cyan), transparent);
+  }
+  .timeline-dot {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 relative z-10;
+    background: linear-gradient(135deg, var(--purple-dark), var(--cyan-dark));
+    box-shadow: 0 0 20px rgba(168,85,247,0.35);
+  }
+
+  /* ── Glow orb ── */
+  .glow-orb {
+    @apply absolute rounded-full pointer-events-none;
+    filter: blur(80px);
+  }
+
+  /* ── Nav link active underline ── */
+  .nav-link {
+    @apply relative text-slate-400 font-medium text-sm transition-colors duration-200 py-1;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 rounded-full transition-all duration-300;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+  }
+  .nav-link:hover { @apply text-slate-100; }
+  .nav-link:hover::after, .nav-link.active::after { @apply w-full; }
+  .nav-link.active { @apply text-slate-100; }
+
+  /* ── Cert card ── */
+  .cert-card {
+    @apply glass-card p-6 flex items-start gap-4 relative overflow-hidden
+           transition-all duration-300;
+  }
+  .cert-card::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 transition-transform duration-300;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    transform: scaleX(0);
+  }
+  .cert-card:hover {
+    @apply border-purple-500/35;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(168,85,247,0.12);
+  }
+  .cert-card:hover::after { transform: scaleX(1); }
+}
+
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .font-display { font-family: 'Poppins', 'Inter', sans-serif; }
+
+  /* Hero grid overlay */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(168,85,247,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,85,247,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+}
