@@ -15,7 +15,7 @@ export default function Education() {
         <meta name="description" content="B.Sc CS from Voorhees College, Vellore. CGPA 7.2. HSC and SSLC from Tamil Nadu State Board." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="education" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
           className="text-center mb-14">

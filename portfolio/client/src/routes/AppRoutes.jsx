@@ -8,14 +8,8 @@ const Spinner = () => (
   </div>
 );
 
-const Home           = lazy(() => import('../pages/Home.jsx'));
-const About          = lazy(() => import('../pages/About.jsx'));
-const Skills         = lazy(() => import('../pages/Skills.jsx'));
-const Projects       = lazy(() => import('../pages/Projects.jsx'));
-const Certifications = lazy(() => import('../pages/Certifications.jsx'));
-const Education      = lazy(() => import('../pages/Education.jsx'));
-const Contact        = lazy(() => import('../pages/Contact.jsx'));
-const NotFound       = lazy(() => import('../pages/NotFound.jsx'));
+const Home     = lazy(() => import('../pages/Home.jsx'));
+const NotFound = lazy(() => import('../pages/NotFound.jsx'));
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -23,14 +17,8 @@ export default function AppRoutes() {
     <AnimatePresence mode="wait">
       <Suspense fallback={<Spinner />}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/"               element={<Home />} />
-          <Route path="/about"          element={<About />} />
-          <Route path="/skills"         element={<Skills />} />
-          <Route path="/projects"       element={<Projects />} />
-          <Route path="/certifications" element={<Certifications />} />
-          <Route path="/education"      element={<Education />} />
-          <Route path="/contact"        element={<Contact />} />
-          <Route path="*"              element={<NotFound />} />
+          <Route path="/"  element={<Home />} />
+          <Route path="*"  element={<NotFound />} />
         </Routes>
       </Suspense>
     </AnimatePresence>

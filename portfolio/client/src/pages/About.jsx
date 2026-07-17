@@ -21,7 +21,7 @@ export default function About() {
         <meta name="description" content="CS Graduate from Chennai passionate about full stack web development with React and Node.js." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="about" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         {/* Header */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-16">
           <div className="section-tag">About Me</div>

@@ -27,7 +27,7 @@ export default function Skills() {
         <meta name="description" content="Tech stack: React, Node.js, MongoDB, Express.js, Tailwind CSS and more." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="skills" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-14">
           <div className="section-tag">Tech Stack</div>
           <h1 className="section-title">My <span className="gradient-text">Skills</span></h1>

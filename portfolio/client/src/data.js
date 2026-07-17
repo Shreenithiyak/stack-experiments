@@ -27,24 +27,24 @@ export const heroTypingTexts = [
 ];
 
 export const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/skills', label: 'Skills' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/certifications', label: 'Certifications' },
-  { to: '/education', label: 'Education' },
-  { to: '/contact', label: 'Contact' },
+  { to: '#home', label: 'Home' },
+  { to: '#about', label: 'About' },
+  { to: '#skills', label: 'Skills' },
+  { to: '#projects', label: 'Projects' },
+  { to: '#certifications', label: 'Certifications' },
+  { to: '#education', label: 'Education' },
+  { to: '#contact', label: 'Contact' },
 ];
 
 export const projects = [
   {
     id: 1,
     number: '01',
-    title: 'Interview Ready',
+    title: 'AI Mock Website - Learn With AI',
     description:
-      'Full-stack AI Mock Interview platform that generates dynamic interview questions based on job role and experience level. Features JWT authentication, protected routes, and clean REST APIs.',
+      'Developed a full stack web application that generates interview questions based on job roles and experience levels. Features secure user authentication using JWT and REST APIs connected to MongoDB.',
     stack: 'React.js · Node.js · Express.js · MongoDB',
-    tags: ['MERN Stack', 'AI-Powered', 'JWT', 'REST API'],
+    tags: ['MERN Stack', 'AI', 'JWT', 'REST API'],
     liveUrl: 'https://mock-interview-ashen-theta.vercel.app/',
     githubUrl: 'https://github.com/Shreenithiyak',
     icon: '🤖',
@@ -53,14 +53,14 @@ export const projects = [
   {
     id: 2,
     number: '02',
-    title: 'Personal Portfolio',
+    title: 'SkillSwap Festival',
     description:
-      'Responsive developer portfolio built with reusable React components, smooth section navigation, and a mobile-first design approach with dark glassmorphism aesthetics.',
-    stack: 'HTML · CSS · JavaScript · React',
-    tags: ['React', 'Responsive', 'Component-Based'],
-    liveUrl: '#',
+      'A Nomadic Skill-Sharing Platform. Full stack MERN web application enabling workshop discovery, reservations, and community networking. Includes secure authentication using JWT and Google OAuth.',
+    stack: 'React.js · Tailwind CSS · Node.js · Express.js · MongoDB',
+    tags: ['MERN Stack', 'Google OAuth', 'Tailwind CSS'],
+    liveUrl: 'https://jod-neon.vercel.app/',
     githubUrl: 'https://github.com/Shreenithiyak',
-    icon: '🌐',
+    icon: '⛺',
     gradient: 'from-cyan-500/15 to-purple-500/8',
   },
   {
@@ -68,9 +68,9 @@ export const projects = [
     number: '03',
     title: 'Student Portal',
     description:
-      'Academic web application to manage student details with a clean, intuitive UI and simple navigation. Supports viewing, adding, and updating student records.',
+      'Academic web application to manage student details and pages. Focused on clean UI and simple navigation for better user experience.',
     stack: 'HTML · CSS · JavaScript',
-    tags: ['Academic', 'CRUD', 'Vanilla JS'],
+    tags: ['Academic', 'UI/UX', 'Vanilla JS'],
     liveUrl: null,
     githubUrl: 'https://github.com/Shreenithiyak',
     icon: '🎓',
@@ -182,8 +182,8 @@ export const skillCategories = [
 
 export const strengths = [
   '⚡ Quick Learner',
-  '🤝 Team Player',
-  '🧩 Problem Solver',
-  '🔥 Ambitious',
-  '🌐 Open Source Enthusiast',
+  '🤝 Teamwork & Collaboration',
+  '🗣️ Communication',
+  '🧩 Problem Solving',
+  '⏱️ Time Management',
 ];

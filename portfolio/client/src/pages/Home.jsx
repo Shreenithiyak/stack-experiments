@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { FaGithub, FaLinkedinIn, FaDownload, FaEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { personalInfo, heroTypingTexts } from '../data.js';
 import TypingText from '../utils/TypingText.jsx';
 import ParticleCanvas from '../components/ui/ParticleCanvas.jsx';
+import About from './About.jsx';
+import Skills from './Skills.jsx';
+import Projects from './Projects.jsx';
+import Certifications from './Certifications.jsx';
+import Education from './Education.jsx';
+import Contact from './Contact.jsx';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -20,7 +25,7 @@ export default function Home() {
       </Helmet>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-[70px]">
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-[70px]">
         {/* Background layers */}
         <div className="hero-grid absolute inset-0 z-0" />
         <ParticleCanvas />
@@ -65,9 +70,9 @@ export default function Home() {
           {/* CTAs */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}
             className="flex flex-wrap gap-4 mb-8">
-            <Link to="/projects" className="btn-primary">
+            <a href="#projects" className="btn-primary">
               <FaEye /> View My Work
-            </Link>
+            </a>
             <a href={personalInfo.resumeUrl} download className="btn-outline">
               <FaDownload /> Download Resume
             </a>
@@ -94,6 +99,14 @@ export default function Home() {
           <div className="w-px h-10" style={{ background: 'linear-gradient(var(--purple), transparent)' }} />
         </div>
       </section>
+
+      {/* ── ALL SECTIONS ── */}
+      <About />
+      <Skills />
+      <Projects />
+      <Certifications />
+      <Education />
+      <Contact />
     </>
   );
 }

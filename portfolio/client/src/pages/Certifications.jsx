@@ -15,7 +15,7 @@ export default function Certifications() {
         <meta name="description" content="Certifications: Oracle Cloud, IBM, Full Stack MERN — Shree Nithiya K." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="certifications" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-14">
           <div className="section-tag">Credentials</div>
           <h1 className="section-title">Certifi<span className="gradient-text">cations</span></h1>

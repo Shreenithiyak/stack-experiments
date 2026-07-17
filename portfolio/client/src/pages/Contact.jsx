@@ -51,7 +51,7 @@ export default function Contact() {
         <meta name="description" content="Get in touch with Shree Nithiya K for job opportunities or collaborations." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="contact" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-14">
           <div className="section-tag">Get In Touch</div>
           <h1 className="section-title">Let&apos;s <span className="gradient-text">Connect</span></h1>

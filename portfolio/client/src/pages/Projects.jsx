@@ -16,7 +16,7 @@ export default function Projects() {
         <meta name="description" content="Portfolio of full stack projects including Interview Ready, Personal Portfolio, and Student Portal." />
       </Helmet>
 
-      <section className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
+      <section id="projects" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-14">
           <div className="section-tag">Portfolio</div>
           <h1 className="section-title">Featured <span className="gradient-text">Projects</span></h1>
