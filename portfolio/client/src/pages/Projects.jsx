@@ -1,7 +1,13 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaRobot, FaCampground, FaGraduationCap, FaArrowRight } from 'react-icons/fa';
 import { projects } from '../data.js';
+
+const iconMap = {
+  FaRobot: <FaRobot />,
+  FaCampground: <FaCampground />,
+  FaGraduationCap: <FaGraduationCap />
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -35,7 +41,7 @@ export default function Projects() {
               <div
                 className={`h-44 flex items-center justify-center relative bg-gradient-to-br ${p.gradient}`}
               >
-                <span className="text-6xl opacity-70">{p.icon}</span>
+                <span className="text-6xl opacity-70">{iconMap[p.icon]}</span>
                 <div className="absolute top-3 right-3 text-xs font-bold text-purple-400 px-2.5 py-1 rounded-full border border-purple-500/25"
                   style={{ background: 'rgba(168,85,247,0.12)' }}>
                   {p.number}
@@ -67,7 +73,7 @@ export default function Projects() {
                     <a href={p.liveUrl} target="_blank" rel="noopener noreferrer"
                       className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold text-white transition-all hover:brightness-110"
                       style={{ background: 'linear-gradient(135deg, #7c3aed, #0891b2)' }}>
-                      <FaExternalLinkAlt className="text-[10px]" /> Live Demo
+                      Live Demo <FaArrowRight className="text-[10px]" />
                     </a>
                   )}
                   <a href={p.githubUrl} target="_blank" rel="noopener noreferrer"

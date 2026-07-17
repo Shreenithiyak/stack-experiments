@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub, FaDocker } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub, FaDocker, FaPaintBrush, FaCogs, FaDatabase, FaTools } from 'react-icons/fa';
 import { skillCategories } from '../data.js';
 
 const iconMap = {
@@ -12,6 +12,10 @@ const iconMap = {
   FaGitAlt: <FaGitAlt />,
   FaGithub: <FaGithub />,
   FaDocker: <FaDocker />,
+  FaPaintBrush: <FaPaintBrush />,
+  FaCogs: <FaCogs />,
+  FaDatabase: <FaDatabase />,
+  FaTools: <FaTools />,
 };
 
 const fadeUp = {
@@ -49,7 +53,7 @@ export default function Skills() {
                 style={{ background: 'linear-gradient(90deg, #a855f7, #22d3ee)' }} />
 
               <div className="flex items-center gap-3 mb-5">
-                <span className="text-2xl">{cat.icon}</span>
+                <span className="text-2xl">{iconMap[cat.icon]}</span>
                 <h2 className="font-display font-bold text-base text-slate-100">{cat.category}</h2>
               </div>
 

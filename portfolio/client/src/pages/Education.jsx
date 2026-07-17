@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { FaUserGraduate, FaBook, FaSchool } from 'react-icons/fa';
 import { education } from '../data.js';
+
+const iconMap = {
+  FaUserGraduate: <FaUserGraduate />,
+  FaBook: <FaBook />,
+  FaSchool: <FaSchool />
+};
 
 const fadeLeft = {
   hidden: { opacity: 0, x: -24 },
@@ -10,11 +17,6 @@ const fadeLeft = {
 export default function Education() {
   return (
     <>
-      <Helmet>
-        <title>Education — Shree Nithiya K</title>
-        <meta name="description" content="B.Sc CS from Voorhees College, Vellore. CGPA 7.2. HSC and SSLC from Tamil Nadu State Board." />
-      </Helmet>
-
       <section id="education" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
@@ -36,7 +38,7 @@ export default function Education() {
                 className="flex gap-6 pb-10"
               >
                 {/* Dot */}
-                <div className="timeline-dot text-xl">{item.icon}</div>
+                <div className="timeline-dot text-xl">{iconMap[item.icon]}</div>
 
                 {/* Content */}
                 <div className="flex-1 glass-card p-5 hover:border-purple-500/30 transition-colors mt-1">

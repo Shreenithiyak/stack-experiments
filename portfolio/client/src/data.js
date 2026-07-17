@@ -47,7 +47,7 @@ export const projects = [
     tags: ['MERN Stack', 'AI', 'JWT', 'REST API'],
     liveUrl: 'https://mock-interview-ashen-theta.vercel.app/',
     githubUrl: 'https://github.com/Shreenithiyak',
-    icon: '🤖',
+    icon: 'FaRobot',
     gradient: 'from-purple-500/15 to-cyan-500/8',
   },
   {
@@ -60,7 +60,7 @@ export const projects = [
     tags: ['MERN Stack', 'Google OAuth', 'Tailwind CSS'],
     liveUrl: 'https://jod-neon.vercel.app/',
     githubUrl: 'https://github.com/Shreenithiyak',
-    icon: '⛺',
+    icon: 'FaCampground',
     gradient: 'from-cyan-500/15 to-purple-500/8',
   },
   {
@@ -73,7 +73,7 @@ export const projects = [
     tags: ['Academic', 'UI/UX', 'Vanilla JS'],
     liveUrl: null,
     githubUrl: 'https://github.com/Shreenithiyak',
-    icon: '🎓',
+    icon: 'FaGraduationCap',
     gradient: 'from-pink-500/12 to-cyan-500/6',
   },
 ];
@@ -83,21 +83,21 @@ export const certifications = [
     id: 1,
     title: 'Business Analytics',
     issuer: 'Oracle Cloud Infrastructure',
-    icon: '☁️',
+    icon: 'FaCloud',
     status: 'Verified',
   },
   {
     id: 2,
     title: 'Developer Skills Network',
     issuer: 'IBM',
-    icon: '🔷',
+    icon: 'FaCubes',
     status: 'Verified',
   },
   {
     id: 3,
     title: 'Full Stack Web Development',
     issuer: 'MERN Stack · SLA · 2026',
-    icon: '🌐',
+    icon: 'FaGlobe',
     status: 'Completed',
   },
 ];
@@ -105,7 +105,7 @@ export const certifications = [
 export const education = [
   {
     id: 1,
-    icon: '🎓',
+    icon: 'FaUserGraduate',
     degree: 'B.Sc Computer Science',
     institution: 'Voorhees College, Vellore',
     year: '2022 – 2025',
@@ -114,7 +114,7 @@ export const education = [
   },
   {
     id: 2,
-    icon: '📚',
+    icon: 'FaBook',
     degree: 'Higher Secondary Certificate (HSC)',
     institution: 'Tamil Nadu State Board',
     year: '2022',
@@ -123,7 +123,7 @@ export const education = [
   },
   {
     id: 3,
-    icon: '🏫',
+    icon: 'FaSchool',
     degree: 'Secondary School Leaving Certificate (SSLC)',
     institution: 'Tamil Nadu State Board',
     year: '2020',
@@ -136,7 +136,7 @@ export const skillCategories = [
   {
     id: 'frontend',
     category: 'Frontend',
-    icon: '🎨',
+    icon: 'FaPaintBrush',
     skills: [
       { name: 'HTML5', icon: 'FaHtml5', color: '#e34c26' },
       { name: 'CSS3', icon: 'FaCss3Alt', color: '#264de4' },
@@ -148,7 +148,7 @@ export const skillCategories = [
   {
     id: 'backend',
     category: 'Backend',
-    icon: '⚙️',
+    icon: 'FaCogs',
     skills: [
       { name: 'Node.js', icon: 'FaNodeJs', color: '#68a063' },
       { name: 'Express.js', icon: null, color: '#a855f7' },
@@ -160,7 +160,7 @@ export const skillCategories = [
   {
     id: 'database',
     category: 'Database',
-    icon: '🗄️',
+    icon: 'FaDatabase',
     skills: [
       { name: 'MongoDB', icon: null, color: '#4db33d' },
       { name: 'Mongoose', icon: null, color: '#880000' },
@@ -169,7 +169,7 @@ export const skillCategories = [
   {
     id: 'tools',
     category: 'Tools & Concepts',
-    icon: '🛠️',
+    icon: 'FaTools',
     skills: [
       { name: 'Git', icon: 'FaGitAlt', color: '#f05032' },
       { name: 'GitHub', icon: 'FaGithub', color: '#a855f7' },
@@ -181,9 +181,9 @@ export const skillCategories = [
 ];
 
 export const strengths = [
-  '⚡ Quick Learner',
-  '🤝 Teamwork & Collaboration',
-  '🗣️ Communication',
-  '🧩 Problem Solving',
-  '⏱️ Time Management',
+  'Quick Learner',
+  'Teamwork & Collaboration',
+  'Communication',
+  'Problem Solving',
+  'Time Management',
 ];

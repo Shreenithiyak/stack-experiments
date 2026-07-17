@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { FaGithub, FaLinkedinIn, FaDownload, FaEye } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaDownload, FaEye, FaArrowRight } from 'react-icons/fa';
 import { personalInfo, heroTypingTexts } from '../data.js';
 import TypingText from '../utils/TypingText.jsx';
 import ParticleCanvas from '../components/ui/ParticleCanvas.jsx';
@@ -71,7 +71,7 @@ export default function Home() {
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}
             className="flex flex-wrap gap-4 mb-8">
             <a href="#projects" className="btn-primary">
-              <FaEye /> View My Work
+              View My Work <FaArrowRight className="ml-2 text-sm" />
             </a>
             <a href={personalInfo.resumeUrl} download className="btn-outline">
               <FaDownload /> Download Resume

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { FaGraduationCap, FaMapMarkerAlt } from 'react-icons/fa';
 import { personalInfo, strengths } from '../data.js';
 
 const fadeUp = {
@@ -16,11 +17,6 @@ const stats = [
 export default function About() {
   return (
     <>
-      <Helmet>
-        <title>About — Shree Nithiya K</title>
-        <meta name="description" content="CS Graduate from Chennai passionate about full stack web development with React and Node.js." />
-      </Helmet>
-
       <section id="about" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         {/* Header */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-16">
@@ -48,14 +44,14 @@ export default function About() {
 
             {/* Floating badges */}
             <div className="absolute -top-2 -right-4 glass-card px-3 py-2 flex items-center gap-2 text-xs font-semibold animate-float shadow-lg">
-              <span>🎓</span>
+              <span className="text-purple-400 text-base"><FaGraduationCap /></span>
               <div>
                 <div className="text-[10px] text-slate-500">Graduated</div>
                 <div>B.Sc CS · 2025</div>
               </div>
             </div>
             <div className="absolute -bottom-2 -left-4 glass-card px-3 py-2 flex items-center gap-2 text-xs font-semibold animate-float animation-delay-300 shadow-lg">
-              <span>📍</span>
+              <span className="text-cyan-400 text-base"><FaMapMarkerAlt /></span>
               <div>
                 <div className="text-[10px] text-slate-500">Location</div>
                 <div>Chennai, India</div>

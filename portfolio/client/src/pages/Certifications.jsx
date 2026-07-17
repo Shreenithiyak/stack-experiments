@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { FaCloud, FaCubes, FaGlobe } from 'react-icons/fa';
 import { certifications } from '../data.js';
+
+const iconMap = {
+  FaCloud: <FaCloud />,
+  FaCubes: <FaCubes />,
+  FaGlobe: <FaGlobe />
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -10,11 +17,6 @@ const fadeUp = {
 export default function Certifications() {
   return (
     <>
-      <Helmet>
-        <title>Certifications — Shree Nithiya K</title>
-        <meta name="description" content="Certifications: Oracle Cloud, IBM, Full Stack MERN — Shree Nithiya K." />
-      </Helmet>
-
       <section id="certifications" className="min-h-screen px-6 lg:px-12 pt-28 pb-20">
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="text-center mb-14">
           <div className="section-tag">Credentials</div>
@@ -33,7 +35,7 @@ export default function Certifications() {
               {/* Icon */}
               <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 border border-purple-500/20"
                 style={{ background: 'linear-gradient(135deg, rgba(168,85,247,0.18), rgba(34,211,238,0.12))' }}>
-                {cert.icon}
+                {iconMap[cert.icon]}
               </div>
 
               {/* Info */}

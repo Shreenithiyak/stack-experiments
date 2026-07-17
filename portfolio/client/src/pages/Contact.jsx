@@ -40,7 +40,7 @@ export default function Contact() {
 
   const onSubmit = handleSubmit(async (data) => {
     await mutation.mutateAsync(data);
-    toast.success("Message sent! I'll get back to you soon 🎉");
+    toast.success("msg has been send will get you soon");
     reset();
   });
 
